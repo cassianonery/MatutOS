@@ -1,6 +1,5 @@
 package DAO;
 
-import Model.Funcionario;
 import Model.Problema;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

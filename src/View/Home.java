@@ -49,7 +49,7 @@ public class Home extends javax.swing.JFrame {
         btn_ordemServico = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         homee = new javax.swing.JPanel();
-        clientes = new javax.swing.JPanel();
+        jPanelClientes = new javax.swing.JPanel();
         Lista_de_tabelas = new javax.swing.JScrollPane();
         tableClientes = new javax.swing.JTable();
         jLabelNome = new javax.swing.JLabel();
@@ -65,7 +65,7 @@ public class Home extends javax.swing.JFrame {
         btn_buscar = new javax.swing.JButton();
         campo_busca_cli = new javax.swing.JTextField();
         jLabelRg1 = new javax.swing.JLabel();
-        funcionarios = new javax.swing.JPanel();
+        jPanelFuncionarios = new javax.swing.JPanel();
         Lista_de_tabelas1 = new javax.swing.JScrollPane();
         tableFuncionario = new javax.swing.JTable();
         jLabel_nome_func = new javax.swing.JLabel();
@@ -85,7 +85,7 @@ public class Home extends javax.swing.JFrame {
         jLabelBusca1 = new javax.swing.JLabel();
         campo_busca_func = new javax.swing.JTextField();
         btn_buscar1 = new javax.swing.JButton();
-        problemas = new javax.swing.JPanel();
+        jPanelProblemas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         codigo_campo_prob = new javax.swing.JTextField();
         nome_campo_prob = new javax.swing.JTextField();
@@ -102,7 +102,7 @@ public class Home extends javax.swing.JFrame {
         jLabelBusca2 = new javax.swing.JLabel();
         btn_buscar2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        ordemDeServicos = new javax.swing.JPanel();
+        jPanelOrdemDeServicos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableOrdemdeServico = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
@@ -161,7 +161,6 @@ public class Home extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("X");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,8 +215,8 @@ public class Home extends javax.swing.JFrame {
         homee.setBackground(new java.awt.Color(255, 255, 255));
         homee.setLayout(new java.awt.CardLayout());
 
-        clientes.setBackground(new java.awt.Color(59, 63, 66));
-        clientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelClientes.setBackground(new java.awt.Color(59, 63, 66));
+        jPanelClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Lista_de_tabelas.setBorder(null);
 
@@ -247,7 +246,6 @@ public class Home extends javax.swing.JFrame {
         tableClientes.setGridColor(new java.awt.Color(59, 63, 66));
         tableClientes.setRowHeight(20);
         tableClientes.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        tableClientes.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableClientesMouseClicked(evt);
@@ -260,21 +258,21 @@ public class Home extends javax.swing.JFrame {
         });
         Lista_de_tabelas.setViewportView(tableClientes);
 
-        clientes.add(Lista_de_tabelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 524, 250));
+        jPanelClientes.add(Lista_de_tabelas, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 524, 250));
 
         jLabelNome.setBackground(new java.awt.Color(187, 187, 187));
         jLabelNome.setForeground(new java.awt.Color(187, 187, 189));
         jLabelNome.setText("Nome ↓");
-        clientes.add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanelClientes.add(jLabelNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
         jLabelCpf.setForeground(new java.awt.Color(187, 187, 186));
         jLabelCpf.setText("CPF ↓");
-        clientes.add(jLabelCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
+        jPanelClientes.add(jLabelCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
 
         jLabelBusca.setBackground(new java.awt.Color(187, 187, 188));
         jLabelBusca.setForeground(new java.awt.Color(187, 187, 189));
         jLabelBusca.setText("Busca ↓");
-        clientes.add(jLabelBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, -1, -1));
+        jPanelClientes.add(jLabelBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, -1, -1));
 
         nome_campo_cli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,7 +284,7 @@ public class Home extends javax.swing.JFrame {
                 nome_campo_cliKeyTyped(evt);
             }
         });
-        clientes.add(nome_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 196, -1));
+        jPanelClientes.add(nome_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 196, -1));
 
         rg_campo_cli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +296,7 @@ public class Home extends javax.swing.JFrame {
                 rg_campo_cliKeyTyped(evt);
             }
         });
-        clientes.add(rg_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 120, -1));
+        jPanelClientes.add(rg_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 120, -1));
 
         cpf_campo_cli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +308,7 @@ public class Home extends javax.swing.JFrame {
                 cpf_campo_cliKeyTyped(evt);
             }
         });
-        clientes.add(cpf_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, -1));
+        jPanelClientes.add(cpf_campo_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, -1));
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -318,7 +316,7 @@ public class Home extends javax.swing.JFrame {
                 jButtonConfirmarActionPerformed(evt);
             }
         });
-        clientes.add(jButtonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
+        jPanelClientes.add(jButtonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
 
         jButtonAtualizar.setText("Atualizar");
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -326,14 +324,14 @@ public class Home extends javax.swing.JFrame {
                 jButtonAtualizarActionPerformed(evt);
             }
         });
-        clientes.add(jButtonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 85, -1));
+        jPanelClientes.add(jButtonAtualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 85, -1));
 
         ClientesTitle.setBackground(new java.awt.Color(187, 187, 187));
         ClientesTitle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ClientesTitle.setForeground(new java.awt.Color(187, 187, 199));
         ClientesTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ClientesTitle.setText("Clientes");
-        clientes.add(ClientesTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 104, 55));
+        jPanelClientes.add(ClientesTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 104, 55));
 
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -341,7 +339,7 @@ public class Home extends javax.swing.JFrame {
                 jButtonExcluirActionPerformed(evt);
             }
         });
-        clientes.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 79, -1));
+        jPanelClientes.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 79, -1));
 
         btn_buscar.setText("Pesquisar");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -349,24 +347,24 @@ public class Home extends javax.swing.JFrame {
                 btn_buscarActionPerformed(evt);
             }
         });
-        clientes.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, -1, -1));
+        jPanelClientes.add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, -1, -1));
 
         campo_busca_cli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_cliKeyTyped(evt);
             }
         });
-        clientes.add(campo_busca_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 280, 120, -1));
+        jPanelClientes.add(campo_busca_cli, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 280, 120, -1));
 
         jLabelRg1.setBackground(new java.awt.Color(187, 187, 188));
         jLabelRg1.setForeground(new java.awt.Color(187, 187, 189));
         jLabelRg1.setText("RG ↓");
-        clientes.add(jLabelRg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanelClientes.add(jLabelRg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
-        homee.add(clientes, "card2");
+        homee.add(jPanelClientes, "card2");
 
-        funcionarios.setBackground(new java.awt.Color(59, 63, 66));
-        funcionarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelFuncionarios.setBackground(new java.awt.Color(59, 63, 66));
+        jPanelFuncionarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tableFuncionario.setBackground(new java.awt.Color(59, 63, 66));
         tableFuncionario.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -393,7 +391,6 @@ public class Home extends javax.swing.JFrame {
         tableFuncionario.setGridColor(new java.awt.Color(59, 63, 66));
         tableFuncionario.setRowHeight(20);
         tableFuncionario.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        tableFuncionario.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableFuncionarioMouseClicked(evt);
@@ -406,21 +403,20 @@ public class Home extends javax.swing.JFrame {
         });
         Lista_de_tabelas1.setViewportView(tableFuncionario);
 
-        funcionarios.add(Lista_de_tabelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 524, 250));
+        jPanelFuncionarios.add(Lista_de_tabelas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(348, 0, 524, 250));
 
         jLabel_nome_func.setForeground(new java.awt.Color(187, 187, 186));
         jLabel_nome_func.setText("Nome");
-        funcionarios.add(jLabel_nome_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jPanelFuncionarios.add(jLabel_nome_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
 
         jLabel_rg_func.setForeground(new java.awt.Color(187, 187, 186));
         jLabel_rg_func.setText("RG");
-        funcionarios.add(jLabel_rg_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+        jPanelFuncionarios.add(jLabel_rg_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         jLabel_cpf_func.setForeground(new java.awt.Color(187, 187, 186));
         jLabel_cpf_func.setText("CPF");
-        funcionarios.add(jLabel_cpf_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
+        jPanelFuncionarios.add(jLabel_cpf_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        nome_campo_func.setForeground(new java.awt.Color(0, 0, 0));
         nome_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nome_campo_funcActionPerformed(evt);
@@ -431,7 +427,7 @@ public class Home extends javax.swing.JFrame {
                 nome_campo_funcKeyTyped(evt);
             }
         });
-        funcionarios.add(nome_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 170, -1));
+        jPanelFuncionarios.add(nome_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 170, -1));
 
         rg_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,7 +439,7 @@ public class Home extends javax.swing.JFrame {
                 rg_campo_funcKeyTyped(evt);
             }
         });
-        funcionarios.add(rg_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 110, -1));
+        jPanelFuncionarios.add(rg_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 110, -1));
 
         cpf_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,7 +451,7 @@ public class Home extends javax.swing.JFrame {
                 cpf_campo_funcKeyTyped(evt);
             }
         });
-        funcionarios.add(cpf_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 110, -1));
+        jPanelFuncionarios.add(cpf_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 110, -1));
 
         jButton_confirmar_cadastro_func.setText("Confirmar");
         jButton_confirmar_cadastro_func.addActionListener(new java.awt.event.ActionListener() {
@@ -463,7 +459,7 @@ public class Home extends javax.swing.JFrame {
                 jButton_confirmar_cadastro_funcActionPerformed(evt);
             }
         });
-        funcionarios.add(jButton_confirmar_cadastro_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+        jPanelFuncionarios.add(jButton_confirmar_cadastro_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
         jButton_atualizar_func.setText("Atualizar");
         jButton_atualizar_func.addActionListener(new java.awt.event.ActionListener() {
@@ -471,17 +467,17 @@ public class Home extends javax.swing.JFrame {
                 jButton_atualizar_funcActionPerformed(evt);
             }
         });
-        funcionarios.add(jButton_atualizar_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 85, -1));
+        jPanelFuncionarios.add(jButton_atualizar_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 85, -1));
 
         ClientesTitle1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         ClientesTitle1.setForeground(new java.awt.Color(187, 187, 186));
         ClientesTitle1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ClientesTitle1.setText("Funcionarios");
-        funcionarios.add(ClientesTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 58));
+        jPanelFuncionarios.add(ClientesTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, 58));
 
         jLabel_cpf_func1.setForeground(new java.awt.Color(187, 187, 186));
         jLabel_cpf_func1.setText("Salario");
-        funcionarios.add(jLabel_cpf_func1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        jPanelFuncionarios.add(jLabel_cpf_func1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         salario_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -493,18 +489,18 @@ public class Home extends javax.swing.JFrame {
                 salario_campo_funcKeyTyped(evt);
             }
         });
-        funcionarios.add(salario_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 110, 20));
+        jPanelFuncionarios.add(salario_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 110, 20));
 
         jLabel_cpf_func2.setForeground(new java.awt.Color(187, 187, 186));
         jLabel_cpf_func2.setText("Matricula");
-        funcionarios.add(jLabel_cpf_func2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanelFuncionarios.add(jLabel_cpf_func2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         matricula_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 matricula_campo_funcActionPerformed(evt);
             }
         });
-        funcionarios.add(matricula_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 40, -1));
+        jPanelFuncionarios.add(matricula_campo_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 40, -1));
 
         jButton_excluir_func.setText("Excluir");
         jButton_excluir_func.addActionListener(new java.awt.event.ActionListener() {
@@ -512,19 +508,19 @@ public class Home extends javax.swing.JFrame {
                 jButton_excluir_funcActionPerformed(evt);
             }
         });
-        funcionarios.add(jButton_excluir_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 79, -1));
+        jPanelFuncionarios.add(jButton_excluir_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 79, -1));
 
         jLabelBusca1.setBackground(new java.awt.Color(187, 187, 188));
         jLabelBusca1.setForeground(new java.awt.Color(187, 187, 189));
         jLabelBusca1.setText("Busca ↓");
-        funcionarios.add(jLabelBusca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
+        jPanelFuncionarios.add(jLabelBusca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
 
         campo_busca_func.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_funcKeyTyped(evt);
             }
         });
-        funcionarios.add(campo_busca_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 120, -1));
+        jPanelFuncionarios.add(campo_busca_func, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 120, -1));
 
         btn_buscar1.setText("Pesquisar");
         btn_buscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -532,18 +528,18 @@ public class Home extends javax.swing.JFrame {
                 btn_buscar1ActionPerformed(evt);
             }
         });
-        funcionarios.add(btn_buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, -1, -1));
+        jPanelFuncionarios.add(btn_buscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, -1, -1));
 
-        homee.add(funcionarios, "card3");
+        homee.add(jPanelFuncionarios, "card3");
 
-        problemas.setBackground(new java.awt.Color(59, 63, 66));
-        problemas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanelProblemas.setBackground(new java.awt.Color(59, 63, 66));
+        jPanelProblemas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(187, 187, 189));
         jLabel1.setText("Problemas");
-        problemas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 130, 50));
-        problemas.add(codigo_campo_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 51, -1));
+        jPanelProblemas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 130, 50));
+        jPanelProblemas.add(codigo_campo_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 51, -1));
 
         nome_campo_prob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -555,21 +551,21 @@ public class Home extends javax.swing.JFrame {
                 nome_campo_probKeyTyped(evt);
             }
         });
-        problemas.add(nome_campo_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 158, -1));
+        jPanelProblemas.add(nome_campo_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 158, -1));
 
         jLabel2.setForeground(new java.awt.Color(187, 187, 189));
         jLabel2.setText("Nome");
-        problemas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+        jPanelProblemas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(187, 187, 189));
         jLabel3.setText("Descrição");
-        problemas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        jPanelProblemas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         descricao_campo_prob.setColumns(20);
         descricao_campo_prob.setRows(5);
         jScrollPane1.setViewportView(descricao_campo_prob);
 
-        problemas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 280, 150));
+        jPanelProblemas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 280, 150));
 
         tableProblema.setBackground(new java.awt.Color(59, 63, 66));
         tableProblema.setForeground(new java.awt.Color(255, 255, 255));
@@ -594,7 +590,6 @@ public class Home extends javax.swing.JFrame {
         });
         tableProblema.setGridColor(new java.awt.Color(59, 63, 66));
         tableProblema.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        tableProblema.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tableProblema.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableProblemaMouseClicked(evt);
@@ -607,49 +602,46 @@ public class Home extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tableProblema);
 
-        problemas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 556, 250));
+        jPanelProblemas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 0, 556, 250));
 
         jButton_confirmar_cadastro_prob.setBackground(new java.awt.Color(59, 63, 66));
-        jButton_confirmar_cadastro_prob.setForeground(new java.awt.Color(0, 0, 0));
         jButton_confirmar_cadastro_prob.setText("Confirmar");
         jButton_confirmar_cadastro_prob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_confirmar_cadastro_probActionPerformed(evt);
             }
         });
-        problemas.add(jButton_confirmar_cadastro_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+        jPanelProblemas.add(jButton_confirmar_cadastro_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
 
         jButton_atualizar_prob.setBackground(new java.awt.Color(59, 63, 66));
-        jButton_atualizar_prob.setForeground(new java.awt.Color(0, 0, 0));
         jButton_atualizar_prob.setText("Atualizar");
         jButton_atualizar_prob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_atualizar_probActionPerformed(evt);
             }
         });
-        problemas.add(jButton_atualizar_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, -1));
+        jPanelProblemas.add(jButton_atualizar_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, -1));
 
         jButton_excluir_prob.setBackground(new java.awt.Color(59, 63, 66));
-        jButton_excluir_prob.setForeground(new java.awt.Color(0, 0, 0));
         jButton_excluir_prob.setText("Excluir");
         jButton_excluir_prob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_excluir_probActionPerformed(evt);
             }
         });
-        problemas.add(jButton_excluir_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
+        jPanelProblemas.add(jButton_excluir_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
 
         campo_busca_prob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_probKeyTyped(evt);
             }
         });
-        problemas.add(campo_busca_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 120, -1));
+        jPanelProblemas.add(campo_busca_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 120, -1));
 
         jLabelBusca2.setBackground(new java.awt.Color(187, 187, 188));
         jLabelBusca2.setForeground(new java.awt.Color(187, 187, 189));
         jLabelBusca2.setText("Busca ↓");
-        problemas.add(jLabelBusca2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
+        jPanelProblemas.add(jLabelBusca2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, -1, -1));
 
         btn_buscar2.setText("Pesquisar");
         btn_buscar2.addActionListener(new java.awt.event.ActionListener() {
@@ -657,15 +649,15 @@ public class Home extends javax.swing.JFrame {
                 btn_buscar2ActionPerformed(evt);
             }
         });
-        problemas.add(btn_buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, -1, -1));
+        jPanelProblemas.add(btn_buscar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 280, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(187, 187, 189));
         jLabel5.setText("Codigo");
-        problemas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
+        jPanelProblemas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, -1, -1));
 
-        homee.add(problemas, "card4");
+        homee.add(jPanelProblemas, "card4");
 
-        ordemDeServicos.setBackground(new java.awt.Color(59, 63, 66));
+        jPanelOrdemDeServicos.setBackground(new java.awt.Color(59, 63, 66));
 
         tableOrdemdeServico.setBackground(new java.awt.Color(59, 63, 66));
         tableOrdemdeServico.setForeground(new java.awt.Color(255, 255, 255));
@@ -682,7 +674,6 @@ public class Home extends javax.swing.JFrame {
         ));
         tableOrdemdeServico.setGridColor(new java.awt.Color(59, 63, 66));
         tableOrdemdeServico.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        tableOrdemdeServico.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(tableOrdemdeServico);
 
         jButton2.setText("Cadastrar OS");
@@ -692,25 +683,25 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout ordemDeServicosLayout = new javax.swing.GroupLayout(ordemDeServicos);
-        ordemDeServicos.setLayout(ordemDeServicosLayout);
-        ordemDeServicosLayout.setHorizontalGroup(
-            ordemDeServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelOrdemDeServicosLayout = new javax.swing.GroupLayout(jPanelOrdemDeServicos);
+        jPanelOrdemDeServicos.setLayout(jPanelOrdemDeServicosLayout);
+        jPanelOrdemDeServicosLayout.setHorizontalGroup(
+            jPanelOrdemDeServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
-            .addGroup(ordemDeServicosLayout.createSequentialGroup()
+            .addGroup(jPanelOrdemDeServicosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        ordemDeServicosLayout.setVerticalGroup(
-            ordemDeServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ordemDeServicosLayout.createSequentialGroup()
+        jPanelOrdemDeServicosLayout.setVerticalGroup(
+            jPanelOrdemDeServicosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOrdemDeServicosLayout.createSequentialGroup()
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
         );
 
-        homee.add(ordemDeServicos, "card5");
+        homee.add(jPanelOrdemDeServicos, "card5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -734,10 +725,10 @@ public class Home extends javax.swing.JFrame {
     private void btn_clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clienteMouseClicked
 
         //Tornar a camada CLIENTE visivel↓
-            clientes.setVisible(true);
-            funcionarios.setVisible(false);
-            problemas.setVisible(false);
-            ordemDeServicos.setVisible(false);
+            jPanelClientes.setVisible(true);
+            jPanelFuncionarios.setVisible(false);
+            jPanelProblemas.setVisible(false);
+            jPanelOrdemDeServicos.setVisible(false);
        
         //Seta a cor nos BOTÕES↓
             Controller.setLblColor(btn_cliente);
@@ -751,10 +742,10 @@ public class Home extends javax.swing.JFrame {
     private void btn_funcionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_funcionarioMouseClicked
         try {
             //Tornar a camada FUNCIONARIO visivel↓
-                clientes.setVisible(false);
-                funcionarios.setVisible(true);
-                problemas.setVisible(false);
-                ordemDeServicos.setVisible(false);
+                jPanelClientes.setVisible(false);
+                jPanelFuncionarios.setVisible(true);
+                jPanelProblemas.setVisible(false);
+                jPanelOrdemDeServicos.setVisible(false);
         
             //Seta a cor nos BOTÕES↓
                 Controller.setLblColor(btn_funcionario);
@@ -777,10 +768,10 @@ public class Home extends javax.swing.JFrame {
                 descricao_campo_prob.setLineWrap(true);
         
             //Tornar a camada PROBLEMA visivel↓
-                clientes.setVisible(false);
-                funcionarios.setVisible(false);
-                problemas.setVisible(true);
-                ordemDeServicos.setVisible(false);
+                jPanelClientes.setVisible(false);
+                jPanelFuncionarios.setVisible(false);
+                jPanelProblemas.setVisible(true);
+                jPanelOrdemDeServicos.setVisible(false);
          
             //Seta a cor nos BOTÕES↓
                 Controller.setLblColor(btn_problema);
@@ -799,10 +790,10 @@ public class Home extends javax.swing.JFrame {
     private void btn_ordemServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordemServicoMouseClicked
           
             //Tornar a camada ORDEM DE SERVIÇO visivel↓
-                clientes.setVisible(false);
-                funcionarios.setVisible(false);
-                problemas.setVisible(false);
-                ordemDeServicos.setVisible(true);
+                jPanelClientes.setVisible(false);
+                jPanelFuncionarios.setVisible(false);
+                jPanelProblemas.setVisible(false);
+                jPanelOrdemDeServicos.setVisible(true);
            
             //Seta a cor nos BOTÕES↓
                 Controller.setLblColor(btn_ordemServico);
@@ -1422,12 +1413,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField campo_busca_cli;
     private javax.swing.JTextField campo_busca_func;
     private javax.swing.JTextField campo_busca_prob;
-    private javax.swing.JPanel clientes;
     private javax.swing.JTextField codigo_campo_prob;
     private javax.swing.JTextField cpf_campo_cli;
     private javax.swing.JTextField cpf_campo_func;
     private javax.swing.JTextArea descricao_campo_prob;
-    private javax.swing.JPanel funcionarios;
     private javax.swing.JPanel header;
     private javax.swing.JPanel homee;
     private javax.swing.JButton jButton2;
@@ -1456,6 +1445,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_cpf_func2;
     private javax.swing.JLabel jLabel_nome_func;
     private javax.swing.JLabel jLabel_rg_func;
+    private javax.swing.JPanel jPanelClientes;
+    private javax.swing.JPanel jPanelFuncionarios;
+    private javax.swing.JPanel jPanelOrdemDeServicos;
+    private javax.swing.JPanel jPanelProblemas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1463,8 +1456,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField nome_campo_cli;
     private javax.swing.JTextField nome_campo_func;
     private javax.swing.JTextField nome_campo_prob;
-    private javax.swing.JPanel ordemDeServicos;
-    private javax.swing.JPanel problemas;
     private javax.swing.JTextField rg_campo_cli;
     private javax.swing.JTextField rg_campo_func;
     private javax.swing.JTextField salario_campo_func;
@@ -1545,35 +1536,35 @@ public class Home extends javax.swing.JFrame {
     // ---------------------------------------------------------------------------
     //Getter e Setter PANEL↓
     public JPanel getClientes() {
-        return clientes;
+        return jPanelClientes;
     }
 
     public void setClientes(JPanel clientes) {
-        this.clientes = clientes;
+        this.jPanelClientes = clientes;
     }
 
     public JPanel getFuncionarios() {
-        return funcionarios;
+        return jPanelFuncionarios;
     }
 
     public void setFuncionarios(JPanel funcionarios) {
-        this.funcionarios = funcionarios;
+        this.jPanelFuncionarios = funcionarios;
     }
 
     public JPanel getProblemas() {
-        return problemas;
+        return jPanelProblemas;
     }
 
     public void setProblemas(JPanel problemas) {
-        this.problemas = problemas;
+        this.jPanelProblemas = problemas;
     }
 
     public JPanel getOrdemDeServicos() {
-        return ordemDeServicos;
+        return jPanelOrdemDeServicos;
     }
 
     public void setOrdemDeServicos(JPanel ordemDeServicos) {
-        this.ordemDeServicos = ordemDeServicos;
+        this.jPanelOrdemDeServicos = ordemDeServicos;
     }
 //-------------------------------------------------------------------
 
