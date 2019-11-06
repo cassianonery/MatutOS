@@ -42,10 +42,7 @@ public class FuncionarioController implements InterfaceFuncionario {
         //SALARIO↓------------------------------------------------------------------
         if (funcionario.getSalario() < 800) {
             throw new Exception("Favor inserir um salario descente");
-        }
-        if (funcionario.getCpf().length() < 3) {
-            throw new Exception("menos que 3 digitos? SERIO? mão de vaca!!");
-        }
+        }       
         //jogar para os DADOS↓
         FuncionarioDAO dao = new FuncionarioDAO();
         dao.create(funcionario);
