@@ -39,16 +39,16 @@ public class ClienteDAO implements InterfaceCliente {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
     @Override
-    public void update(Cliente cliente) {
+    public void update(Cliente clienteNovo, Cliente clienteVelho) {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(" UPDATE cliente SET nome = ?, rg = ?, cpf = ? WHERE cpf = ? ");
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getRg());
-            stmt.setString(3, cliente.getCpf());
-            stmt.setString(4, cliente.getCpf());
+            stmt.setString(1, clienteNovo.getNome());
+            stmt.setString(2, clienteNovo.getRg());
+            stmt.setString(3, clienteNovo.getCpf());
+            stmt.setString(4, clienteVelho.getCpf());
 
             stmt.executeUpdate();
 
@@ -145,4 +145,6 @@ public class ClienteDAO implements InterfaceCliente {
         return (ArrayList<Cliente>) clientes;
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    
 }

@@ -20,11 +20,10 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement(" INSERT INTO problema (codigo,nome,descricao) "
-                    + "VALUES (?,?,?)");
-            stmt.setInt(1, problema.getCodigo());
-            stmt.setString(2, problema.getNome());
-            stmt.setString(3, problema.getDescricao());
+            stmt = con.prepareStatement(" INSERT INTO problema (nome,descricao) "
+                    + "VALUES (?,?)");           
+            stmt.setString(1, problema.getNome());
+            stmt.setString(2, problema.getDescricao());
 
             stmt.executeUpdate();
 
@@ -44,11 +43,10 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement(" UPDATE problema SET codigo = ?, nome = ?, descricao = ? WHERE codigo = ? ");
-            stmt.setInt(1, problema.getCodigo());
-            stmt.setString(2, problema.getNome());
-            stmt.setString(3, problema.getDescricao());
-            stmt.setInt(4, problema.getCodigo());
+            stmt = con.prepareStatement(" UPDATE problema SET nome = ?, descricao = ? WHERE codigo = ? ");
+            stmt.setString(1, problema.getNome());
+            stmt.setString(2, problema.getDescricao());
+            stmt.setInt(3, problema.getCodigo());
 
             stmt.executeUpdate();
 

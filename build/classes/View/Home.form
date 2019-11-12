@@ -672,6 +672,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="matricula_campo_func">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="matricula_campo_funcActionPerformed"/>
               </Events>
@@ -768,6 +771,9 @@
               </Constraints>
             </Component>
             <Component class="javax.swing.JTextField" name="codigo_campo_prob">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="230" y="100" width="51" height="-1"/>
@@ -853,14 +859,14 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="3" rowCount="4">
-                        <Column editable="true" title="Codigo" type="java.lang.Integer"/>
-                        <Column editable="true" title="Nome" type="java.lang.Object">
+                        <Column editable="false" title="Codigo" type="java.lang.Integer"/>
+                        <Column editable="false" title="Nome" type="java.lang.Object">
                           <Data value=""/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                         </Column>
-                        <Column editable="true" title="Descri&#xe7;&#xe3;o" type="java.lang.Object">
+                        <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object">
                           <Data value=""/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -868,11 +874,33 @@
                         </Column>
                       </Table>
                     </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
                     <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="42" green="3f" red="3b" type="rgb"/>
                     </Property>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="42" green="3f" red="3b" type="rgb"/>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -1035,22 +1063,74 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="9" rowCount="4">
-                        <Column editable="true" title="Numero" type="java.lang.Object"/>
-                        <Column editable="true" title="Drescri&#xe7;&#xe3;o Servi&#xe7;o" type="java.lang.Object"/>
-                        <Column editable="true" title="Cod Problema" type="java.lang.Object"/>
-                        <Column editable="true" title="Drescri&#xe7;&#xe3;o Problema" type="java.lang.Object"/>
-                        <Column editable="true" title="Data Cadastro" type="java.lang.Object"/>
-                        <Column editable="true" title="Data Cancelamento" type="java.lang.Object"/>
-                        <Column editable="true" title="Motivo Cancelamento" type="java.lang.Object"/>
-                        <Column editable="true" title="Cod Funcionario" type="java.lang.Object"/>
-                        <Column editable="true" title="Cpf Cliente" type="java.lang.Object"/>
+                        <Column editable="false" title="Numero" type="java.lang.Object"/>
+                        <Column editable="false" title="Drescri&#xe7;&#xe3;o Servi&#xe7;o" type="java.lang.Object"/>
+                        <Column editable="false" title="Cod Problema" type="java.lang.Object"/>
+                        <Column editable="false" title="Drescri&#xe7;&#xe3;o Problema" type="java.lang.Object"/>
+                        <Column editable="false" title="Data Cadastro" type="java.lang.Object"/>
+                        <Column editable="false" title="Data Cancelamento" type="java.lang.Object"/>
+                        <Column editable="false" title="Motivo Cancelamento" type="java.lang.Object"/>
+                        <Column editable="false" title="Cod Funcionario" type="java.lang.Object"/>
+                        <Column editable="false" title="Cpf Cliente" type="java.lang.Object"/>
                       </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
                     </Property>
                     <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="42" green="3f" red="3b" type="rgb"/>
                     </Property>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="42" green="3f" red="3b" type="rgb"/>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                 </Component>
