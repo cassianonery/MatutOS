@@ -44,38 +44,38 @@ public class ClienteController implements InterfaceCliente {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
-    public void update(Cliente cliente) throws Exception {
+    public void update(Cliente clienteNovo, Cliente clienteVelho) throws Exception {
         //Objeto↓------------------------------------------------------------------
-        if (cliente == null) {
+        if (clienteNovo == null) {
             throw new Exception("Favor insira os dados corretamente");
         }
         //NOME↓------------------------------------------------------------------
-        if (cliente.getNome().trim().equals("") || cliente.getNome() == null) {
+        if (clienteNovo.getNome().trim().equals("") || clienteNovo.getNome() == null) {
 
             throw new Exception("Favor insira o nome corretamente");
         }
-        if (cliente.getNome().length() > 100) {
+        if (clienteNovo.getNome().length() > 100) {
 
             throw new Exception("Quantidades de caracters exedidos");
         }
         //RG↓------------------------------------------------------------------
 
-        if (cliente.getRg().trim().equals("") || cliente.getRg() == null) {
+        if (clienteNovo.getRg().trim().equals("") || clienteNovo.getRg() == null) {
             throw new Exception("Favor insira o rg corretamente");
         }
-        if (cliente.getRg().length() > 10 || cliente.getRg().length() < 7) {
+        if (clienteNovo.getRg().length() > 10 || clienteNovo.getRg().length() < 7) {
             throw new Exception("RG deve conter no minimo 7 digitos e no maximo 10 digitos");
         }
         //CPF↓------------------------------------------------------------------
-        if (cliente.getCpf().trim().equals("") || cliente.getCpf() == null) {
+        if (clienteNovo.getCpf().trim().equals("") || clienteNovo.getCpf() == null) {
             throw new Exception("O CPF não pode ser vazio ou nulo");
         }
-        if (cliente.getCpf().length() != 11) {
+        if (clienteNovo.getCpf().length() != 11) {
             throw new Exception("O CPF não pode conter menos de 11 digitos");
         }
         //jogar para os DADOS↓
         ClienteDAO dao = new ClienteDAO();
-        dao.update(cliente);
+        dao.update(clienteNovo, clienteVelho);
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override

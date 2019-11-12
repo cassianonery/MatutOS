@@ -495,6 +495,7 @@ public class Home extends javax.swing.JFrame {
         jLabel_cpf_func2.setText("Matricula");
         jPanelFuncionarios.add(jLabel_cpf_func2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
+        matricula_campo_func.setEditable(false);
         matricula_campo_func.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 matricula_campo_funcActionPerformed(evt);
@@ -539,6 +540,8 @@ public class Home extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(187, 187, 189));
         jLabel1.setText("Problemas");
         jPanelProblemas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, 130, 50));
+
+        codigo_campo_prob.setEditable(false);
         jPanelProblemas.add(codigo_campo_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 51, -1));
 
         nome_campo_prob.addActionListener(new java.awt.event.ActionListener() {
@@ -583,9 +586,16 @@ public class Home extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tableProblema.setGridColor(new java.awt.Color(59, 63, 66));
@@ -671,7 +681,15 @@ public class Home extends javax.swing.JFrame {
             new String [] {
                 "Numero", "Drescrição Serviço", "Cod Problema", "Drescrição Problema", "Data Cadastro", "Data Cancelamento", "Motivo Cancelamento", "Cod Funcionario", "Cpf Cliente"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableOrdemdeServico.setGridColor(new java.awt.Color(59, 63, 66));
         tableOrdemdeServico.setSelectionBackground(new java.awt.Color(59, 63, 66));
         jScrollPane3.setViewportView(tableOrdemdeServico);
@@ -854,14 +872,15 @@ public class Home extends javax.swing.JFrame {
             try {
             
             //Passa os dados ATUALIZADOS do CLIENTE para o CONTROLLADOR↓
-                Cliente cliente = new Cliente();
+                Cliente clienteNovo = new Cliente();
+                Cliente clienteVelho = new Cliente();
                 ClienteController cliController = new ClienteController();
 
-                cliente.setNome(nome_campo_cli.getText());
-                cliente.setRg(rg_campo_cli.getText());
-                cliente.setCpf(cpf_campo_cli.getText());
-                cliente.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
-                cliController.update(cliente);
+                clienteNovo.setNome(nome_campo_cli.getText());
+                clienteNovo.setRg(rg_campo_cli.getText());
+                clienteNovo.setCpf(cpf_campo_cli.getText());
+                clienteVelho.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
+                cliController.update(clienteNovo, clienteVelho);
 
             //LIMPA OS CAMPOS APOS O UPDATE↓
                 campo_busca_cli.setText("");
@@ -902,7 +921,7 @@ public class Home extends javax.swing.JFrame {
                 Funcionario funcionario = new Funcionario();
                 FuncionarioController funController = new FuncionarioController();
 
-                funcionario.setMatricula(Integer.parseInt(matricula_campo_func.getText()));
+               
                 funcionario.setNome(nome_campo_func.getText());
                 funcionario.setRg(rg_campo_func.getText());
                 funcionario.setCpf(cpf_campo_func.getText());
@@ -936,7 +955,7 @@ public class Home extends javax.swing.JFrame {
                 Funcionario funcionario = new Funcionario();
                 FuncionarioController funController = new FuncionarioController();
 
-                funcionario.setMatricula(Integer.parseInt(matricula_campo_func.getText()));
+                
                 funcionario.setNome(nome_campo_func.getText());
                 funcionario.setRg(rg_campo_func.getText());
                 funcionario.setCpf(cpf_campo_func.getText());
@@ -1123,7 +1142,7 @@ public class Home extends javax.swing.JFrame {
             Problema problema = new Problema();
             ProblemaController probController = new ProblemaController();
 
-            problema.setCodigo(Integer.parseInt(codigo_campo_prob.getText()));
+          
             problema.setNome(nome_campo_prob.getText());
             problema.setDescricao(descricao_campo_prob.getText());
             probController.create(problema);
@@ -1176,7 +1195,7 @@ public class Home extends javax.swing.JFrame {
         String caracteres = "0123456789/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.";
 
         if (caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
+               evt.consume();
         }
     }//GEN-LAST:event_nome_campo_funcKeyTyped
 
@@ -1218,7 +1237,7 @@ public class Home extends javax.swing.JFrame {
                 Problema problema = new Problema();
                 ProblemaController probController = new ProblemaController();
 
-                problema.setCodigo(Integer.parseInt(codigo_campo_prob.getText()));
+                
                 problema.setNome(nome_campo_prob.getText());
                 problema.setDescricao(descricao_campo_prob.getText());
                 probController.update(problema);

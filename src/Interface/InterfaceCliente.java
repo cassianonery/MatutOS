@@ -17,7 +17,7 @@ public interface InterfaceCliente {
 
     void create(Cliente cliente) throws Exception;
 
-    void update(Cliente cliente) throws Exception;
+    void update(Cliente clienteNovo, Cliente clienteVelho) throws Exception;
 
     void delete(Cliente cliente) throws Exception;
     

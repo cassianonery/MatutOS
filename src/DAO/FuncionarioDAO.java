@@ -21,13 +21,12 @@ public class FuncionarioDAO implements InterfaceFuncionario {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("INSERT INTO Funcionario (matricula,nome,rg,cpf,salario)"
-                    + "VALUES (?,?,?,?,?)");
-            stmt.setInt(1, funcionario.getMatricula());
-            stmt.setString(2, funcionario.getNome());
-            stmt.setString(3, funcionario.getRg());
-            stmt.setString(4, funcionario.getCpf());
-            stmt.setFloat(5, funcionario.getSalario());
+            stmt = con.prepareStatement("INSERT INTO Funcionario (nome,rg,cpf,salario)"
+                    + "VALUES (?,?,?,?)");           
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getRg());
+            stmt.setString(3, funcionario.getCpf());
+            stmt.setFloat(4, funcionario.getSalario());
 
             stmt.executeUpdate();
 
@@ -48,13 +47,13 @@ public class FuncionarioDAO implements InterfaceFuncionario {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("UPDATE funcionario SET matricula = ?, nome = ?, rg = ?, cpf = ?, salario = ? WHERE matricula = ?");
-            stmt.setInt(1, funcionario.getMatricula());
-            stmt.setString(2, funcionario.getNome());
-            stmt.setString(3, funcionario.getRg());
-            stmt.setString(4, funcionario.getCpf());
-            stmt.setFloat(5, funcionario.getSalario());
-            stmt.setInt(6, funcionario.getMatricula());
+            stmt = con.prepareStatement("UPDATE funcionario SET nome = ?, rg = ?, cpf = ?, salario = ? WHERE matricula = ?");
+            
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getRg());
+            stmt.setString(3, funcionario.getCpf());
+            stmt.setFloat(4, funcionario.getSalario());
+            stmt.setInt(5, funcionario.getMatricula());
 
             stmt.executeUpdate();
 
