@@ -13,12 +13,12 @@ public class FuncionarioController implements InterfaceFuncionario {
     public void create(Funcionario funcionario) throws Exception {
          //Objeto↓------------------------------------------------------------------
         if (funcionario == null) {
-            throw new Exception("Favor insira os dados corretamente");
+            throw new Exception("Objeto Funcionario não pode ser Nulo: Favor insira os dados corretamente");
         }
         //NOME↓------------------------------------------------------------------
         if (funcionario.getNome().trim().equals("") || funcionario.getNome() == null) {
 
-            throw new Exception("Favor insira o nome corretamente");
+            throw new Exception("Favor insira o NOME corretamente");
         }
         if (funcionario.getNome().length() > 100) {
 
@@ -27,10 +27,10 @@ public class FuncionarioController implements InterfaceFuncionario {
         //RG↓------------------------------------------------------------------
 
         if (funcionario.getRg().trim().equals("") || funcionario.getRg() == null) {
-            throw new Exception("Favor insira o rg corretamente");
+            throw new Exception("Favor insira o RG corretamente");
         }
-        if (funcionario.getRg().length() > 10 || funcionario.getRg().length() < 7) {
-            throw new Exception("RG deve conter no minimo 7 digitos e no maximo 10 digitos");
+        if (funcionario.getRg().length() > 10 || funcionario.getRg().length() < 6) {
+            throw new Exception("RG deve conter no minimo 6 digitos e no maximo 10 digitos");
         }
         //CPF↓------------------------------------------------------------------
         if (funcionario.getCpf().trim().equals("") || funcionario.getCpf() == null) {
@@ -40,8 +40,8 @@ public class FuncionarioController implements InterfaceFuncionario {
             throw new Exception("O CPF não pode conter menos de 11 digitos");
         }
         //SALARIO↓------------------------------------------------------------------
-        if (funcionario.getSalario() < 800) {
-            throw new Exception("Favor inserir um salario descente");
+        if (funcionario.getSalario() < 1039) {
+            throw new Exception("Salário minimo é de 1039 reais..");
         }       
         //jogar para os DADOS↓
         FuncionarioDAO dao = new FuncionarioDAO();

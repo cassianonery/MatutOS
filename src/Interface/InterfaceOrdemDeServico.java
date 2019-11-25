@@ -11,6 +11,4 @@ public interface InterfaceOrdemDeServico {
 
     void update(OrdemDeServico OrdemDeServico) throws Exception;
 
-    void delete(OrdemDeServico OrdemDeServico) throws Exception;
-
 }

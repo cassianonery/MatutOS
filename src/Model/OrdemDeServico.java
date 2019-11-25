@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class OrdemDeServico {
    
-    private Cliente cliente;
-    private Funcionario funcionario;
-    private Problema problema;
+    private Cliente cpf_cliente_os;
+    private Funcionario matri_funcionario_os;
+    private Problema cod_problema_os;
     
     private ArrayList<Cliente> clientes;
     private ArrayList<Funcionario> funcionarios;
-    private ArrayList<Problema> classProblemas;
+    private ArrayList<Problema> problemas;
     
     private int numeroOS;
     private String descricaoProblemaOS,
@@ -23,11 +23,15 @@ public class OrdemDeServico {
                  dataSolucaoOS;
 
     
+    public OrdemDeServico() {
+    }
+
+    /*
     //Construtor de Ordem de Servico para CANCELAMENTO↓
-    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema codProblema, String descricaoProblemaOS, Date dataCadastroOS, Date dataCancelamentoOS, String motivoCancelamentoOS, Funcionario funcionario, Cliente cliente) {
-        this.cliente = cliente;
-        this.funcionario = funcionario;
-        this.problema = codProblema;
+    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema codProblema, String descricaoProblemaOS, Date dataCadastroOS, Date dataCancelamentoOS, String motivoCancelamentoOS, Funcionario matri_funcionario_os, Cliente cpf_cliente_os) {
+        this.cpf_cliente_os = cpf_cliente_os;
+        this.matri_funcionario_os = matri_funcionario_os;
+        this.cod_problema = codProblema;
         this.numeroOS = numeroOS;
         this.descricaoProblemaOS = descricaoProblemaOS;
         this.descricaoServicoOS = descricaoServicoOS;
@@ -41,10 +45,10 @@ public class OrdemDeServico {
     }
 
     //Construtor de Ordem de Servico para SOLUCIONADO↓
-    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema problema, String descricaoProblemaOS, Date dataCadastroOS, Date dataSolucaoOS, Funcionario funcionario, Cliente cliente) {
-        this.cliente = cliente;
-        this.funcionario = funcionario;
-        this.problema = problema;
+    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema cod_problema, String descricaoProblemaOS, Date dataCadastroOS, Date dataSolucaoOS, Funcionario matri_funcionario_os, Cliente cpf_cliente_os) {
+        this.cpf_cliente_os = cpf_cliente_os;
+        this.matri_funcionario_os = matri_funcionario_os;
+        this.cod_problema = cod_problema;
         this.numeroOS = numeroOS;
         this.descricaoProblemaOS = descricaoProblemaOS;
         this.descricaoServicoOS = descricaoServicoOS;
@@ -54,49 +58,34 @@ public class OrdemDeServico {
         this.clientes = new ArrayList<>();
         this.funcionarios = new ArrayList<>();
         this.classProblemas = new ArrayList<>();
-    }
+    }*/
 
     
     //Todos os Getter↓
-    public Cliente getCliente() {
-        return cliente;
+
+    public Cliente getCpf_cliente_os() {
+        return cpf_cliente_os;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
+    public void setCpf_cliente_os(Cliente cpf_cliente_os) {
+        this.cpf_cliente_os = cpf_cliente_os;
     }
 
-    public Problema getProblema() {
-        return problema;
+    public Funcionario getMatri_funcionario_os() {
+        return matri_funcionario_os;
     }
 
-    public int getNumeroOS() {
-        return numeroOS;
+    public void setMatri_funcionario_os(Funcionario matri_funcionario_os) {
+        this.matri_funcionario_os = matri_funcionario_os;
     }
 
-    public String getDescricaoProblemaOS() {
-        return descricaoProblemaOS;
+    public Problema getCod_problema_os() {
+        return cod_problema_os;
     }
 
-    public String getDescricaoServicoOS() {
-        return descricaoServicoOS;
+    public void setCod_problema_os(Problema cod_problema_os) {
+        this.cod_problema_os = cod_problema_os;
     }
-
-    public String getMotivoCancelamentoOS() {
-        return motivoCancelamentoOS;
-    }
-
-    public Date getDataCadastroOS() {
-        return dataCadastroOS;
-    }
-
-    public Date getDataCancelamentoOS() {
-        return dataCancelamentoOS;
-    }
-
-    public Date getDataSolucaoOS() {
-        return dataSolucaoOS;
-    } 
 
     public ArrayList<Cliente> getClientes() {
         return clientes;
@@ -114,14 +103,72 @@ public class OrdemDeServico {
         this.funcionarios = funcionarios;
     }
 
-    public ArrayList<Problema> getClassProblemas() {
-        return classProblemas;
+    public ArrayList<Problema> getProblemas() {
+        return problemas;
     }
 
-    public void setClassProblemas(ArrayList<Problema> classProblemas) {
-        this.classProblemas = classProblemas;
+    public void setProblemas(ArrayList<Problema> problemas) {
+        this.problemas = problemas;
     }
+
     
+
+    public int getNumeroOS() {
+        return numeroOS;
+    }
+
+    public void setNumeroOS(int numeroOS) {
+        this.numeroOS = numeroOS;
+    }
+
+    public String getDescricaoProblemaOS() {
+        return descricaoProblemaOS;
+    }
+
+    public void setDescricaoProblemaOS(String descricaoProblemaOS) {
+        this.descricaoProblemaOS = descricaoProblemaOS;
+    }
+
+    public String getDescricaoServicoOS() {
+        return descricaoServicoOS;
+    }
+
+    public void setDescricaoServicoOS(String descricaoServicoOS) {
+        this.descricaoServicoOS = descricaoServicoOS;
+    }
+
+    public String getMotivoCancelamentoOS() {
+        return motivoCancelamentoOS;
+    }
+
+    public void setMotivoCancelamentoOS(String motivoCancelamentoOS) {
+        this.motivoCancelamentoOS = motivoCancelamentoOS;
+    }
+
+    public Date getDataCadastroOS() {
+        return dataCadastroOS;
+    }
+
+    public void setDataCadastroOS(Date dataCadastroOS) {
+        this.dataCadastroOS = dataCadastroOS;
+    }
+
+    public Date getDataCancelamentoOS() {
+        return dataCancelamentoOS;
+    }
+
+    public void setDataCancelamentoOS(Date dataCancelamentoOS) {
+        this.dataCancelamentoOS = dataCancelamentoOS;
+    }
+
+    public Date getDataSolucaoOS() {
+        return dataSolucaoOS;
+    }
+
+    public void setDataSolucaoOS(Date dataSolucaoOS) {
+        this.dataSolucaoOS = dataSolucaoOS;
+    }
+  
     
     
 }
