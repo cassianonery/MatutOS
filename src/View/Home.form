@@ -414,6 +414,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campo_busca_cli">
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campo_busca_cliActionPerformed"/>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo_busca_cliKeyTyped"/>
               </Events>
               <Constraints>

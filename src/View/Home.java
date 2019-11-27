@@ -325,6 +325,11 @@ public class Home extends javax.swing.JFrame {
         });
         jPanelClientes.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 79, -1));
 
+        campo_busca_cli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_cliActionPerformed(evt);
+            }
+        });
         campo_busca_cli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_cliKeyTyped(evt);
@@ -1220,11 +1225,13 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
 
     private void campo_busca_cliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_cliKeyTyped
         //Não permite o uso de NUMEROS e SIMBOLOS ↓↓
+      
         String caracteres = "/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.";
 
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
+        
     }//GEN-LAST:event_campo_busca_cliKeyTyped
 
     private void campo_busca_funcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_funcKeyTyped
@@ -1248,6 +1255,16 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private void matricula_campo_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matricula_campo_funcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matricula_campo_funcActionPerformed
+
+    private void campo_busca_cliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_cliActionPerformed
+     
+        try {
+            Controller.readJTableClienteForCPF(campo_busca_cli.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }//GEN-LAST:event_campo_busca_cliActionPerformed
 //------------------------------------------------------------
 
 //------------------------------------------------------------

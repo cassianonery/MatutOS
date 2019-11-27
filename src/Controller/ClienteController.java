@@ -4,7 +4,7 @@ import DAO.ClienteDAO;
 import Model.Cliente;
 import Interface.InterfaceCliente;
 import java.util.ArrayList;
-import javafx.scene.control.ButtonBar;
+
 import javax.swing.JOptionPane;
 
 public class ClienteController implements InterfaceCliente {
@@ -77,8 +77,8 @@ public class ClienteController implements InterfaceCliente {
             if (clienteNovo.getRg().trim().equals("") || clienteNovo.getRg() == null) {
                 throw new Exception("Favor insira o rg corretamente");
             }
-            if (clienteNovo.getRg().length() > 10 || clienteNovo.getRg().length() < 7) {
-                throw new Exception("RG deve conter no minimo 7 digitos e no maximo 10 digitos");
+            if (clienteNovo.getRg().length() > 10 || clienteNovo.getRg().length() < 6) {
+                throw new Exception("RG deve conter no minimo 6 digitos e no maximo 10 digitos");
             }
             //CPF↓------------------------------------------------------------------
             if (clienteNovo.getCpf().trim().equals("") || clienteNovo.getCpf() == null) {

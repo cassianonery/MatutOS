@@ -9,7 +9,7 @@ nome varchar(100) NOT NULL,
 rg varchar(10) NOT NULL,
 cpf varchar(11) PRIMARY KEY
 );
-
+ 
 CREATE TABLE funcionario (
 matricula int AUTO_INCREMENT PRIMARY KEY ,
 nome varchar(100)  NOT NULL,
@@ -42,4 +42,39 @@ FOREIGN KEY(codigo_problema) REFERENCES problema (codigo)
 );
     
 */
+    
+    
+   /******************** INSETs ************/
+    /*
+    //Cliente↓
+INSERT INTO cliente (nome, rg, cpf) 
+VALUES 
+('Lukas', '9311567', '110645045403'),
+('Cassiano', '5445214', '11111111111'),
+('Marco', '4577878', '22222222222'),
+('Gustavo', '7885521', '33333333333'),
+('Caio', '7879998', '44444444444'),
+('Rya', '9999999', '5555555555');
+    
+    
+    //Funcionario↓
+INSERT INTO funcionario (`matricula`, `nome`, `rg`, `cpf`, `salario`) 
+VALUES 
+(NULL, 'Marco Lindo', '666666', '77777777777', '1500'),
+(NULL, 'Cassiano Viado', '3325648', '66666666666', '1500'),
+(NULL, 'GustOvão', '1211232', '88888888888', '1500'),
+(NULL, 'Leon Tzum', '7878798', '99999999999', '1500'),
+(NULL, 'Afonso Braguilha', '5547632', '00000000001', '1500');
+
+    //Problema ↓
+INSERT INTO problema (`codigo`, `nome`, `descricao`) 
+VALUES 
+(NULL, 'Placa Mãe', 'A placa mão simplesmente nao funciona mais!!'),
+(NULL, 'Religião', 'Ela vem iludindo a sociedade por muito tempo!! CHEGA!!'),
+(NULL, 'Passagem', 'falta passagem para vim para faculdade'),
+(NULL, 'IA altamente desenvolvida', 'meu pc é uma IA altamente desenvolvida e tem suas proprias vontades');
+    
+    
+    
+    */
 }
