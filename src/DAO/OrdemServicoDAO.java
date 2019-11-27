@@ -15,11 +15,15 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement(" INSERT INTO os (descricaoservico,descricaoproblema) "
-                    + " VALUES (?,?) ");
+            stmt = con.prepareStatement(" INSERT INTO ordemservico (datacadastro,descricaoproblema,cpf_cliente,codigo_problema,matricula_funcionario) "
+                    + " VALUES (?,?,?,?,?) ");
            
-            stmt.setString(1, os.getDescricaoServicoOS());
+            stmt.setDate(1, os.getDataCadastroOS());
             stmt.setString(2, os.getDescricaoProblemaOS());
+            stmt.setString(3, os.getClienteOs().getCpf());
+            stmt.setInt(4,os.getProblemaOs().getCodigo());
+            stmt.setInt(5, os.getFuncionarioOs().getMatricula());
+            
 
             stmt.executeUpdate();
 

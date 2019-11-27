@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class OrdemDeServico {
    
-    private Cliente cpf_cliente_os;
-    private Funcionario matri_funcionario_os;
-    private Problema cod_problema_os;
+    private Cliente clienteOs;
+    private Funcionario FuncionarioOs;
+    private Problema problemaOs;
     
     private ArrayList<Cliente> clientes;
     private ArrayList<Funcionario> funcionarios;
@@ -63,28 +63,28 @@ public class OrdemDeServico {
     
     //Todos os Getter↓
 
-    public Cliente getCpf_cliente_os() {
-        return cpf_cliente_os;
+    public Cliente getClienteOs() {
+        return clienteOs;
     }
 
-    public void setCpf_cliente_os(Cliente cpf_cliente_os) {
-        this.cpf_cliente_os = cpf_cliente_os;
+    public void setClienteOs(Cliente clienteOs) {
+        this.clienteOs = clienteOs;
     }
 
-    public Funcionario getMatri_funcionario_os() {
-        return matri_funcionario_os;
+    public Funcionario getFuncionarioOs() {
+        return FuncionarioOs;
     }
 
-    public void setMatri_funcionario_os(Funcionario matri_funcionario_os) {
-        this.matri_funcionario_os = matri_funcionario_os;
+    public void setFuncionarioOs(Funcionario FuncionarioOs) {
+        this.FuncionarioOs = FuncionarioOs;
     }
 
-    public Problema getCod_problema_os() {
-        return cod_problema_os;
+    public Problema getProblemaOs() {
+        return problemaOs;
     }
 
-    public void setCod_problema_os(Problema cod_problema_os) {
-        this.cod_problema_os = cod_problema_os;
+    public void setProblemaOs(Problema problemaOs) {
+        this.problemaOs = problemaOs;
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -168,6 +168,8 @@ public class OrdemDeServico {
     public void setDataSolucaoOS(Date dataSolucaoOS) {
         this.dataSolucaoOS = dataSolucaoOS;
     }
+    
+    
   
     
     

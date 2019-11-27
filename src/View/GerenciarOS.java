@@ -1,11 +1,12 @@
 package View;
 
 import Controller.OrdemServicoController;
-import DAO.OrdemServicoDAO;
 import Model.OrdemDeServico;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 public class GerenciarOS extends javax.swing.JFrame {
 
@@ -20,20 +21,17 @@ public class GerenciarOS extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
         jPanel_cadastrarOs = new javax.swing.JPanel();
-        jRadioButton_status_solucionado = new javax.swing.JRadioButton();
         jButton_atualizar_os = new javax.swing.JButton();
         jButton_cadastrar_os = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jText_numeroOS = new javax.swing.JTextField();
-        jText_descricao_servicoOS = new javax.swing.JTextField();
         jText_cod_problemaOS = new javax.swing.JTextField();
         jText_matricula_funcionarioOS = new javax.swing.JTextField();
         jText_cpf_clienteOs = new javax.swing.JTextField();
@@ -42,7 +40,6 @@ public class GerenciarOS extends javax.swing.JFrame {
         jTextArea_descricao_problemaOS = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_OS_cadastro_atualizar = new javax.swing.JTable();
-        btn_test = new javax.swing.JButton();
         jPanel_cancelarOs = new javax.swing.JPanel();
         jButton_confirmar_cancelamento = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -56,14 +53,16 @@ public class GerenciarOS extends javax.swing.JFrame {
         jTextArea_movito_cancelamento = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_OS_cancelamento = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea_descricao_servicoOS = new javax.swing.JTextArea();
+        jLabel12 = new javax.swing.JLabel();
+        jRadioButton_status_solucionado = new javax.swing.JRadioButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jRadioButton_status_solucionado.setText("Solucionada");
 
         jButton_atualizar_os.setText("Atualizar");
 
@@ -75,8 +74,6 @@ public class GerenciarOS extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Numero OS:");
-
-        jLabel2.setText("Descrição Serviço:");
 
         jLabel3.setText("Cod. Problema:");
 
@@ -114,13 +111,6 @@ public class GerenciarOS extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable_OS_cadastro_atualizar);
 
-        btn_test.setText("TEST OS");
-        btn_test.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_testActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel_cadastrarOsLayout = new javax.swing.GroupLayout(jPanel_cadastrarOs);
         jPanel_cadastrarOs.setLayout(jPanel_cadastrarOsLayout);
         jPanel_cadastrarOsLayout.setHorizontalGroup(
@@ -129,105 +119,77 @@ public class GerenciarOS extends javax.swing.JFrame {
                 .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
+                        .addGap(174, 174, 174)
                         .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(jLabel7)
+                                .addGap(276, 276, 276)
+                                .addComponent(jLabel4)
+                                .addGap(21, 21, 21))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cadastrarOsLayout.createSequentialGroup()
+                                .addComponent(jButton_cadastrar_os)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(175, 175, 175)
-                                        .addComponent(jLabel4)
-                                        .addGap(21, 21, 21))
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(btn_test)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton_cadastrar_os)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton_atualizar_os)
-                                        .addGap(31, 31, 31)))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton_atualizar_os)
+                                .addGap(40, 40, 40)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE))
+                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jLabel6)
-                                        .addGap(13, 13, 13)))
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jLabel3))
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(jText_matricula_funcionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel5)))
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedText_data_cadastroOS, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(52, 52, 52)
-                                        .addComponent(jLabel2)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(jText_descricao_servicoOS, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jRadioButton_status_solucionado)))))
-                        .addGap(0, 27, Short.MAX_VALUE)))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jText_matricula_funcionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
+                                .addComponent(jFormattedText_data_cadastroOS, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_cadastrarOsLayout.setVerticalGroup(
             jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel3))
-                    .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jText_descricao_servicoOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton_status_solucionado))))
-                .addGap(7, 7, 7)
                 .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel6)
                     .addComponent(jText_matricula_funcionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jFormattedText_data_cadastroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_atualizar_os)
                             .addComponent(jButton_cadastrar_os)
-                            .addComponent(btn_test))
-                        .addGap(42, 42, 42))
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jButton_atualizar_os)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Ordens de Serviços", jPanel_cadastrarOs);
+        jTabbedPane.addTab("Ordens de Serviços", jPanel_cadastrarOs);
 
         jButton_confirmar_cancelamento.setText("Confirmar");
 
@@ -265,81 +227,106 @@ public class GerenciarOS extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable_OS_cancelamento);
 
+        jTextArea_descricao_servicoOS.setColumns(20);
+        jTextArea_descricao_servicoOS.setRows(5);
+        jScrollPane6.setViewportView(jTextArea_descricao_servicoOS);
+
+        jLabel12.setText("Descrição do Serviço ↓");
+
+        jRadioButton_status_solucionado.setText("Solucionada");
+
         javax.swing.GroupLayout jPanel_cancelarOsLayout = new javax.swing.GroupLayout(jPanel_cancelarOs);
         jPanel_cancelarOs.setLayout(jPanel_cancelarOsLayout);
         jPanel_cancelarOsLayout.setHorizontalGroup(
             jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                         .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
+                                .addGap(11, 11, 11)
                                 .addComponent(jLabel11)))
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel10))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jFormattedText_data_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel9))
-                                .addGap(54, 615, Short.MAX_VALUE))
-                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(86, 86, 86)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton_confirmar_cancelamento)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(39, 39, 39))
+                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_confirmar_cancelamento)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane4)))
+                        .addComponent(jScrollPane4))
+                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel9)
+                                .addGap(245, 245, 245)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jFormattedText_data_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cancelarOsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jRadioButton_status_solucionado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
         jPanel_cancelarOsLayout.setVerticalGroup(
             jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jFormattedText_data_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(11, 11, 11)
+                .addComponent(jRadioButton_status_solucionado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
                         .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton_confirmar_cancelamento))
-                .addGap(18, 18, 18)
+                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5))
+                            .addComponent(jButton_confirmar_cancelamento))
+                        .addGap(12, 12, 12)))
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jTabbedPane1.addTab("Cancelamentos de OS", jPanel_cancelarOs);
+        jTabbedPane.addTab("Cancelamentos e Soluções", jPanel_cancelarOs);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane)
         );
 
         pack();
@@ -351,15 +338,14 @@ public class GerenciarOS extends javax.swing.JFrame {
             OrdemDeServico os = new OrdemDeServico();
             OrdemServicoController osController = new OrdemServicoController();
 
-            os.setNumeroOS(Integer.parseInt(jText_numeroOS.getText()));
-            os.setDescricaoServicoOS(jText_descricao_servicoOS.getText());
+            SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+           
+            os.setDataCadastroOS((java.sql.Date) form.parse(jFormattedText_data_cadastroOS.getText()));
             os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
-            /*
-            os.setCod_problema_os(jText_cod_problemaOS.getText());
-            os.setMatri_funcionario_os(jText_matricula_funcionarioOS.getText());
-            os.setCpf_cliente_os(jText_cpf_clienteOs.getText());
-            os.setDataCadastroOS(jFormattedText_data_cadastroOS.getText());
-             */
+            os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
+            os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
+            os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
+             
             osController.create(os);
 
         } catch (Exception ex) {
@@ -368,22 +354,6 @@ public class GerenciarOS extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton_cadastrar_osActionPerformed
-
-    private void btn_testActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_testActionPerformed
-        try {
-            OrdemDeServico os = new OrdemDeServico();
-            OrdemServicoController controller = new OrdemServicoController();
-            OrdemServicoDAO dao = new OrdemServicoDAO();
-            
-            os.setDescricaoServicoOS(jText_descricao_servicoOS.getText());
-            os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
-            
-            controller.create(os);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this,ex);
-        }
-        
-    }//GEN-LAST:event_btn_testActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -419,7 +389,6 @@ public class GerenciarOS extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_test;
     private javax.swing.JButton jButton_atualizar_os;
     private javax.swing.JButton jButton_cadastrar_os;
     private javax.swing.JButton jButton_confirmar_cancelamento;
@@ -428,7 +397,7 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -444,16 +413,17 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTable jTable_OS_cadastro_atualizar;
     private javax.swing.JTable jTable_OS_cancelamento;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea_descricao_problemaOS;
+    private javax.swing.JTextArea jTextArea_descricao_servicoOS;
     private javax.swing.JTextArea jTextArea_movito_cancelamento;
     private javax.swing.JTextField jText_busca_os_cancelamento;
     private javax.swing.JTextField jText_cod_problemaOS;
     private javax.swing.JTextField jText_cpf_clienteOs;
-    private javax.swing.JTextField jText_descricao_servicoOS;
     private javax.swing.JTextField jText_matricula_funcionarioOS;
     private javax.swing.JTextField jText_numeroOS;
     private javax.swing.JTextField jText_numeroOS_cancelamento;
