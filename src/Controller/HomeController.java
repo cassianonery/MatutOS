@@ -1,7 +1,5 @@
 package Controller;
 
-import DAO.FuncionarioDAO;
-import DAO.ProblemaDAO;
 import Model.Cliente;
 import Model.Funcionario;
 import Model.Problema;
@@ -171,8 +169,7 @@ public class HomeController {
         }
     }*/
     
-    
-    
+  
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------  
     //METODOS RESPONSAVEIS POR ALTERAR AS CORES DOS BOTOES (CLIENTE,FUNCIONARIO,PROBLEMA,ORDEM DE SERIVOÇO)↓
