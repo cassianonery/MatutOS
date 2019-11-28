@@ -27,6 +27,8 @@ public class Funcionario extends Pessoa {
         this.matricula = matriculaFuncionario;
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------   
+
+    
     //Getter e Setter↓
     public ArrayList<OrdemDeServico> getOrdemDeServico() {
         return ordemDeServicos;

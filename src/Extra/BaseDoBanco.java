@@ -9,7 +9,7 @@ nome varchar(100) NOT NULL,
 rg varchar(10) NOT NULL,
 cpf varchar(11) PRIMARY KEY
 );
- 
+
 CREATE TABLE funcionario (
 matricula int AUTO_INCREMENT PRIMARY KEY ,
 nome varchar(100)  NOT NULL,
@@ -73,6 +73,21 @@ VALUES
 (NULL, 'Religião', 'Ela vem iludindo a sociedade por muito tempo!! CHEGA!!'),
 (NULL, 'Passagem', 'falta passagem para vim para faculdade'),
 (NULL, 'IA altamente desenvolvida', 'meu pc é uma IA altamente desenvolvida e tem suas proprias vontades');
+    
+    
+    
+//Ordem de Serviço↓
+
+INSERT INTO `ordemservico` 
+(`numero`,`descricaoproblema`,`datacadastro`,`datacancelamento`,`datasolucao`,`descricaoservico`,`motivocancelamento`,`matricula_funcionario`,`cpf_cliente`,`codigo_problema`,`status`)  
+VALUES
+(NULL, 'gzuz não voltou', '27/11/2019', NULL, NULL, NULL, NULL, '5', '11064504540', '4', 'Em Andamento'), 
+(NULL, 'arrumar a casa', '30/11/2019', NULL, NULL, NULL, NULL, '4', '22222222222', '5', 'Em Andamento'),
+(NULL, 'casa de macaco', '30/11/2019', NULL, NULL, NULL, NULL, '6', '44444444444', '5', 'Em Andamento'),
+(NULL, 'problemaao chatao veii', '28/11/2019', NULL, NULL, NULL, NULL, '8', '11111111111', '6', 'Em Andamento');
+
+
+    
     
     
     

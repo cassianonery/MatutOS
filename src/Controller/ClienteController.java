@@ -12,7 +12,7 @@ public class ClienteController implements InterfaceCliente {
 
     @Override
     public void create(Cliente cliente) throws Exception {
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer criar esse Cliente?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer criar esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
 
         if (confirmacao == JOptionPane.YES_OPTION) {
             //Objeto↓------------------------------------------------------------------
@@ -47,7 +47,6 @@ public class ClienteController implements InterfaceCliente {
             ClienteDAO dao = new ClienteDAO();
             dao.create(cliente);
         }
-        
 
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -90,17 +89,20 @@ public class ClienteController implements InterfaceCliente {
             //jogar para os DADOS↓
             ClienteDAO dao = new ClienteDAO();
             dao.update(clienteNovo, clienteVelho);
-        } 
+        }
 
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void delete(Cliente cliente) throws Exception {
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer EXCLUIR esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
 
-        //jogar para os DADOS↓
-        ClienteDAO dao = new ClienteDAO();
-        dao.delete(cliente);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            //jogar para os DADOS↓
+            ClienteDAO dao = new ClienteDAO();
+            dao.delete(cliente);
+        }
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -120,11 +122,11 @@ public class ClienteController implements InterfaceCliente {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public ArrayList<Cliente> readAll(String valorPesquisa) throws Exception {
+    /*public ArrayList<Cliente> readAll(String valorPesquisa) throws Exception {
 
         ClienteDAO dao = new ClienteDAO();
         return dao.readForCpf(valorPesquisa);
-    }
+    }*/
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------\\
 //------------------------------------------------------------------------------------------------------------------------------------------------------------\\

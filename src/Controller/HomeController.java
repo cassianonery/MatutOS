@@ -48,7 +48,7 @@ public class HomeController {
     }
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE CLIENTES↓
+    //ATUALIZA A TABELA DE CLIENTES↓
     public void readJTableCliente() throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableClientes().getModel();
         model.setNumRows(0);
@@ -61,6 +61,13 @@ public class HomeController {
                 c.getCpf()
             });
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_cli().setText("");
+        home.getNome_campo_cli().setText("");
+        home.getRg_campo_cli().setText("");
+        home.getCpf_campo_cli().setText("");
+          
     }
      //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE CLIENTES PELO CPF↓
     public void readJTableClienteForCPF(String cpf) throws Exception {
@@ -75,6 +82,13 @@ public class HomeController {
                 c.getCpf()
             });
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_cli().setText("");
+        home.getNome_campo_cli().setText("");
+        home.getRg_campo_cli().setText("");
+        home.getCpf_campo_cli().setText("");
+          
     }
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -93,6 +107,14 @@ public class HomeController {
                 f.getSalario()
             });
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_func().setText("");
+        home.getMatricula_campo_func().setText("");
+        home.getNome_campo_func().setText("");
+        home.getRg_campo_func().setText("");
+        home.getCpf_campo_func().setText("");
+        home.getSalario_campo_func().setText("");
     }
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE FUNCIONARIO PELA MATRICULA↓
     public void readJTableFuncionarioForMatricula(String matricula) throws Exception {
@@ -109,6 +131,14 @@ public class HomeController {
                 f.getSalario()
             });
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_func().setText("");
+        home.getMatricula_campo_func().setText("");
+        home.getNome_campo_func().setText("");
+        home.getRg_campo_func().setText("");
+        home.getCpf_campo_func().setText("");
+        home.getSalario_campo_func().setText("");
     }
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,6 +154,12 @@ public class HomeController {
                 p.getNome(),
                 p.getDescricao(),});
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_prob().setText("");
+        home.getCodigo_campo_prob().setText("");
+        home.getNome_campo_prob().setText("");
+        home.getDescricao_campo_prob().setText("");
     }
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE PROBLEMAS PELO CODIGO↓
     public void readJTableProblemaForCodigo(String codigo) throws Exception {
@@ -137,6 +173,12 @@ public class HomeController {
                 p.getNome(),
                 p.getDescricao(),});
         }
+        
+        //LIMPA OS CAMPOS DE TEXTO↓
+        home.getCampo_busca_prob().setText("");
+        home.getCodigo_campo_prob().setText("");
+        home.getNome_campo_prob().setText("");
+        home.getDescricao_campo_prob().setText("");
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
