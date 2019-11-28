@@ -7,20 +7,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import Controller.GerenciarOsController;
+import DAO.OrdemServicoDAO;
+import com.toedter.calendar.JDateChooser;
+import java.sql.Date;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
 public class GerenciarOS extends javax.swing.JFrame {
 
-    private GerenciarOsController gerenciarOS;
+    private GerenciarOsController Controller_gerenciar;
     
-    public GerenciarOS() {
+    public GerenciarOS() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
-        gerenciarOS = new GerenciarOsController(this);
-        gerenciarOS.readComboBox_Cliente();
+        
+        Controller_gerenciar = new GerenciarOsController(this);
+        //Controller_gerenciar.readJTableOS();
+        startReadComboBox();
+       
     }
-
+    
+    void startReadComboBox(){
+        Controller_gerenciar.readComboBox_Cliente();
+        Controller_gerenciar.readComboBox_Funcionario();
+        Controller_gerenciar.readComboBox_Problema();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,6 +45,7 @@ public class GerenciarOS extends javax.swing.JFrame {
         jPanel_cadastrarOs = new javax.swing.JPanel();
         jButton_atualizar_os = new javax.swing.JButton();
         jButton_cadastrar_os = new javax.swing.JButton();
+        jLabel_Status = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -44,11 +59,11 @@ public class GerenciarOS extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_descricao_problemaOS = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable_OS_cadastro_atualizar = new javax.swing.JTable();
-        jComboBoxFuncionarioOS = new javax.swing.JComboBox();
-        jComboBoxClienteOS = new javax.swing.JComboBox();
-        jcalendar__data_cadastroOS = new Extra.Jcalendar();
-        jComboBoxProblemaOS = new javax.swing.JComboBox();
+        jTable_OS_cadastro = new javax.swing.JTable();
+        jComboBoxFuncionarioOS = new javax.swing.JComboBox<>();
+        jComboBoxClienteOS = new javax.swing.JComboBox<>();
+        jComboBoxProblemaOS = new javax.swing.JComboBox<>();
+        jDateChooser_data_cadastroOS = new com.toedter.calendar.JDateChooser();
         jPanel_cancelarOs = new javax.swing.JPanel();
         jButton_confirmar_cancelamento = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -73,7 +88,10 @@ public class GerenciarOS extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel_cadastrarOs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jButton_atualizar_os.setText("Atualizar");
+        jPanel_cadastrarOs.add(jButton_atualizar_os, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
 
         jButton_cadastrar_os.setText("Cadastrar");
         jButton_cadastrar_os.addActionListener(new java.awt.event.ActionListener() {
@@ -81,162 +99,89 @@ public class GerenciarOS extends javax.swing.JFrame {
                 jButton_cadastrar_osActionPerformed(evt);
             }
         });
+        jPanel_cadastrarOs.add(jButton_cadastrar_os, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
+
+        jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel_Status.setText("Status");
+        jPanel_cadastrarOs.add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 210, 110, 30));
 
         jLabel1.setText("Numero OS:");
+        jPanel_cadastrarOs.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 18, -1, -1));
 
         jLabel3.setText("Cod. Problema:");
+        jPanel_cadastrarOs.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 152, -1, -1));
 
         jLabel4.setText("Descrição Problema:");
+        jPanel_cadastrarOs.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
         jLabel5.setText("Data Cadastro:");
+        jPanel_cadastrarOs.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         jLabel6.setText("Matricula do Funcionario:");
+        jPanel_cadastrarOs.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 62, -1, -1));
 
         jLabel7.setText("Cpf do Cliente:");
+        jPanel_cadastrarOs.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 108, -1, -1));
 
         jText_numeroOS.setEditable(false);
+        jPanel_cadastrarOs.add(jText_numeroOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 40, -1));
+
+        jText_cod_problemaOS.setEditable(false);
+        jPanel_cadastrarOs.add(jText_cod_problemaOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 135, -1));
+
+        jText_matricula_funcionarioOS.setEditable(false);
+        jPanel_cadastrarOs.add(jText_matricula_funcionarioOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 135, -1));
+
+        jText_cpf_clienteOs.setEditable(false);
+        jPanel_cadastrarOs.add(jText_cpf_clienteOs, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 135, -1));
 
         jTextArea_descricao_problemaOS.setColumns(20);
         jTextArea_descricao_problemaOS.setRows(5);
         jScrollPane2.setViewportView(jTextArea_descricao_problemaOS);
 
-        jTable_OS_cadastro_atualizar.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel_cadastrarOs.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 272, 134));
+
+        jTable_OS_cadastro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero Os", "Serviço", "Cod Problema", "Desc Problema", "Cadastrado", "Matricula Func", "Cpf Cliente", "Status OS"
+                "Numero Os", "Matricula Func", "Cpf Cliente", "Cod Problema", "Desc Problema", "Cadastrado", "Status OS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable_OS_cadastro_atualizar);
+        jScrollPane3.setViewportView(jTable_OS_cadastro);
 
-        jComboBoxFuncionarioOS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel_cadastrarOs.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 262, 963, 324));
+
         jComboBoxFuncionarioOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxFuncionarioOSActionPerformed(evt);
             }
         });
+        jPanel_cadastrarOs.add(jComboBoxFuncionarioOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(193, 57, -1, -1));
 
-        jComboBoxClienteOS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxClienteOS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxClienteOSActionPerformed(evt);
             }
         });
+        jPanel_cadastrarOs.add(jComboBoxClienteOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, -1, -1));
 
-        jcalendar__data_cadastroOS.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jcalendar__data_cadastroOSKeyTyped(evt);
+        jComboBoxProblemaOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProblemaOSActionPerformed(evt);
             }
         });
-
-        jComboBoxProblemaOS.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jPanel_cadastrarOsLayout = new javax.swing.GroupLayout(jPanel_cadastrarOs);
-        jPanel_cadastrarOs.setLayout(jPanel_cadastrarOsLayout);
-        jPanel_cadastrarOsLayout.setHorizontalGroup(
-            jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                .addGap(174, 174, 174)
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addComponent(jButton_cadastrar_os)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton_atualizar_os)
-                                        .addGap(40, 40, 40))
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addGap(276, 276, 276)
-                                        .addComponent(jLabel4)
-                                        .addGap(21, 21, 21)))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBoxFuncionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                                .addGap(17, 17, 17)
-                                                .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jText_matricula_funcionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                                .addGap(26, 26, 26)
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jcalendar__data_cadastroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                                            .addComponent(jComboBoxProblemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel_cadastrarOsLayout.createSequentialGroup()
-                                            .addComponent(jComboBoxClienteOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 101, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel_cadastrarOsLayout.setVerticalGroup(
-            jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jText_numeroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel5))
-                    .addComponent(jcalendar__data_cadastroOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBoxFuncionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jText_matricula_funcionarioOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel_cadastrarOsLayout.createSequentialGroup()
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(jComboBoxClienteOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jText_cpf_clienteOs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jText_cod_problemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jComboBoxProblemaOS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel_cadastrarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_cadastrar_os)
-                            .addComponent(jButton_atualizar_os)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 25, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jPanel_cadastrarOs.add(jComboBoxProblemaOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
+        jPanel_cadastrarOs.add(jDateChooser_data_cadastroOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 140, -1));
 
         jTabbedPane.addTab("Ordens de Serviços", jPanel_cadastrarOs);
 
@@ -384,18 +329,23 @@ public class GerenciarOS extends javax.swing.JFrame {
     private void jButton_cadastrar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cadastrar_osActionPerformed
 
         try {
-            OrdemDeServico os = new OrdemDeServico();
-            OrdemServicoController osController = new OrdemServicoController();
-
-            SimpleDateFormat form = new SimpleDateFormat("dd/MM/yyyy");
+           OrdemDeServico ordemServico = new OrdemDeServico();
+           OrdemServicoController osController = new OrdemServicoController();
+           OrdemServicoDAO dao = new OrdemServicoDAO();
            
-            os.setDataCadastroOS((java.sql.Date) form.parse(jcalendar__data_cadastroOS.getDateFormatString()));
-            os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
-            os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
-            os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
-            os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
-             
-            osController.create(os);
+           SimpleDateFormat simpleDateFormate = new SimpleDateFormat("dd/MM/yyyy");
+           String dataFormatada = simpleDateFormate.format(jDateChooser_data_cadastroOS.getDate().toString());
+           
+           ordemServico.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
+           ordemServico.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
+           ordemServico.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getName()));
+           
+           ordemServico.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
+           ordemServico.setDataCadastroOS(dataFormatada);
+           ordemServico.setStatus("Em andamento");
+           
+           dao.create(ordemServico);
+           
 
         } catch (Exception ex) {
             Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
@@ -404,22 +354,17 @@ public class GerenciarOS extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_cadastrar_osActionPerformed
 
-    private void jcalendar__data_cadastroOSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcalendar__data_cadastroOSKeyTyped
-        //Não permite o uso de LETRAS e SIMBOLOS ↓↓
-        String caracteres = "0123456789";
-
-        if (!caracteres.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jcalendar__data_cadastroOSKeyTyped
-
     private void jComboBoxFuncionarioOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFuncionarioOSActionPerformed
-        gerenciarOS.setNameJText_Funcionario();
+        Controller_gerenciar.setNameJText_Funcionario();
     }//GEN-LAST:event_jComboBoxFuncionarioOSActionPerformed
 
     private void jComboBoxClienteOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteOSActionPerformed
-       gerenciarOS.setNameJText_Cliente();
+       Controller_gerenciar.setNameJText_Cliente();
     }//GEN-LAST:event_jComboBoxClienteOSActionPerformed
+
+    private void jComboBoxProblemaOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProblemaOSActionPerformed
+        Controller_gerenciar.setNameJText_Problema();
+    }//GEN-LAST:event_jComboBoxProblemaOSActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -449,7 +394,11 @@ public class GerenciarOS extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerenciarOS().setVisible(true);
+                try {
+                    new GerenciarOS().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -458,9 +407,10 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JButton jButton_atualizar_os;
     private javax.swing.JButton jButton_cadastrar_os;
     private javax.swing.JButton jButton_confirmar_cancelamento;
-    private javax.swing.JComboBox jComboBoxClienteOS;
-    private javax.swing.JComboBox jComboBoxFuncionarioOS;
-    private javax.swing.JComboBox jComboBoxProblemaOS;
+    private javax.swing.JComboBox<Object> jComboBoxClienteOS;
+    private javax.swing.JComboBox<Object> jComboBoxFuncionarioOS;
+    private javax.swing.JComboBox<Object> jComboBoxProblemaOS;
+    private com.toedter.calendar.JDateChooser jDateChooser_data_cadastroOS;
     private javax.swing.JFormattedTextField jFormattedText_data_cancelamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -473,6 +423,7 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Status;
     private javax.swing.JPanel jPanel_cadastrarOs;
     private javax.swing.JPanel jPanel_cancelarOs;
     private javax.swing.JRadioButton jRadioButton_status_solucionado;
@@ -483,7 +434,7 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane;
-    private javax.swing.JTable jTable_OS_cadastro_atualizar;
+    private javax.swing.JTable jTable_OS_cadastro;
     private javax.swing.JTable jTable_OS_cancelamento;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea_descricao_problemaOS;
@@ -495,11 +446,10 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JTextField jText_matricula_funcionarioOS;
     private javax.swing.JTextField jText_numeroOS;
     private javax.swing.JTextField jText_numeroOS_cancelamento;
-    private Extra.Jcalendar jcalendar__data_cadastroOS;
     // End of variables declaration//GEN-END:variables
 
-    //-----------------------------------
-
+    //-----------------------------------------------------------//-----------------------------------------------------------\\
+    //ComboBoxs↓
     public JComboBox getjComboBoxClienteOS() {
         return jComboBoxClienteOS;
     }
@@ -525,8 +475,9 @@ public class GerenciarOS extends javax.swing.JFrame {
     }
 
   
-    //-----------------------------------------------------------
-
+    //-----------------------------------------------------------//-----------------------------------------------------------\\
+    
+    //Campos de Texto↓
     public JTextField getjText_cpf_clienteOs() {
         return jText_cpf_clienteOs;
     }
@@ -550,6 +501,63 @@ public class GerenciarOS extends javax.swing.JFrame {
     public void setjText_numeroOS(JTextField jText_numeroOS) {
         this.jText_numeroOS = jText_numeroOS;
     }
+
+    public JTextField getjText_cod_problemaOS() {
+        return jText_cod_problemaOS;
+    }
+
+    public void setjText_cod_problemaOS(JTextField jText_cod_problemaOS) {
+        this.jText_cod_problemaOS = jText_cod_problemaOS;
+    }
+
+    public JTextArea getjTextArea_descricao_problemaOS() {
+        return jTextArea_descricao_problemaOS;
+    }
+
+    public void setjTextArea_descricao_problemaOS(JTextArea jTextArea_descricao_problemaOS) {
+        this.jTextArea_descricao_problemaOS = jTextArea_descricao_problemaOS;
+    }
+
+    public JDateChooser getjDateChooser_data_cadastroOS() {
+        return jDateChooser_data_cadastroOS;
+    }
+
+    public void setjDateChooser_data_cadastroOS(JDateChooser jDateChooser_data_cadastroOS) {
+        this.jDateChooser_data_cadastroOS = jDateChooser_data_cadastroOS;
+    }
+    
+    //-----------------------------------------------------------//-----------------------------------------------------------\\
+
+    public JLabel getjLabel_Status() {
+        return jLabel_Status;
+    }
+
+    public void setjLabel_Status(JLabel jLabel_Status) {
+        this.jLabel_Status = jLabel_Status;
+    }
+    
+
+    //-----------------------------------------------------------//-----------------------------------------------------------\\
+
+    //Tables↓
+
+    public JTable getjTable_OS_cadastro() {
+        return jTable_OS_cadastro;
+    }
+
+    public void setjTable_OS_cadastro(JTable jTable_OS_cadastro) {
+        this.jTable_OS_cadastro = jTable_OS_cadastro;
+    }
+
+    public JTable getjTable_OS_cancelamento() {
+        return jTable_OS_cancelamento;
+    }
+
+    public void setjTable_OS_cancelamento(JTable jTable_OS_cancelamento) {
+        this.jTable_OS_cancelamento = jTable_OS_cancelamento;
+    }
+    
+    
     
     
     

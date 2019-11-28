@@ -26,8 +26,8 @@ public class Home extends javax.swing.JFrame {
         initComponents();
 
         //Modelo Tabela Cliente↓↓
-        DefaultTableModel modelo = (DefaultTableModel) tableClientes.getModel();
-        tableClientes.setRowSorter(new TableRowSorter(modelo));
+       /* DefaultTableModel modelo = (DefaultTableModel) tableClientes.getModel();
+        tableClientes.setRowSorter(new TableRowSorter(modelo));*/
 
         //Iniciar lendo a tableCliente↓
         Controller = new HomeController(this);
@@ -477,6 +477,11 @@ public class Home extends javax.swing.JFrame {
         jLabelBusca1.setText("Busca ↓");
         jPanelFuncionarios.add(jLabelBusca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, -1, -1));
 
+        campo_busca_func.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_funcActionPerformed(evt);
+            }
+        });
         campo_busca_func.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_funcKeyTyped(evt);
@@ -531,16 +536,9 @@ public class Home extends javax.swing.JFrame {
                 "Codigo", "Nome", "Descrição"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -589,6 +587,11 @@ public class Home extends javax.swing.JFrame {
         });
         jPanelProblemas.add(jButton_excluir_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
 
+        campo_busca_prob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_probActionPerformed(evt);
+            }
+        });
         campo_busca_prob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_probKeyTyped(evt);
@@ -785,13 +788,7 @@ public class Home extends javax.swing.JFrame {
             cliente.setCpf(cpf_campo_cli.getText());
             cliController.create(cliente);
 
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_cli.setText("");
-            nome_campo_cli.setText("");
-            rg_campo_cli.setText("");
-            cpf_campo_cli.setText("");
-
-            //Atualizar a tabela CLIENTE↓
+            //Atualizar a tabela de CLIENTES e Limpa os CAMPOS↓
             Controller.readJTableCliente();
 
         } catch (Exception ex) {
@@ -819,13 +816,7 @@ public class Home extends javax.swing.JFrame {
                 clienteVelho.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
                 cliController.update(clienteNovo, clienteVelho);
 
-                //LIMPA OS CAMPOS APOS O UPDATE↓
-                campo_busca_cli.setText("");
-                nome_campo_cli.setText("");
-                rg_campo_cli.setText("");
-                cpf_campo_cli.setText("");
-
-                //Atualizar a tabela CLIENTE↓
+                //Atualizar a tabela de CLIENTES e Limpa os CAMPOS↓
                 Controller.readJTableCliente();
 
             } catch (Exception ex) {
@@ -852,14 +843,6 @@ public class Home extends javax.swing.JFrame {
             funcionario.setSalario(Float.parseFloat(salario_campo_func.getText()));
             funController.create(funcionario);
 
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_func.setText("");
-            matricula_campo_func.setText("");
-            nome_campo_func.setText("");
-            rg_campo_func.setText("");
-            cpf_campo_func.setText("");
-            salario_campo_func.setText("");
-
             //Atualizar a tabela FUNCIONARIO↓
             Controller.readJTableFuncionario();
         } catch (Exception ex) {
@@ -871,7 +854,6 @@ public class Home extends javax.swing.JFrame {
     private void jButton_atualizar_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_funcActionPerformed
         //BOTÃO DE ATUALIZAR O FUNCIONARIO CADASTRADO↓↓
 //----------------------------------------------------------------------------------\\
-JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario?","ATENÇÃO", JOptionPane.YES_OPTION);
 
         //IF usado para verificar que linha da tabela estou clicando↓
         if (tableFuncionario.getSelectedRow() != -1) {
@@ -887,14 +869,6 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
                 funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
                 funController.update(funcionario);
 
-                //LIMPA OS CAMPOS APOS O UPDATE↓
-                campo_busca_func.setText("");
-                matricula_campo_func.setText("");
-                nome_campo_func.setText("");
-                rg_campo_func.setText("");
-                cpf_campo_func.setText("");
-                salario_campo_func.setText("");
-
                 //Atualizar a tabela FUNCIONARIO↓
                 Controller.readJTableFuncionario();
 
@@ -907,9 +881,13 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     }//GEN-LAST:event_jButton_atualizar_funcActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //Abre o JFrame de CADASTRO OS↓
-        GerenciarOS gerenciarOs = new GerenciarOS();
-        gerenciarOs.setVisible(true);
+        try {
+            //Abre o JFrame de CADASTRO OS↓
+            GerenciarOS gerenciarOs = new GerenciarOS();
+            gerenciarOs.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableClientesKeyReleased
@@ -935,32 +913,25 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         //BOTÃO DE EXCLUIR OS DADOS DO CLIENTE↓↓
 //----------------------------------------------------------------------------------\\
-        //IF usado para verificar que linha da tabela estou clicando↓
-        JOptionPane.showConfirmDialog(null, "Certeza que quer excluir esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
 
-        if (tableClientes.getSelectedRow() != -1) {
-            try {
+        try {
+            if (tableClientes.getSelectedRow() != -1) {
                 //Remove os dados do CLIENTE↓
                 Cliente cliente = new Cliente();
                 ClienteController cliController = new ClienteController();
 
                 cliente.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
-                cliController.delete(cliente);
 
-                //LIMPA OS CAMPOS APOS O CADASTRO↓
-                campo_busca_cli.setText("");
-                nome_campo_cli.setText("");
-                rg_campo_cli.setText("");
-                cpf_campo_cli.setText("");
+                cliController.delete(cliente);
 
                 //Atualizar a tabela CLIENTE↓
                 Controller.readJTableCliente();
 
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Cliente... " + ex.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Cliente... " + ex.getMessage());
         }
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -993,41 +964,26 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
         //BOTÃO DE EXCLUIR OS DADOS DO FUNCIONARIO↓↓
 //----------------------------------------------------------------------------------\\
 
-        JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Funcionario?", "ATENÇÃO", JOptionPane.YES_NO_OPTION);
-
         //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableFuncionario.getSelectedRow() != -1) {
+        try {
+            if (tableFuncionario.getSelectedRow() != -1) {
 
-            //Remove os dados do Funcionario↓
-            Funcionario funcionario = new Funcionario();
-            FuncionarioController funController = new FuncionarioController();
+                //Remove os dados do Funcionario↓
+                Funcionario funcionario = new Funcionario();
+                FuncionarioController funController = new FuncionarioController();
 
-            funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
+                funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
 
-            try {
                 funController.delete(funcionario);
 
-            } catch (Exception ex) {
-                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_func.setText("");
-            matricula_campo_func.setText("");
-            nome_campo_func.setText("");
-            rg_campo_func.setText("");
-            cpf_campo_func.setText("");
-            salario_campo_func.setText("");
-
-            try {
                 //Atualizar a tabela FUNCIONARIO↓
                 Controller.readJTableFuncionario();
 
-            } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Funcionario... "+ex.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Funcionario para excluir");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario para excluir");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Funcionario... " + ex.getMessage());
         }
 
 
@@ -1062,12 +1018,6 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
             problema.setNome(nome_campo_prob.getText());
             problema.setDescricao(descricao_campo_prob.getText());
             probController.create(problema);
-
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_prob.setText("");
-            codigo_campo_prob.setText("");
-            nome_campo_prob.setText("");
-            descricao_campo_prob.setText("");
 
             //Atualizar a tabela PROBLEMA↓
             Controller.readJTableProblema();
@@ -1145,11 +1095,11 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private void jButton_atualizar_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_probActionPerformed
         //BOTÃO DE ATUALIZAR O PROBLEMA CADASTRADO↓
 //----------------------------------------------------------------------------------\\
-        JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Problema?", "ATENÇÃO", JOptionPane.YES_OPTION);
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableProblema.getSelectedRow() != -1) {
 
-            try {
+        try {
+            //IF usado para verificar que linha da tabela estou clicando↓
+            if (tableProblema.getSelectedRow() != -1) {
+
                 //Passa os dados ATUALIZADOS do PROBLEMA para o CONTROLLADOR↓
                 Problema problema = new Problema();
                 ProblemaController probController = new ProblemaController();
@@ -1159,32 +1109,23 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
                 problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
                 probController.update(problema);
 
-                //LIMPA OS CAMPOS↓
-                campo_busca_prob.setText("");
-                codigo_campo_prob.setText("");
-                nome_campo_prob.setText("");
-                descricao_campo_prob.setText("");
-
                 //Atualizar a tabela PROBLEMA↓
                 Controller.readJTableProblema();
 
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Problema... " + ex.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Problema para Atualizar");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Problema para Atualizar");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Problema... " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton_atualizar_probActionPerformed
 
     private void jButton_excluir_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_excluir_probActionPerformed
         //BOTÃO DE EXCLUIR OS DADOS DO PROBLEMA↓↓
 //----------------------------------------------------------------------------------\\
-
-        JOptionPane.showConfirmDialog(null, "Certeza que quer excluir esse Problema?", "ATENÇÃO", JOptionPane.YES_OPTION);
-
         //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableProblema.getSelectedRow() != -1) {
-            try {
+        try {
+            if (tableProblema.getSelectedRow() != -1) {
                 //REMOVE OS DADDOS DO PROBLEMA↓↓
                 Problema problema = new Problema();
                 ProblemaController probController = new ProblemaController();
@@ -1192,20 +1133,14 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
                 problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
                 probController.delete(problema);
 
-                //LIMPA OS CAMPOS↓
-                campo_busca_prob.setText("");
-                codigo_campo_prob.setText("");
-                nome_campo_prob.setText("");
-                descricao_campo_prob.setText("");
-
                 //Atualizar a tabela PROBLEMA↓
                 Controller.readJTableProblema();
 
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Problema... "+ex.getMessage());
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Problema para excluir");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Problema para excluir");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Problema... " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton_excluir_probActionPerformed
 
@@ -1225,13 +1160,13 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
 
     private void campo_busca_cliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_cliKeyTyped
         //Não permite o uso de NUMEROS e SIMBOLOS ↓↓
-      
+
         String caracteres = "/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.";
 
         if (caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_campo_busca_cliKeyTyped
 
     private void campo_busca_funcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_funcKeyTyped
@@ -1257,14 +1192,30 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     }//GEN-LAST:event_matricula_campo_funcActionPerformed
 
     private void campo_busca_cliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_cliActionPerformed
-     
+
         try {
             Controller.readJTableClienteForCPF(campo_busca_cli.getText());
         } catch (Exception ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }//GEN-LAST:event_campo_busca_cliActionPerformed
+
+    private void campo_busca_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_probActionPerformed
+        try {
+            Controller.readJTableProblemaForCodigo(campo_busca_prob.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_campo_busca_probActionPerformed
+
+    private void campo_busca_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_funcActionPerformed
+        try {
+            Controller.readJTableFuncionarioForMatricula(campo_busca_func.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_campo_busca_funcActionPerformed
 //------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -1562,6 +1513,30 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
 
     public void setSalario_campo_func(JTextField salario_campo_func) {
         this.salario_campo_func = salario_campo_func;
+    }
+
+    public JTextField getCampo_busca_cli() {
+        return campo_busca_cli;
+    }
+
+    public void setCampo_busca_cli(JTextField campo_busca_cli) {
+        this.campo_busca_cli = campo_busca_cli;
+    }
+
+    public JTextField getCampo_busca_func() {
+        return campo_busca_func;
+    }
+
+    public void setCampo_busca_func(JTextField campo_busca_func) {
+        this.campo_busca_func = campo_busca_func;
+    }
+
+    public JTextField getCampo_busca_prob() {
+        return campo_busca_prob;
+    }
+
+    public void setCampo_busca_prob(JTextField campo_busca_prob) {
+        this.campo_busca_prob = campo_busca_prob;
     }
 
 }

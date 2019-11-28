@@ -60,7 +60,9 @@ public class OrdemServicoController implements InterfaceOrdemDeServico  {
 
     @Override
     public List<OrdemDeServico> read() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        OrdemServicoDAO dao = new OrdemServicoDAO();
+        return dao.read();
     }
 
     @Override

@@ -16,9 +16,12 @@ public class OrdemDeServico {
     private int numeroOS;
     private String descricaoProblemaOS,
                    descricaoServicoOS,
-                   motivoCancelamentoOS;
+                   motivoCancelamentoOS,
+                   status;
      
-    private Date dataCadastroOS, 
+    private Date dataCad;
+    
+    private String dataCadastroOS, 
                  dataCancelamentoOS,
                  dataSolucaoOS;
 
@@ -63,6 +66,29 @@ public class OrdemDeServico {
     
     //Todos os Getter↓
 
+    public Date getDataCad() {
+        return dataCad;
+    }
+
+    public void setDataCad(Date dataCad) {
+        this.dataCad = dataCad;
+    }
+    
+    
+    
+    
+    
+    
+    //----
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public Cliente getClienteOs() {
         return clienteOs;
     }
@@ -145,31 +171,31 @@ public class OrdemDeServico {
         this.motivoCancelamentoOS = motivoCancelamentoOS;
     }
 
-    public Date getDataCadastroOS() {
+    public String getDataCadastroOS() {
         return dataCadastroOS;
     }
 
-    public void setDataCadastroOS(Date dataCadastroOS) {
+    public void setDataCadastroOS(String dataCadastroOS) {
         this.dataCadastroOS = dataCadastroOS;
     }
 
-    public Date getDataCancelamentoOS() {
+    public String getDataCancelamentoOS() {
         return dataCancelamentoOS;
     }
 
-    public void setDataCancelamentoOS(Date dataCancelamentoOS) {
+    public void setDataCancelamentoOS(String dataCancelamentoOS) {
         this.dataCancelamentoOS = dataCancelamentoOS;
     }
 
-    public Date getDataSolucaoOS() {
+    public String getDataSolucaoOS() {
         return dataSolucaoOS;
     }
 
-    public void setDataSolucaoOS(Date dataSolucaoOS) {
+    public void setDataSolucaoOS(String dataSolucaoOS) {
         this.dataSolucaoOS = dataSolucaoOS;
     }
-    
-    
+
+ 
   
     
     
