@@ -10,5 +10,7 @@ public interface InterfaceOrdemDeServico {
     List<OrdemDeServico> read() throws Exception;
 
     void update(OrdemDeServico OrdemDeServico) throws Exception;
+    
+    List<OrdemDeServico> readAllTable() throws Exception;
 
 }

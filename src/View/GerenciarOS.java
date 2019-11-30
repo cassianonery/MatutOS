@@ -1,40 +1,36 @@
 package View;
 
 import Controller.OrdemServicoController;
-import Model.OrdemDeServico;
-import java.text.SimpleDateFormat;
+import Model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import Controller.GerenciarOsController;
-import DAO.OrdemServicoDAO;
+import Controller.Views.GController;
 import com.toedter.calendar.JDateChooser;
-import java.sql.Date;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 public class GerenciarOS extends javax.swing.JFrame {
 
-    private GerenciarOsController Controller_gerenciar;
-    
+    private GController controller_g;
+
     public GerenciarOS() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
-        
-        Controller_gerenciar = new GerenciarOsController(this);
-        //Controller_gerenciar.readJTableOS();
+
+        controller_g = new GController(this);
+        controller_g.readJTableOS();
         startReadComboBox();
-       
+
     }
-    
-    void startReadComboBox(){
-        Controller_gerenciar.readComboBox_Cliente();
-        Controller_gerenciar.readComboBox_Funcionario();
-        Controller_gerenciar.readComboBox_Problema();
+
+    void startReadComboBox() {
+        controller_g.readComboBox_Cliente();
+        controller_g.readComboBox_Funcionario();
+        controller_g.readComboBox_Problema();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,7 +41,6 @@ public class GerenciarOS extends javax.swing.JFrame {
         jPanel_cadastrarOs = new javax.swing.JPanel();
         jButton_atualizar_os = new javax.swing.JButton();
         jButton_cadastrar_os = new javax.swing.JButton();
-        jLabel_Status = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -101,10 +96,6 @@ public class GerenciarOS extends javax.swing.JFrame {
         });
         jPanel_cadastrarOs.add(jButton_cadastrar_os, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, -1, -1));
 
-        jLabel_Status.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel_Status.setText("Status");
-        jPanel_cadastrarOs.add(jLabel_Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 210, 110, 30));
-
         jLabel1.setText("Numero OS:");
         jPanel_cadastrarOs.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 18, -1, -1));
 
@@ -141,6 +132,8 @@ public class GerenciarOS extends javax.swing.JFrame {
 
         jPanel_cadastrarOs.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 272, 134));
 
+        jTable_OS_cadastro.setBackground(new java.awt.Color(59, 63, 66));
+        jTable_OS_cadastro.setForeground(new java.awt.Color(255, 255, 255));
         jTable_OS_cadastro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -155,6 +148,19 @@ public class GerenciarOS extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable_OS_cadastro.setGridColor(new java.awt.Color(59, 63, 66));
+        jTable_OS_cadastro.setSelectionBackground(new java.awt.Color(59, 63, 66));
+        jTable_OS_cadastro.setSelectionForeground(new java.awt.Color(59, 63, 66));
+        jTable_OS_cadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_OS_cadastroMouseClicked(evt);
+            }
+        });
+        jTable_OS_cadastro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable_OS_cadastroKeyReleased(evt);
             }
         });
         jScrollPane3.setViewportView(jTable_OS_cadastro);
@@ -329,42 +335,47 @@ public class GerenciarOS extends javax.swing.JFrame {
     private void jButton_cadastrar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cadastrar_osActionPerformed
 
         try {
-           OrdemDeServico ordemServico = new OrdemDeServico();
-           OrdemServicoController osController = new OrdemServicoController();
-           OrdemServicoDAO dao = new OrdemServicoDAO();
-           
-           SimpleDateFormat simpleDateFormate = new SimpleDateFormat("dd/MM/yyyy");
-           String dataFormatada = simpleDateFormate.format(jDateChooser_data_cadastroOS.getDate().toString());
-           
-           ordemServico.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
-           ordemServico.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
-           ordemServico.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getName()));
-           
-           ordemServico.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
-           ordemServico.setDataCadastroOS(dataFormatada);
-           ordemServico.setStatus("Em andamento");
-           
-           dao.create(ordemServico);
-           
+            OrdemDeServico os = new OrdemDeServico();
 
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Funcionario funcionario = controller_g.getFuncionarios().get(jComboBoxFuncionarioOS.getSelectedIndex());
+            Cliente cliente = controller_g.getClientes().get(jComboBoxClienteOS.getSelectedIndex());
+            Problema problema = controller_g.getProblemas().get(jComboBoxProblemaOS.getSelectedIndex());
+
+            os.setFuncionarioOs(funcionario);
+            os.setClienteOs(cliente);
+            os.setProblemaOs(problema);
+            os.setDataCadastroOS(new java.sql.Date(jDateChooser_data_cadastroOS.getDate().getTime()));
+            os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
+            os.setNumeroOS(Integer.parseInt(jText_numeroOS.getText()));
+
+            new OrdemServicoController().create(os);
+
+            controller_g.readJTableOS();
+
+        } catch (Exception e) {
+            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, e.getMessage());
         }
-
-
     }//GEN-LAST:event_jButton_cadastrar_osActionPerformed
 
     private void jComboBoxFuncionarioOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFuncionarioOSActionPerformed
-        Controller_gerenciar.setNameJText_Funcionario();
+        controller_g.setNameJText_Funcionario();
     }//GEN-LAST:event_jComboBoxFuncionarioOSActionPerformed
 
     private void jComboBoxClienteOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClienteOSActionPerformed
-       Controller_gerenciar.setNameJText_Cliente();
+        controller_g.setNameJText_Cliente();
     }//GEN-LAST:event_jComboBoxClienteOSActionPerformed
 
     private void jComboBoxProblemaOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProblemaOSActionPerformed
-        Controller_gerenciar.setNameJText_Problema();
+        controller_g.setNameJText_Problema();
     }//GEN-LAST:event_jComboBoxProblemaOSActionPerformed
+
+    private void jTable_OS_cadastroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OS_cadastroKeyReleased
+        controller_g.readLineTableOs();
+    }//GEN-LAST:event_jTable_OS_cadastroKeyReleased
+
+    private void jTable_OS_cadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_OS_cadastroMouseClicked
+        controller_g.readLineTableOs();
+    }//GEN-LAST:event_jTable_OS_cadastroMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -374,7 +385,7 @@ public class GerenciarOS extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -423,7 +434,6 @@ public class GerenciarOS extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel jLabel_Status;
     private javax.swing.JPanel jPanel_cadastrarOs;
     private javax.swing.JPanel jPanel_cancelarOs;
     private javax.swing.JRadioButton jRadioButton_status_solucionado;
@@ -474,9 +484,7 @@ public class GerenciarOS extends javax.swing.JFrame {
         this.jComboBoxProblemaOS = jComboBoxProblemaOS;
     }
 
-  
     //-----------------------------------------------------------//-----------------------------------------------------------\\
-    
     //Campos de Texto↓
     public JTextField getjText_cpf_clienteOs() {
         return jText_cpf_clienteOs;
@@ -525,22 +533,9 @@ public class GerenciarOS extends javax.swing.JFrame {
     public void setjDateChooser_data_cadastroOS(JDateChooser jDateChooser_data_cadastroOS) {
         this.jDateChooser_data_cadastroOS = jDateChooser_data_cadastroOS;
     }
-    
-    //-----------------------------------------------------------//-----------------------------------------------------------\\
-
-    public JLabel getjLabel_Status() {
-        return jLabel_Status;
-    }
-
-    public void setjLabel_Status(JLabel jLabel_Status) {
-        this.jLabel_Status = jLabel_Status;
-    }
-    
 
     //-----------------------------------------------------------//-----------------------------------------------------------\\
-
     //Tables↓
-
     public JTable getjTable_OS_cadastro() {
         return jTable_OS_cadastro;
     }
@@ -556,9 +551,5 @@ public class GerenciarOS extends javax.swing.JFrame {
     public void setjTable_OS_cancelamento(JTable jTable_OS_cancelamento) {
         this.jTable_OS_cancelamento = jTable_OS_cancelamento;
     }
-    
-    
-    
-    
-    
+
 }

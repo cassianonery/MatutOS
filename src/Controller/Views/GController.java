@@ -1,52 +1,46 @@
-package Controller;
+package Controller.Views;
 
-import DAO.ClienteDAO;
-import DAO.FuncionarioDAO;
-import DAO.OrdemServicoDAO;
-import DAO.ProblemaDAO;
-import Model.Cliente;
-import Model.Funcionario;
-import Model.Problema;
-import Model.OrdemDeServico;
+import Controller.OrdemServicoController;
+import DAO.*;
+import Model.*;
+import View.GerenciarOS;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
-import View.GerenciarOS;
-import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 
-public class GerenciarOsController {
+public class GController {
 
     private GerenciarOS gerenciarOs;
+    private ArrayList<Cliente> clientes = new ArrayList<>();
+    private ArrayList<Funcionario> funcionarios = new ArrayList<>();
+    private ArrayList<Problema> problemas = new ArrayList<>();
 
-    public GerenciarOsController(GerenciarOS gerenciarOs){
+    public GController(GerenciarOS gerenciarOs) {
         this.gerenciarOs = gerenciarOs;
     }
 
     public void readLineTableOs() {
         if (gerenciarOs.getjTable_OS_cadastro().getSelectedRow() != -1) {
-         /*   
-         SimpleDateFormat simpleDateFormate = new SimpleDateFormat("dd/MM/yyyy");
-           String dataFormatada = simpleDateFormate.format(gerenciarOs.getjDateChooser_data_cadastroOS().getDate().toString());*/
-           
+      
+            gerenciarOs.getjText_numeroOS().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(),0).toString());
             gerenciarOs.getjText_matricula_funcionarioOS().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 1).toString());
             gerenciarOs.getjText_cpf_clienteOs().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 2).toString());
             gerenciarOs.getjText_cod_problemaOS().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 3).toString());
             gerenciarOs.getjTextArea_descricao_problemaOS().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 4).toString());
-           // gerenciarOs.getjDateChooser_data_cadastroOS().setDate(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 5));
-            gerenciarOs.getjLabel_Status().setText(gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 6).toString());
+            gerenciarOs.getjDateChooser_data_cadastroOS().setDate((Date) gerenciarOs.getjTable_OS_cadastro().getValueAt(gerenciarOs.getjTable_OS_cadastro().getSelectedRow(), 5));
         }
     }
-    
+
     //ATUALIZA A TABELA DA ORDEM DE SERVIÇO↓
     public void readJTableOS() throws Exception {
         DefaultTableModel model = (DefaultTableModel) gerenciarOs.getjTable_OS_cadastro().getModel();
         model.setNumRows(0);
-        
         OrdemServicoController OsController = new OrdemServicoController();
-        OrdemServicoDAO dao = new OrdemServicoDAO();
-   
+
         for (OrdemDeServico os : OsController.read()) {
             model.addRow(new Object[]{
                 os.getNumeroOS(),
@@ -54,42 +48,31 @@ public class GerenciarOsController {
                 os.getClienteOs().getCpf(),
                 os.getProblemaOs().getCodigo(),
                 os.getDescricaoProblemaOS(),
+                os.getDataCadastroOS(),
                 os.getStatus()
             });
         }
-        
+
         //LIMPA OS CAMPOS DE TEXTO↓
-        /*home.getCampo_busca_cli().setText("");
-        home.getNome_campo_cli().setText("");
-        home.getRg_campo_cli().setText("");
-        home.getCpf_campo_cli().setText("");*/
-          
+        gerenciarOs.getjText_numeroOS().setText("");
+        gerenciarOs.getjText_matricula_funcionarioOS().setText("");
+        gerenciarOs.getjText_cpf_clienteOs().setText("");
+        gerenciarOs.getjText_cod_problemaOS().setText("");
+        gerenciarOs.getjTextArea_descricao_problemaOS().setText("");
+        gerenciarOs.getjDateChooser_data_cadastroOS().setDate(null);
     }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //-------
+    //Cliente↓
     public void readComboBox_Cliente() {
         try {
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             ArrayList<Cliente> clientes = new ArrayList<>();
             ClienteDAO dao = new ClienteDAO();
-            
+
             clientes = dao.read();
-            
+
             for (Cliente cliente : clientes) {
                 model.addElement(cliente.getCpf());
             }
@@ -111,15 +94,16 @@ public class GerenciarOsController {
     }
 
 //-----------------------------------------------------------------------------------------
+    //Funcionario↓
     public void readComboBox_Funcionario() {
 
         try {
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             ArrayList<Funcionario> funcionarios = new ArrayList<>();
             FuncionarioDAO dao = new FuncionarioDAO();
-            
+
             funcionarios = dao.read();
-            
+
             for (Funcionario funcionario : funcionarios) {
                 model.addElement(funcionario.getMatricula());
             }
@@ -141,13 +125,14 @@ public class GerenciarOsController {
         }
     }
 //-----------------------------------------------------------------------------------------
-    
+
+    //Problema↓
     public void readComboBox_Problema() {
         try {
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             ArrayList<Problema> problemas = new ArrayList<>();
             ProblemaDAO dao = new ProblemaDAO();
-            
+
             problemas = dao.read();
 
             for (Problema problema : problemas) {
@@ -170,20 +155,42 @@ public class GerenciarOsController {
             Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
-     /*  
-    public void testFunc(){
-        
-        try {
-            FuncionarioDAO dao = new FuncionarioDAO();
-            
-            for(Funcionario f: dao.read()){
-               
-                gerenciar.getjComboBoxFuncionarioOS().addItem(f);               
-            }     
-        } catch (Exception ex) {
-            Logger.getLogger(GerenciarOsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }*/
+
+    
+
+//GETTE E SETTE↓   
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+    public ArrayList<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+
+    public ArrayList<Problema> getProblemas() {
+        return problemas;
+    }
+
+    public void setProblemas(ArrayList<Problema> problemas) {
+        this.problemas = problemas;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }

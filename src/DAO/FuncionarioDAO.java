@@ -121,7 +121,7 @@ public class FuncionarioDAO implements InterfaceFuncionario {
         return (ArrayList<Funcionario>) funcionarios;
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
-    public ArrayList<Funcionario> readForMatricula(String matricula) throws Exception {
+    public ArrayList<Funcionario> read(String matricula) throws Exception {
       Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;

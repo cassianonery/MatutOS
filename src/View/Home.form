@@ -1020,7 +1020,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tableOrdemdeServico">
+                <Component class="javax.swing.JTable" name="jTable_OsMain">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="42" green="3f" red="3b" type="rgb"/>
@@ -1101,6 +1101,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable_OsMainKeyReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1113,6 +1116,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jText_pesquisaOs">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jText_pesquisaOsActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
