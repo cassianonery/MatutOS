@@ -1,114 +1,93 @@
-
 package Controller;
 
 import DAO.FuncionarioDAO;
 import Model.Funcionario;
 import java.util.ArrayList;
 import Interface.InterfaceFuncionario;
+import javax.swing.JOptionPane;
 
 public class FuncionarioController implements InterfaceFuncionario {
-    
-//----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void create(Funcionario funcionario) throws Exception {
-         //Objeto↓------------------------------------------------------------------
-        if (funcionario == null) {
-            throw new Exception("Objeto Funcionario não pode ser Nulo: Favor insira os dados corretamente");
-        }
-        //NOME↓------------------------------------------------------------------
-        if (funcionario.getNome().trim().equals("") || funcionario.getNome() == null) {
 
-            throw new Exception("Favor insira o NOME corretamente");
-        }
-        if (funcionario.getNome().length() > 100) {
+        //Confirmação de CADASTRO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Cadastrar esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
 
-            throw new Exception("Quantidades de caracters exedidos");
-        }
-        //RG↓------------------------------------------------------------------
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-        if (funcionario.getRg().trim().equals("") || funcionario.getRg() == null) {
-            throw new Exception("Favor insira o RG corretamente");
-        }
-        if (funcionario.getRg().length() > 10 || funcionario.getRg().length() < 6) {
-            throw new Exception("RG deve conter no minimo 6 digitos e no maximo 10 digitos");
-        }
-        //CPF↓------------------------------------------------------------------
-        if (funcionario.getCpf().trim().equals("") || funcionario.getCpf() == null) {
-            throw new Exception("O CPF não pode ser vazio ou nulo");
-        }
-        if (funcionario.getCpf().length() != 11) {
-            throw new Exception("O CPF não pode conter menos de 11 digitos");
-        }
-        //SALARIO↓------------------------------------------------------------------
-        if (funcionario.getSalario() < 1039) {
-            throw new Exception("Salário minimo é de 1039 reais..");
-        }       
-        //jogar para os DADOS↓
-        FuncionarioDAO dao = new FuncionarioDAO();
-        dao.create(funcionario);
+            //Object Treatment↓------------------------------------------------------------------
+            if (funcionario == null) {
+                throw new Exception("Objeto Funcionario não pode ser Nulo: Favor insira os dados corretamente");
+            }
 
+            
+            Validations.nome(funcionario.getNome());//←NAME Treatment
+            Validations.rg(funcionario.getRg());  //←RG Treatment
+            Validations.cpf(funcionario.getCpf());//←CPF Treatment
+            Validations.salario(funcionario.getSalario());//←SALARIO Treatment
+
+            //jogar para os DADOS↓
+            new FuncionarioDAO().create(funcionario);
+        }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
-//----------------------------------------------------------------------------------------------------------------------------------------------------------
-    @Override
-    public ArrayList<Funcionario> read() throws Exception {
-      FuncionarioDAO dao = new FuncionarioDAO();
-         return dao.read();
-    }
-//----------------------------------------------------------------------------------------------------------------------------------------------------------   
-    public ArrayList<Funcionario> readForMatricula(String matricula) throws Exception {
-      FuncionarioDAO dao = new FuncionarioDAO();
-      
-         return dao.readForMatricula(matricula);
-    }
-//----------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     @Override
     public void update(Funcionario funcionario) throws Exception {
-         //Objeto↓------------------------------------------------------------------
-        if (funcionario == null) {
-            throw new Exception("Favor insira os dados corretamente");
-        }
-        //NOME↓------------------------------------------------------------------
-        if (funcionario.getNome().trim().equals("") || funcionario.getNome() == null) {
 
-            throw new Exception("Favor insira o nome corretamente");
-        }
-        if (funcionario.getNome().length() > 100) {
+        //Confirmação de ATUALIZAÇÃO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
 
-            throw new Exception("Quantidades de caracters exedidos");
-        }
-        //RG↓------------------------------------------------------------------
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-        if (funcionario.getRg().trim().equals("") || funcionario.getRg() == null) {
-            throw new Exception("Favor insira o rg corretamente");
+            //Object Treatment↓------------------------------------------------------------------
+            if (funcionario == null) {
+                throw new Exception("Objeto Funcionario não pode ser Nulo: Favor insira os dados corretamente");
+            }
+
+            Validations.matricula(funcionario.getMatricula());//←MATRICULA Treatment
+            Validations.nome(funcionario.getNome());//←NAME Treatment
+            Validations.rg(funcionario.getRg());  //←RG Treatment
+            Validations.cpf(funcionario.getCpf());//←CPF Treatment
+            Validations.salario(funcionario.getSalario());//←SALARIO Treatment
+
+            //jogar para os DADOS↓
+            new FuncionarioDAO().update(funcionario);
         }
-        if (funcionario.getRg().length() > 10 || funcionario.getRg().length() < 7) {
-            throw new Exception("RG deve conter no minimo 7 digitos e no maximo 10 digitos");
-        }
-        //CPF↓------------------------------------------------------------------
-        if (funcionario.getCpf().trim().equals("") || funcionario.getCpf() == null) {
-            throw new Exception("O CPF não pode ser vazio ou nulo");
-        }
-        if (funcionario.getCpf().length() != 11) {
-            throw new Exception("O CPF não pode conter menos de 11 digitos");
-        }
-        //SALARIO↓------------------------------------------------------------------
-        if (funcionario.getSalario() < 1000) {
-            throw new Exception("Favor inserir um salario descente");
-        }
-        if (funcionario.getCpf().length() < 4) {
-            throw new Exception("menos que 4 digitos? SERIO? mão de vaca!!");
-        }
-        //jogar para os DADOS↓
-        FuncionarioDAO dao = new FuncionarioDAO();
-        dao.update(funcionario);
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
-//----------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void delete(Funcionario funcionario) throws Exception {
-     
-        //jogar para os DADOS↓
-        FuncionarioDAO dao = new FuncionarioDAO();
-        dao.delete(funcionario);
+
+        //Confirmação de EXCLUSÃO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
+
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
+
+          
+            //jogar para os DADOS↓
+            new FuncionarioDAO().delete(funcionario);
+        }
     }
-//---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    @Override
+    public ArrayList<Funcionario> read() throws Exception {
+        FuncionarioDAO dao = new FuncionarioDAO();
+        return dao.read();
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+    public ArrayList<Funcionario> read(String matricula) throws Exception {
+        return new FuncionarioDAO().read(matricula);
+    }
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------END---------------------------------------------------------------------------------------------------------
+
 }

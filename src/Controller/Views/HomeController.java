@@ -1,7 +1,13 @@
-package Controller;
+package Controller.Views;
 
+import Controller.ClienteController;
+import Controller.FuncionarioController;
+import Controller.OrdemServicoController;
+import Controller.ProblemaController;
+import DAO.OrdemServicoDAO;
 import Model.Cliente;
 import Model.Funcionario;
+import Model.OrdemDeServico;
 import Model.Problema;
 import View.Home;
 import java.awt.Color;
@@ -70,12 +76,12 @@ public class HomeController {
           
     }
      //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE CLIENTES PELO CPF↓
-    public void readJTableClienteForCPF(String cpf) throws Exception {
+    public void readJTableCliente(String cpf) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableClientes().getModel();
         model.setNumRows(0);
         ClienteController cliController = new ClienteController();
 
-        for (Cliente c : cliController.readForCpf(cpf)) {
+        for (Cliente c : cliController.read(cpf)) {
             model.addRow(new Object[]{
                 c.getNome(),
                 c.getRg(),
@@ -90,6 +96,7 @@ public class HomeController {
         home.getCpf_campo_cli().setText("");
           
     }
+  
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE FUNCIONARIO↓
@@ -117,12 +124,12 @@ public class HomeController {
         home.getSalario_campo_func().setText("");
     }
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE FUNCIONARIO PELA MATRICULA↓
-    public void readJTableFuncionarioForMatricula(String matricula) throws Exception {
+    public void readJTableFuncionario(String matricula) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableFuncionario().getModel();
         model.setNumRows(0);
         FuncionarioController funcController = new FuncionarioController();
 
-        for (Funcionario f : funcController.readForMatricula(matricula)) {
+        for (Funcionario f : funcController.read(matricula)) {
             model.addRow(new Object[]{
                 f.getMatricula(),
                 f.getNome(),
@@ -140,6 +147,7 @@ public class HomeController {
         home.getCpf_campo_func().setText("");
         home.getSalario_campo_func().setText("");
     }
+   
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE PROBLEMAS↓
@@ -152,7 +160,7 @@ public class HomeController {
             model.addRow(new Object[]{
                 p.getCodigo(),
                 p.getNome(),
-                p.getDescricao(),});
+                p.getDescricao()});
         }
         
         //LIMPA OS CAMPOS DE TEXTO↓
@@ -162,16 +170,16 @@ public class HomeController {
         home.getDescricao_campo_prob().setText("");
     }
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE PROBLEMAS PELO CODIGO↓
-    public void readJTableProblemaForCodigo(String codigo) throws Exception {
+    public void readJTableProblema(String codigo) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableProblema().getModel();
         model.setNumRows(0);
         ProblemaController probController = new ProblemaController();
-       
-        for (Problema p : probController.readForCodigo(codigo)) {
+ 
+        for (Problema p : probController.read(codigo)) {
             model.addRow(new Object[]{
                 p.getCodigo(),
                 p.getNome(),
-                p.getDescricao(),});
+                p.getDescricao()});
         }
         
         //LIMPA OS CAMPOS DE TEXTO↓
@@ -180,36 +188,51 @@ public class HomeController {
         home.getNome_campo_prob().setText("");
         home.getDescricao_campo_prob().setText("");
     }
+   
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE ORDEM DE SERVIÇO↓
-    /*public void readJTableOrdemdeServico() throws Exception {
-        DefaultTableModel model = (DefaultTableModel) home.getOrdemDeServicos().getModel();
+    public void readJTableOrdemdeServico() throws Exception {
+        DefaultTableModel model = (DefaultTableModel) home.getjTable_OsMain().getModel();
         model.setNumRows(0);
-        OrdemDeServicoDAO OsDAO = new OrdemDeServicoDAO();
+        OrdemServicoController OsControll = new OrdemServicoController();
 
-        for (OrdemDeServico os : OrdemDeServicoDAO.read()) {
+        for (OrdemDeServico os : OsControll.readAllTable()) {
             model.addRow(new Object[]{
-                os.getNome(),
-                os.getRg(),
-                os.getCpf()
+                os.getNumeroOS(),
+                os.getDescricaoServicoOS(),
+                os.getProblemaOs().getCodigo(),
+                os.getDescricaoProblemaOS(),
+                os.getDataCadastroOS(),
+                os.getDataCancelamentoOS(),
+                os.getMotivoCancelamentoOS(),
+                os.getFuncionarioOs().getMatricula(),
+                os.getClienteOs().getCpf()
             });
         }
     }
-    
-    public void readJTableOrdemdeServicoForCodigo(String codigo) throws Exception {
-        DefaultTableModel model = (DefaultTableModel) home.getOrdemDeServicos().getModel();
+    public void readJTableOrdemdeServico(String numero) throws Exception {
+        DefaultTableModel model = (DefaultTableModel) home.getjTable_OsMain().getModel();
         model.setNumRows(0);
-        OrdemDeServicoDAO OsDAO = new OrdemDeServicoDAO();
+        OrdemServicoController OsControll = new OrdemServicoController();
 
-        for (OrdemDeServico os : OrdemDeServicoDAO.read()) {
+        for (OrdemDeServico os : OsControll.readAllTable(numero)) {
             model.addRow(new Object[]{
-                os.getNome(),
-                os.getRg(),
-                os.getCpf()
+                os.getNumeroOS(),
+                os.getDescricaoServicoOS(),
+                os.getProblemaOs().getCodigo(),
+                os.getDescricaoProblemaOS(),
+                os.getDataCadastroOS(),
+                os.getDataCancelamentoOS(),
+                os.getMotivoCancelamentoOS(),
+                os.getFuncionarioOs().getMatricula(),
+                os.getClienteOs().getCpf()
             });
         }
-    }*/
+        home.getjText_pesquisaOs().setText("");
+    }
+    
+
     
   
     

@@ -2,7 +2,7 @@ package View;
 
 import Controller.ClienteController;
 import Controller.FuncionarioController;
-import Controller.HomeController;
+import Controller.Views.HomeController;
 import Controller.ProblemaController;
 import Model.Cliente;
 import Model.Funcionario;
@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Home extends javax.swing.JFrame {
 
@@ -26,9 +24,8 @@ public class Home extends javax.swing.JFrame {
         initComponents();
 
         //Modelo Tabela Cliente↓↓
-       /* DefaultTableModel modelo = (DefaultTableModel) tableClientes.getModel();
+        /* DefaultTableModel modelo = (DefaultTableModel) tableClientes.getModel();
         tableClientes.setRowSorter(new TableRowSorter(modelo));*/
-
         //Iniciar lendo a tableCliente↓
         Controller = new HomeController(this);
         Controller.readJTableCliente();
@@ -101,7 +98,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanelOrdemDeServicos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableOrdemdeServico = new javax.swing.JTable();
+        jTable_OsMain = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jText_pesquisaOs = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -612,9 +609,9 @@ public class Home extends javax.swing.JFrame {
 
         jPanelOrdemDeServicos.setBackground(new java.awt.Color(59, 63, 66));
 
-        tableOrdemdeServico.setBackground(new java.awt.Color(59, 63, 66));
-        tableOrdemdeServico.setForeground(new java.awt.Color(255, 255, 255));
-        tableOrdemdeServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_OsMain.setBackground(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.setForeground(new java.awt.Color(255, 255, 255));
+        jTable_OsMain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -630,14 +627,25 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableOrdemdeServico.setGridColor(new java.awt.Color(59, 63, 66));
-        tableOrdemdeServico.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        jScrollPane3.setViewportView(tableOrdemdeServico);
+        jTable_OsMain.setGridColor(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.setSelectionBackground(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable_OsMainKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable_OsMain);
 
         jButton2.setText("Gerenciar Ordens de Serviços");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jText_pesquisaOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_pesquisaOsActionPerformed(evt);
             }
         });
 
@@ -759,26 +767,32 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_ordemServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordemServicoMouseClicked
 
-        //Tornar a camada ORDEM DE SERVIÇO visivel↓
-        jPanelClientes.setVisible(false);
-        jPanelFuncionarios.setVisible(false);
-        jPanelProblemas.setVisible(false);
-        jPanelOrdemDeServicos.setVisible(true);
-
-        //Seta a cor nos BOTÕES↓
-        Controller.setLblColor(btn_ordemServico);
-        Controller.resetLblColor(btn_cliente);
-        Controller.resetLblColor(btn_funcionario);
-        Controller.resetLblColor(btn_problema);
+        try {
+            //Tornar a camada ORDEM DE SERVIÇO visivel↓
+            jPanelClientes.setVisible(false);
+            jPanelFuncionarios.setVisible(false);
+            jPanelProblemas.setVisible(false);
+            jPanelOrdemDeServicos.setVisible(true);
+            
+            //Seta a cor nos BOTÕES↓
+            Controller.setLblColor(btn_ordemServico);
+            Controller.resetLblColor(btn_cliente);
+            Controller.resetLblColor(btn_funcionario);
+            Controller.resetLblColor(btn_problema);
+            
+            Controller.readJTableOrdemdeServico();
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_btn_ordemServicoMouseClicked
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        //BOTÃO DE CONFIRMAR CADASTRO DO CLIENTE↓↓
+        try {
+            //BOTÃO DE CONFIRMAR CADASTRO DO CLIENTE↓↓
 //----------------------------------------------------------------------------------\\
 
-        try {
             //Passa os dados do CLIENTE para o CONTROLLADOR↓
             Cliente cliente = new Cliente();
             ClienteController cliController = new ClienteController();
@@ -790,10 +804,10 @@ public class Home extends javax.swing.JFrame {
 
             //Atualizar a tabela de CLIENTES e Limpa os CAMPOS↓
             Controller.readJTableCliente();
-
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do CONFIRMAR Cliente... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
+
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
@@ -820,7 +834,7 @@ public class Home extends javax.swing.JFrame {
                 Controller.readJTableCliente();
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do ATUALIZAR Cliente... " + ex);
+               JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um CLIENTE para alterar");
@@ -931,7 +945,7 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Cliente... " + ex.getMessage());
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -1194,7 +1208,7 @@ public class Home extends javax.swing.JFrame {
     private void campo_busca_cliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_cliActionPerformed
 
         try {
-            Controller.readJTableClienteForCPF(campo_busca_cli.getText());
+            Controller.readJTableCliente(campo_busca_cli.getText());
         } catch (Exception ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1203,7 +1217,7 @@ public class Home extends javax.swing.JFrame {
 
     private void campo_busca_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_probActionPerformed
         try {
-            Controller.readJTableProblemaForCodigo(campo_busca_prob.getText());
+            Controller.readJTableProblema(campo_busca_prob.getText());
         } catch (Exception ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1211,11 +1225,28 @@ public class Home extends javax.swing.JFrame {
 
     private void campo_busca_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_funcActionPerformed
         try {
-            Controller.readJTableFuncionarioForMatricula(campo_busca_func.getText());
+            Controller.readJTableFuncionario(campo_busca_func.getText());
         } catch (Exception ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_campo_busca_funcActionPerformed
+
+    private void jTable_OsMainKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OsMainKeyReleased
+
+        try {
+            Controller.readJTableOrdemdeServico();
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTable_OsMainKeyReleased
+
+    private void jText_pesquisaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_pesquisaOsActionPerformed
+        try {
+            Controller.readJTableOrdemdeServico(jText_pesquisaOs.getText());
+        } catch (Exception ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jText_pesquisaOsActionPerformed
 //------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -1309,6 +1340,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable_OsMain;
     private javax.swing.JTextField jText_pesquisaOs;
     private javax.swing.JTextField matricula_campo_func;
     private javax.swing.JTextField nome_campo_cli;
@@ -1319,7 +1351,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField salario_campo_func;
     private javax.swing.JTable tableClientes;
     private javax.swing.JTable tableFuncionario;
-    private javax.swing.JTable tableOrdemdeServico;
     private javax.swing.JTable tableProblema;
     // End of variables declaration//GEN-END:variables
 
@@ -1383,13 +1414,15 @@ public class Home extends javax.swing.JFrame {
         this.tableProblema = tableProblema;
     }
 
-    public JTable getTableOrdemdeServico() {
-        return tableOrdemdeServico;
+    public JTable getjTable_OsMain() {
+        return jTable_OsMain;
     }
 
-    public void setTableOrdemdeServico(JTable tableOrdemdeServico) {
-        this.tableOrdemdeServico = tableOrdemdeServico;
+    public void setjTable_OsMain(JTable jTable_OsMain) {
+        this.jTable_OsMain = jTable_OsMain;
     }
+
+   
 
     // ---------------------------------------------------------------------------
     //Getter e Setter PANEL↓
@@ -1538,5 +1571,15 @@ public class Home extends javax.swing.JFrame {
     public void setCampo_busca_prob(JTextField campo_busca_prob) {
         this.campo_busca_prob = campo_busca_prob;
     }
+
+    public JTextField getjText_pesquisaOs() {
+        return jText_pesquisaOs;
+    }
+
+    public void setjText_pesquisaOs(JTextField jText_pesquisaOs) {
+        this.jText_pesquisaOs = jText_pesquisaOs;
+    }
+    
+    
 
 }

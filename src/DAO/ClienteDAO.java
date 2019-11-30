@@ -121,7 +121,7 @@ public class ClienteDAO implements InterfaceCliente {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
 
-    public ArrayList<Cliente> readForCpf(String cpf) throws Exception {
+    public ArrayList<Cliente> read(String cpf) throws Exception {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;

@@ -112,7 +112,7 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
     }
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    public ArrayList<Problema> readForCodigo(String codigo) throws Exception {
+    public ArrayList<Problema> read(String codigo) throws Exception {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;

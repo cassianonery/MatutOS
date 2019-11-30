@@ -2,6 +2,7 @@ package Extra;
 
 abstract class BaseDoBanco {
 
+
 /*
     
 CREATE TABLE cliente (
@@ -27,14 +28,15 @@ descricao varchar(255)
 
 CREATE TABLE ordemservico (
 numero int AUTO_INCREMENT PRIMARY KEY,
-descricaoservico varchar(255),
-codigo_problema int NOT NULL,
-descricaoproblema varchar(255) NOT NULL,
-datacadastro datetime NOT NULL,
 matricula_funcionario int NOT NULL,
 cpf_cliente varchar(11) NOT NULL,
-datasolucao datetime,
-datacancelamento datetime,
+codigo_problema int NOT NULL,
+descricaoproblema varchar(255) NOT NULL,
+datacadastro date NOT NULL,
+status VARCHAR(20) NOT NULL,
+datasolucao date,
+datacancelamento date,
+descricaoservico varchar(255),
 motivocancelamento varchar(255),
 FOREIGN KEY(matricula_funcionario) REFERENCES funcionario (matricula),
 FOREIGN KEY(cpf_cliente) REFERENCES cliente (cpf),
@@ -78,15 +80,15 @@ VALUES
     
 //Ordem de Serviço↓
 
-INSERT INTO `ordemservico` 
-(`numero`,`descricaoproblema`,`datacadastro`,`datacancelamento`,`datasolucao`,`descricaoservico`,`motivocancelamento`,`matricula_funcionario`,`cpf_cliente`,`codigo_problema`,`status`)  
-VALUES
-(NULL, 'gzuz não voltou', '27/11/2019', NULL, NULL, NULL, NULL, '5', '11064504540', '4', 'Em Andamento'), 
-(NULL, 'arrumar a casa', '30/11/2019', NULL, NULL, NULL, NULL, '4', '22222222222', '5', 'Em Andamento'),
-(NULL, 'casa de macaco', '30/11/2019', NULL, NULL, NULL, NULL, '6', '44444444444', '5', 'Em Andamento'),
-(NULL, 'problemaao chatao veii', '28/11/2019', NULL, NULL, NULL, NULL, '8', '11111111111', '6', 'Em Andamento');
+    
+INSERT INTO `ordemservico` (`numero`, `matricula_funcionario`, `cpf_cliente`, `codigo_problema`, `descricaoproblema`, `datacadastro`, `status`, `datasolucao`, `datacancelamento`, `descricaoservico`, `motivocancelamento`) 
+VALUES 
+(NULL, '8', '44444444444', '2', 'To entendendo nada', '2019-11-12', 'Em Andamento', NULL, NULL, NULL, NULL);
+(NULL, '5', '11111111111', '5', 'gzuz não voltou', '2019-10-16', 'Em Andamento', NULL, NULL, NULL, NULL);
+(NULL, '6', '22222222222', '4', 'To entendendo nada', '2019-09-02', 'Em Andamento', NULL, NULL, NULL, NULL);
 
 
+    
     
     
     
