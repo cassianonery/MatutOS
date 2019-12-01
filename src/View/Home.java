@@ -4,9 +4,13 @@ import Controller.ClienteController;
 import Controller.FuncionarioController;
 import Controller.Views.HomeController;
 import Controller.ProblemaController;
+
 import Model.Cliente;
 import Model.Funcionario;
 import Model.Problema;
+
+import View.Gerenciador_ordens;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -616,7 +620,7 @@ public class Home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Numero OS", "Serviço", "Cod Problema", "Dresc Problema", "Cadastro", "Cancelamento", "Motivo Cancelamento", "Matricula Func", "Cpf Cliente", "Status OS"
+                "Numero OS", "Matricula Func", "Cpf Cliente", "Cod Problema", "Dresc Problema", "Cadastro", "Serviço", "Cancelamento", "Motivo Cancelamento", "Status OS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -646,6 +650,11 @@ public class Home extends javax.swing.JFrame {
         jText_pesquisaOs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jText_pesquisaOsActionPerformed(evt);
+            }
+        });
+        jText_pesquisaOs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jText_pesquisaOsKeyTyped(evt);
             }
         });
 
@@ -735,7 +744,7 @@ public class Home extends javax.swing.JFrame {
             Controller.readJTableFuncionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btn_funcionarioMouseClicked
 
@@ -760,7 +769,7 @@ public class Home extends javax.swing.JFrame {
             //Atualiza a tabela PROBLEMA↓
             Controller.readJTableProblema();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_btn_problemaMouseClicked
@@ -773,16 +782,16 @@ public class Home extends javax.swing.JFrame {
             jPanelFuncionarios.setVisible(false);
             jPanelProblemas.setVisible(false);
             jPanelOrdemDeServicos.setVisible(true);
-            
+
             //Seta a cor nos BOTÕES↓
             Controller.setLblColor(btn_ordemServico);
             Controller.resetLblColor(btn_cliente);
             Controller.resetLblColor(btn_funcionario);
             Controller.resetLblColor(btn_problema);
-            
+
             Controller.readJTableOrdemdeServico();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -834,7 +843,7 @@ public class Home extends javax.swing.JFrame {
                 Controller.readJTableCliente();
 
             } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um CLIENTE para alterar");
@@ -860,7 +869,7 @@ public class Home extends javax.swing.JFrame {
             //Atualizar a tabela FUNCIONARIO↓
             Controller.readJTableFuncionario();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Cadastrar Funcionario... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_jButton_confirmar_cadastro_funcActionPerformed
@@ -887,7 +896,7 @@ public class Home extends javax.swing.JFrame {
                 Controller.readJTableFuncionario();
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Funcionario... " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um Funcionario para Atualizar");
@@ -897,10 +906,9 @@ public class Home extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             //Abre o JFrame de CADASTRO OS↓
-            GerenciarOS gerenciarOs = new GerenciarOS();
-            gerenciarOs.setVisible(true);
+            new Gerenciador_ordens().setVisible(true);
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -909,7 +917,7 @@ public class Home extends javax.swing.JFrame {
             //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando as SETAS DO TECLADO
             Controller.readLineTableCliente();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableClientesKeyReleased
 
@@ -918,7 +926,7 @@ public class Home extends javax.swing.JFrame {
             //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando o CLICK DO MOUSE
             Controller.readLineTableCliente();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -945,7 +953,7 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
             }
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
@@ -957,7 +965,7 @@ public class Home extends javax.swing.JFrame {
             Controller.readLineTableFuncionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_tableFuncionarioKeyReleased
@@ -969,7 +977,7 @@ public class Home extends javax.swing.JFrame {
             Controller.readLineTableFuncionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_tableFuncionarioMouseClicked
@@ -997,7 +1005,7 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um Funcionario para excluir");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Funcionario... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -1008,7 +1016,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readLineTableProblema();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO NO USO DO CONTROLLER" + ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableProblemaMouseClicked
 
@@ -1017,7 +1025,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readLineTableProblema();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO NO USO DO CONTROLLER" + ex);
+           JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableProblemaKeyReleased
 
@@ -1037,7 +1045,7 @@ public class Home extends javax.swing.JFrame {
             Controller.readJTableProblema();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo No Catch do Confirmar Problema... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -1130,7 +1138,7 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um Problema para Atualizar");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Problema... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton_atualizar_probActionPerformed
 
@@ -1154,7 +1162,7 @@ public class Home extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um Problema para excluir");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Problema... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton_excluir_probActionPerformed
 
@@ -1173,11 +1181,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void campo_busca_cliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_cliKeyTyped
-        //Não permite o uso de NUMEROS e SIMBOLOS ↓↓
+        //Não permite o uso de LETRAS e SIMBOLOS ↓↓
+        String caracteres = "0123456789";
 
-        String caracteres = "/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.";
-
-        if (caracteres.contains(evt.getKeyChar() + "")) {
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
 
@@ -1210,7 +1217,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readJTableCliente(campo_busca_cli.getText());
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_campo_busca_cliActionPerformed
@@ -1219,7 +1226,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readJTableProblema(campo_busca_prob.getText());
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_campo_busca_probActionPerformed
 
@@ -1227,7 +1234,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readJTableFuncionario(campo_busca_func.getText());
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_campo_busca_funcActionPerformed
 
@@ -1236,7 +1243,7 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readJTableOrdemdeServico();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jTable_OsMainKeyReleased
 
@@ -1244,9 +1251,18 @@ public class Home extends javax.swing.JFrame {
         try {
             Controller.readJTableOrdemdeServico(jText_pesquisaOs.getText());
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jText_pesquisaOsActionPerformed
+
+    private void jText_pesquisaOsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_pesquisaOsKeyTyped
+        //Não permite o uso de LETRAS e SIMBOLOS ↓↓
+        String caracteres = "0123456789";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jText_pesquisaOsKeyTyped
 //------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -1422,8 +1438,6 @@ public class Home extends javax.swing.JFrame {
         this.jTable_OsMain = jTable_OsMain;
     }
 
-   
-
     // ---------------------------------------------------------------------------
     //Getter e Setter PANEL↓
     public JPanel getClientes() {
@@ -1579,7 +1593,5 @@ public class Home extends javax.swing.JFrame {
     public void setjText_pesquisaOs(JTextField jText_pesquisaOs) {
         this.jText_pesquisaOs = jText_pesquisaOs;
     }
-    
-    
 
 }

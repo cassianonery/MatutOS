@@ -10,8 +10,8 @@ import java.sql.SQLException;
 //-------------------------------
 import java.util.ArrayList;
 import java.util.List;
-//-------------------------------
 
+//-------------------------------
 //-------------------------------
 import javax.swing.JOptionPane;
 
@@ -19,73 +19,63 @@ public class ClienteDAO implements InterfaceCliente {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
-    public void create(Cliente cliente) {
+    public void create(Cliente cliente) throws SQLException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(" INSERT INTO Cliente (nome,rg,cpf) "
-                    + " VALUES (?,?,?) ");
-            stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getRg());
-            stmt.setString(3, cliente.getCpf());
 
-            stmt.executeUpdate();
+        stmt = con.prepareStatement(" INSERT INTO Cliente (nome,rg,cpf) "
+                + " VALUES (?,?,?) ");
+        stmt.setString(1, cliente.getNome());
+        stmt.setString(2, cliente.getRg());
+        stmt.setString(3, cliente.getCpf());
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no Banco: !" + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt);
-        }
+        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        ConexaoBanco.closeConnetion(con, stmt);
+
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
 
     @Override
-    public void update(Cliente clienteNovo, Cliente clienteVelho) {
+    public void update(Cliente clienteNovo, Cliente clienteVelho) throws SQLException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(" UPDATE cliente SET nome = ?, rg = ?, cpf = ? WHERE cpf = ? ");
-            stmt.setString(1, clienteNovo.getNome());
-            stmt.setString(2, clienteNovo.getRg());
-            stmt.setString(3, clienteNovo.getCpf());
-            stmt.setString(4, clienteVelho.getCpf());
 
-            stmt.executeUpdate();
+        stmt = con.prepareStatement(" UPDATE cliente SET nome = ?, rg = ?, cpf = ? WHERE cpf = ? ");
+        stmt.setString(1, clienteNovo.getNome());
+        stmt.setString(2, clienteNovo.getRg());
+        stmt.setString(3, clienteNovo.getCpf());
+        stmt.setString(4, clienteVelho.getCpf());
 
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+        stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Atualizar: !" + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt);
-        }
+        JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+
+        ConexaoBanco.closeConnetion(con, stmt);
+
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
-    public void delete(Cliente cliente) {
+    public void delete(Cliente cliente) throws SQLException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(" DELETE FROM Cliente WHERE cpf = ? ");
 
-            stmt.setString(1, cliente.getCpf());
+        stmt = con.prepareStatement(" DELETE FROM Cliente WHERE cpf = ? ");
 
-            stmt.executeUpdate();
+        stmt.setString(1, cliente.getCpf());
 
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+        stmt.executeUpdate();
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Excluir: !" + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt);
-        }
+        JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+
+        ConexaoBanco.closeConnetion(con, stmt);
+
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -97,25 +87,20 @@ public class ClienteDAO implements InterfaceCliente {
 
         List<Cliente> clientes = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement(" SELECT * FROM Cliente ");
-            rs = stmt.executeQuery();
+        stmt = con.prepareStatement(" SELECT * FROM Cliente ");
+        rs = stmt.executeQuery();
 
-            while (rs.next()) {
+        while (rs.next()) {
 
-                Cliente cli = new Cliente();
+            Cliente cli = new Cliente();
 
-                cli.setNome(rs.getString("nome"));
-                cli.setRg(rs.getString("rg"));
-                cli.setCpf(rs.getString("cpf"));
-                clientes.add(cli);
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO na leitura do banco " + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt, rs);
+            cli.setNome(rs.getString("nome"));
+            cli.setRg(rs.getString("rg"));
+            cli.setCpf(rs.getString("cpf"));
+            clientes.add(cli);
         }
+
+        ConexaoBanco.closeConnetion(con, stmt, rs);
 
         return (ArrayList<Cliente>) clientes;
     }
@@ -129,26 +114,21 @@ public class ClienteDAO implements InterfaceCliente {
 
         List<Cliente> clientes = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement(" SELECT * FROM Cliente WHERE cpf LIKE ? ");
-            stmt.setString(1, "%" + cpf + "%");
-            rs = stmt.executeQuery();
+        stmt = con.prepareStatement(" SELECT * FROM Cliente WHERE cpf LIKE ? ");
+        stmt.setString(1, "%" + cpf + "%");
+        rs = stmt.executeQuery();
 
-            while (rs.next()) {
+        while (rs.next()) {
 
-                Cliente cli = new Cliente();
+            Cliente cli = new Cliente();
 
-                cli.setNome(rs.getString("nome"));
-                cli.setRg(rs.getString("rg"));
-                cli.setCpf(rs.getString("cpf"));
-                clientes.add(cli);
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO!!" + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt, rs);
+            cli.setNome(rs.getString("nome"));
+            cli.setRg(rs.getString("rg"));
+            cli.setCpf(rs.getString("cpf"));
+            clientes.add(cli);
         }
+
+        ConexaoBanco.closeConnetion(con, stmt, rs);
 
         return (ArrayList<Cliente>) clientes;
     }
@@ -162,26 +142,21 @@ public class ClienteDAO implements InterfaceCliente {
 
         List<Cliente> clientes = new ArrayList<>();
 
-        try {
-            stmt = con.prepareStatement(" SELECT * FROM Cliente WHERE cpf LIKE ? ");
-            stmt.setString(1, "%" + valorPesquisa + "%");
-            rs = stmt.executeQuery();
+        stmt = con.prepareStatement(" SELECT * FROM Cliente WHERE cpf LIKE ? ");
+        stmt.setString(1, "%" + valorPesquisa + "%");
+        rs = stmt.executeQuery();
 
-            while (rs.next()) {
+        while (rs.next()) {
 
-                Cliente cli = new Cliente();
+            Cliente cli = new Cliente();
 
-                cli.setNome(rs.getString("nome"));
-                cli.setRg(rs.getString("rg"));
-                cli.setCpf(rs.getString("cpf"));
-                clientes.add(cli);
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO!!" + ex);
-        } finally {
-            ConexaoBanco.closeConnetion(con, stmt, rs);
+            cli.setNome(rs.getString("nome"));
+            cli.setRg(rs.getString("rg"));
+            cli.setCpf(rs.getString("cpf"));
+            clientes.add(cli);
         }
+
+        ConexaoBanco.closeConnetion(con, stmt, rs);
 
         return (ArrayList<Cliente>) clientes;
     }

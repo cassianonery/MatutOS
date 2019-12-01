@@ -22,8 +22,7 @@ public class ProblemaController implements InterfaceProblema {
             if (problema == null) {
                 throw new Exception("Objeto Problema não pode ser Nulo: Favor insira os dados corretamente");
             }
-
-            
+   
             Validations.nome(problema.getNome());//←NAME Treatment
             Validations.descrição(problema.getDescricao());//←DESCRIPTION Treatment
 

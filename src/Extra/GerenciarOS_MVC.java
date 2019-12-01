@@ -1,21 +1,20 @@
-package View;
+package Extra;
 
 import Controller.OrdemServicoController;
 import Model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import Controller.Views.GController;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class GerenciarOS extends javax.swing.JFrame {
+public class GerenciarOS_MVC extends javax.swing.JFrame {
 
     private GController controller_g;
 
-    public GerenciarOS() throws Exception {
+    public GerenciarOS_MVC() throws Exception {
         initComponents();
         setLocationRelativeTo(null);
 
@@ -353,7 +352,7 @@ public class GerenciarOS extends javax.swing.JFrame {
             controller_g.readJTableOS();
 
         } catch (Exception e) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, e.getMessage());
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, e.getMessage());
         }
     }//GEN-LAST:event_jButton_cadastrar_osActionPerformed
 
@@ -391,14 +390,16 @@ public class GerenciarOS extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciarOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarOS_MVC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciarOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarOS_MVC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciarOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarOS_MVC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciarOS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciarOS_MVC.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -406,9 +407,9 @@ public class GerenciarOS extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new GerenciarOS().setVisible(true);
+                    new GerenciarOS_MVC().setVisible(true);
                 } catch (Exception ex) {
-                    Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
