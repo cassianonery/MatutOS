@@ -200,17 +200,19 @@ public class HomeController {
         for (OrdemDeServico os : OsControll.readAllTable()) {
             model.addRow(new Object[]{
                 os.getNumeroOS(),
-                os.getDescricaoServicoOS(),
+                os.getFuncionarioOs().getMatricula(),
+                os.getClienteOs().getCpf(),
                 os.getProblemaOs().getCodigo(),
                 os.getDescricaoProblemaOS(),
                 os.getDataCadastroOS(),
+                os.getDescricaoServicoOS(),
                 os.getDataCancelamentoOS(),
                 os.getMotivoCancelamentoOS(),
-                os.getFuncionarioOs().getMatricula(),
-                os.getClienteOs().getCpf()
+                os.getStatus()
             });
         }
     }
+    
     public void readJTableOrdemdeServico(String numero) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getjTable_OsMain().getModel();
         model.setNumRows(0);
@@ -219,22 +221,20 @@ public class HomeController {
         for (OrdemDeServico os : OsControll.readAllTable(numero)) {
             model.addRow(new Object[]{
                 os.getNumeroOS(),
-                os.getDescricaoServicoOS(),
+                os.getFuncionarioOs().getMatricula(),
+                os.getClienteOs().getCpf(),
                 os.getProblemaOs().getCodigo(),
                 os.getDescricaoProblemaOS(),
                 os.getDataCadastroOS(),
+                os.getDescricaoServicoOS(),
                 os.getDataCancelamentoOS(),
                 os.getMotivoCancelamentoOS(),
-                os.getFuncionarioOs().getMatricula(),
-                os.getClienteOs().getCpf()
+                os.getStatus()
             });
         }
         home.getjText_pesquisaOs().setText("");
     }
     
-
-    
-  
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------  
     //METODOS RESPONSAVEIS POR ALTERAR AS CORES DOS BOTOES (CLIENTE,FUNCIONARIO,PROBLEMA,ORDEM DE SERIVOÇO)↓

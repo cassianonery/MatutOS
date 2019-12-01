@@ -1,9 +1,9 @@
-package Controller.Views;
+package Extra;
 
 import Controller.OrdemServicoController;
 import DAO.*;
 import Model.*;
-import View.GerenciarOS;
+import Extra.GerenciarOS_MVC;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class GController {
 
-    private GerenciarOS gerenciarOs;
+    private GerenciarOS_MVC gerenciarOs;
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
     private ArrayList<Problema> problemas = new ArrayList<>();
 
-    public GController(GerenciarOS gerenciarOs) {
+    public GController(GerenciarOS_MVC gerenciarOs) {
         this.gerenciarOs = gerenciarOs;
     }
 
@@ -78,7 +78,7 @@ public class GController {
             }
             gerenciarOs.getjComboBoxClienteOS().setModel(model);
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,7 +89,7 @@ public class GController {
 
             gerenciarOs.getjText_cpf_clienteOs().setText(cliente.getNome());
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -110,7 +110,7 @@ public class GController {
 
             gerenciarOs.getjComboBoxFuncionarioOS().setModel(model);
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -121,7 +121,7 @@ public class GController {
 
             gerenciarOs.getjText_matricula_funcionarioOS().setText(funcionario.getNome());
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //-----------------------------------------------------------------------------------------
@@ -141,7 +141,7 @@ public class GController {
 
             gerenciarOs.getjComboBoxProblemaOS().setModel(model);
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -152,7 +152,7 @@ public class GController {
 
             gerenciarOs.getjText_cod_problemaOS().setText(problema.getNome());
         } catch (Exception ex) {
-            Logger.getLogger(GerenciarOS.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GerenciarOS_MVC.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

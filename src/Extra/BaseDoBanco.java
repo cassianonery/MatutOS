@@ -4,6 +4,12 @@ abstract class BaseDoBanco {
 
 
 /*
+
+CREATE TABLE usuario(
+id int AUTO_INCREMENT PRIMARY KEY,
+login varchar (50) NOT NULL,
+senha varchar (100) NOT NULL  
+);
     
 CREATE TABLE cliente (
 nome varchar(100) NOT NULL,
@@ -33,7 +39,6 @@ cpf_cliente varchar(11) NOT NULL,
 codigo_problema int NOT NULL,
 descricaoproblema varchar(255) NOT NULL,
 datacadastro date NOT NULL,
-status VARCHAR(20) NOT NULL,
 datasolucao date,
 datacancelamento date,
 descricaoservico varchar(255),
@@ -48,6 +53,11 @@ FOREIGN KEY(codigo_problema) REFERENCES problema (codigo)
     
    /******************** INSETs ************/
     /*
+    //Usuarios↓
+    INSERT INTO usuario (login, senha)
+    VALUES ('lukasnox', 'mago');
+           ('cnery', 'gordo');
+    
     //Cliente↓
 INSERT INTO cliente (nome, rg, cpf) 
 VALUES 
@@ -79,19 +89,14 @@ VALUES
     
     
 //Ordem de Serviço↓
-
-    
-INSERT INTO `ordemservico` (`numero`, `matricula_funcionario`, `cpf_cliente`, `codigo_problema`, `descricaoproblema`, `datacadastro`, `status`, `datasolucao`, `datacancelamento`, `descricaoservico`, `motivocancelamento`) 
+ INSERT INTO ordemservico (numero, matricula_funcionario, cpf_cliente, codigo_problema, descricaoproblema, datacadastro, datasolucao, datacancelamento, descricaoservico, motivocancelamento) 
 VALUES 
-(NULL, '8', '44444444444', '2', 'To entendendo nada', '2019-11-12', 'Em Andamento', NULL, NULL, NULL, NULL);
-(NULL, '5', '11111111111', '5', 'gzuz não voltou', '2019-10-16', 'Em Andamento', NULL, NULL, NULL, NULL);
-(NULL, '6', '22222222222', '4', 'To entendendo nada', '2019-09-02', 'Em Andamento', NULL, NULL, NULL, NULL);
+(DEFAULT, '1', '24242424269', '5', 'Esses mlks precisam de limites', '2019-12-02', NULL, NULL, NULL, NULL),  
+(DEFAULT, '2', '11111111111', '1', 'só gzuz salva', '2019-12-03', NULL, NULL, NULL, NULL),  
+(DEFAULT, '3', '22222222222', '2', 'Casa de macaco', '2019-12-04', NULL, NULL, NULL, NULL),  
+(DEFAULT, '4', '01129276678', '3', 'Não acredite nas mentiras dele', '2019-12-05', NULL, NULL, NULL, NULL),
+(DEFAULT, '5', '10645045403', '4', 'Minha igreja é melhor que a sua', '2019-12-06', NULL, NULL, NULL, NULL),  
+(DEFAULT, '6', '10755793412', '6', 'Futebol é um lixo e quem briga por isso é doente!!', '2019-12-07', NULL, NULL, NULL, NULL);  
 
-
-    
-    
-    
-    
-    
     */
 }

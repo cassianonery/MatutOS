@@ -97,7 +97,7 @@ public class Validations {
             throw new Exception("Favor insira a DESCRIÇÃO corretamente");
         }
         if (descricao.length() < 10) {
-            throw new Exception("Quantidade MINIMA é de 10 caracters");
+            throw new Exception("A DESCRIÇÃO tem uma quantidade MINIMA de 10 caracters");
         }
         if (descricao.length() > 255) {
            throw new Exception("Quantidades de caracters exedidos a 255");
@@ -137,7 +137,7 @@ public class Validations {
         }
     }  
     
-    //Tratamento dos CODIGO dos PROBLEMAS↓ (PREVENTIVO)↓------------------------------------------------------------------
+    //Tratamento dos CODIGO dos PROBLEMAS↓ (PREVENTIVO)↓---------------------------------------------------------------------------
     public static void codigoProb(int codigo)throws Exception{
         if (codigo == 0) {
             throw new Exception("O numero do Problema nao pode ser 0");
@@ -148,8 +148,23 @@ public class Validations {
         if (codigo > Integer.MAX_VALUE) {
             throw new Exception("Numero dos Problemas passou dos limites..., vamo manerar nas broncas ae!");
         }
+    }  
+    
+    //Tratando a SENHA do Login↓↓----------------------------------------------------------------------------------------------------------
+    public static void senha(String senha)throws Exception {
+
+        if (senha == null) {
+             throw new Exception("A SENHA é um campo OBRIGATORIO");
+        }
+        if (senha.equals("") || senha.isEmpty()) {
+            throw new Exception("Favor insira a SENHA corretamente");
+        }
+        if (senha.length() < 4) {
+            throw new Exception("Quantidade de caracters minima é 4");
+        }
+        if (senha.length() > 100) {
+           throw new Exception("Quantidades de caracters exedidos a 100");
+        }   
+        
     }
-   
-    
-    
 }

@@ -23,7 +23,6 @@ public class FuncionarioController implements InterfaceFuncionario {
                 throw new Exception("Objeto Funcionario não pode ser Nulo: Favor insira os dados corretamente");
             }
 
-            
             Validations.nome(funcionario.getNome());//←NAME Treatment
             Validations.rg(funcionario.getRg());  //←RG Treatment
             Validations.cpf(funcionario.getCpf());//←CPF Treatment

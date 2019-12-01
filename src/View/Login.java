@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.Views.LoginController;
 import Extra.UserDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,6 +97,11 @@ public class Login extends javax.swing.JFrame {
 
         campo_senha.setBackground(new java.awt.Color(255, 255, 255));
         campo_senha.setForeground(new java.awt.Color(0, 0, 0));
+        campo_senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_senhaActionPerformed(evt);
+            }
+        });
         jPanel1.add(campo_senha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 130, -1));
 
         painelLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/View/Imagens/painel-login.png"))); // NOI18N
@@ -113,9 +119,10 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
 
-        UserDAO dao = new UserDAO();
+        
+        LoginController controll = new LoginController();
         try {
-            if (dao.checkLogin(campo_login.getText(), campo_senha.getText())) {
+            if (controll.checkLogin(campo_login.getText(), campo_senha.getText())) {
                 new Home().setVisible(true);
                 this.disable();
                 this.dispose();
@@ -124,7 +131,7 @@ public class Login extends javax.swing.JFrame {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btn_entrarActionPerformed
 
@@ -140,6 +147,10 @@ public class Login extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_campo_loginKeyTyped
+
+    private void campo_senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_senhaActionPerformed
+        btn_entrarActionPerformed(evt);
+    }//GEN-LAST:event_campo_senhaActionPerformed
 
     /**
      * @param args the command line arguments

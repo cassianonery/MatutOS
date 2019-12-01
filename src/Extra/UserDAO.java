@@ -2,6 +2,7 @@
 package Extra;
 
 import DAO.ConexaoBanco;
+import Interface.UserInterface;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class UserDAO {
+public class UserDAO implements UserInterface{
     
      public boolean checkLogin(String login, String senha ) throws Exception {
          
@@ -20,7 +21,7 @@ public class UserDAO {
 
         
         try {
-            stmt = con.prepareStatement(" SELECT * FROM user WHERE login = ? AND senha = ? ");
+            stmt = con.prepareStatement(" SELECT * FROM usuario WHERE login = ? AND senha = ? ");
             stmt.setString(1, login);
             stmt.setString(2, senha);
             

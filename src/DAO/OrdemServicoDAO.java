@@ -17,14 +17,14 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement(" INSERT INTO ordemservico (matricula_funcionario, cpf_cliente, codigo_problema, descricaoproblema, datacadastro) "
-                    + " VALUES (?,?,?,?,?,?) ");
+            stmt = con.prepareStatement(" INSERT INTO ordemservico (matricula_funcionario, cpf_cliente, codigo_problema, datacadastro, descricaoproblema) "
+                    + " VALUES (?,?,?,?,?) ");
            
             stmt.setInt(1, os.getFuncionarioOs().getMatricula());
             stmt.setString(2, os.getClienteOs().getCpf());
             stmt.setInt(3,os.getProblemaOs().getCodigo());
-            stmt.setString(4, os.getDescricaoProblemaOS());
-            stmt.setDate(5, os.getDataCadastroOS());
+            stmt.setDate(4, os.getDataCadastroOS());
+            stmt.setString(5, os.getDescricaoProblemaOS());
            
             stmt.executeUpdate();
 
@@ -73,8 +73,31 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
     }
 
     @Override
-    public void update(OrdemDeServico OrdemDeServico) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(OrdemDeServico os) throws Exception {
+    Connection con = ConexaoBanco.getConnection();
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(" UPDATE ordemservico SET matricula_funcionario = ?, cpf_cliente = ?, codigo_problema = ?, "
+                    + " datacadastro = ?, descricaoproblema = ? WHERE numero = ? ");
+                    
+           
+            stmt.setInt(1, os.getFuncionarioOs().getMatricula());
+            stmt.setString(2, os.getClienteOs().getCpf());
+            stmt.setInt(3,os.getProblemaOs().getCodigo());
+            stmt.setDate(4, os.getDataCadastroOS());
+            stmt.setString(5, os.getDescricaoProblemaOS());
+            stmt.setInt(6, os.getNumeroOS());
+           
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Erro ao salvar no Banco: !" + ex);
+        } finally {
+            ConexaoBanco.closeConnetion(con, stmt);
+        } 
     }
 
     @Override
