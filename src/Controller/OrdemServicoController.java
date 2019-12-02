@@ -35,9 +35,10 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
         //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     @Override
     public void update(OrdemDeServico ordemServico) throws Exception {
-           //Confirmação de ATUALIZAÇÃO do OS↓
+        //Confirmação de ATUALIZAÇÃO do OS↓
         int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar essa Ordem? ", "Confirmação", JOptionPane.YES_OPTION);
 
         //Caso confirmação seja SIM↓
@@ -61,18 +62,46 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
         //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+
     @Override
     public List<OrdemDeServico> read() throws Exception {
-       return new OrdemServicoDAO().read();
+        return new OrdemServicoDAO().read();
     }
-     @Override
-    public List<OrdemDeServico> readAllTable() throws Exception {
-         return new OrdemServicoDAO().readAllTable();
+
+    public List<OrdemDeServico> read(String numero) throws Exception {
+        return new OrdemServicoDAO().read(numero);
     }
-    public List<OrdemDeServico> readAllTable(String numero) throws Exception {
-         return new OrdemServicoDAO().readAllTable(numero);
-    }
-   
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------END---------------------------------------------------------------------------------------------------------   
+    @Override
+    public void solucionar(OrdemDeServico os) throws Exception {
+        //Object Treatment↓------------------------------------------------------------------
+        if (os == null) {
+            throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
+        }
+
+        Validations.numeroOs(os.getNumeroOS());
+        Validations.data(os.getDataSolucaoOS());
+        Validations.descrição(os.getDescricaoServicoOS());
+
+        //jogar para os DADOS↓
+        new OrdemServicoDAO().update(os);
+
+    }
+
+    @Override
+    public void cancelar(OrdemDeServico os) throws Exception {
+        //Object Treatment↓------------------------------------------------------------------
+        if (os == null) {
+            throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
+        }
+
+        Validations.numeroOs(os.getNumeroOS());
+        Validations.data(os.getDataSolucaoOS());
+        Validations.descrição(os.getDescricaoServicoOS());
+        //jogar para os DADOS↓
+        new OrdemServicoDAO().update(os);
+
+    }
 }

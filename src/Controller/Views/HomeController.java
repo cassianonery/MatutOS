@@ -197,11 +197,11 @@ public class HomeController {
         model.setNumRows(0);
         OrdemServicoController OsControll = new OrdemServicoController();
 
-        for (OrdemDeServico os : OsControll.readAllTable()) {
+        for (OrdemDeServico os : OsControll.read()) {
             model.addRow(new Object[]{
                 os.getNumeroOS(),
-                os.getFuncionarioOs().getMatricula(),
-                os.getClienteOs().getCpf(),
+                os.getFuncionarioOs().getNome(),
+                os.getClienteOs().getNome(),
                 os.getProblemaOs().getCodigo(),
                 os.getDescricaoProblemaOS(),
                 os.getDataCadastroOS(),
@@ -218,7 +218,7 @@ public class HomeController {
         model.setNumRows(0);
         OrdemServicoController OsControll = new OrdemServicoController();
 
-        for (OrdemDeServico os : OsControll.readAllTable(numero)) {
+        for (OrdemDeServico os : OsControll.read(numero)) {
             model.addRow(new Object[]{
                 os.getNumeroOS(),
                 os.getFuncionarioOs().getMatricula(),

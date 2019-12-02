@@ -11,6 +11,9 @@ public interface InterfaceOrdemDeServico {
 
     void update(OrdemDeServico OrdemDeServico) throws Exception;
     
-    List<OrdemDeServico> readAllTable() throws Exception;
-
+    void solucionar(OrdemDeServico OrdemDeServico) throws Exception;
+    
+    void cancelar(OrdemDeServico OrdemDeServico) throws Exception;
+    
+    
 }

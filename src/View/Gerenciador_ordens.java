@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OrdemServicoController;
+import Controller.Views.HomeController;
 import Model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,14 +27,18 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         startRead();
+        readALL();
+        
     }
 //---------------------------------------------------------------------------------------------------------------------------------
 
+    void readALL() throws Exception{
+        readJTableAll();
+        readJTableOpen();
+    }
     void startRead() {
 
         try {
-            readJTableOS(jTable_OS_cadastro);
-
             readComboBox_Cliente();
             readComboBox_Funcionario();
             readComboBox_Problema();
@@ -57,35 +62,52 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 //---------------------------------------------------------------------------------------------------------------------------------
     //ATUALIZA A TABELA DA ORDEM DE SERVIÇO↓
 
-    public void readJTableOS(JTable jtable) throws Exception {
-        DefaultTableModel model = (DefaultTableModel) jtable.getModel();
-        model.setNumRows(0);
-        OrdemServicoController OsController = new OrdemServicoController();
+    public void readJTableAll() throws Exception {
+        DefaultTableModel model = (DefaultTableModel) jTable_OS_cadastro.getModel();
 
-        for (OrdemDeServico os : OsController.read()) {
+        model.setNumRows(0);
+        OrdemServicoController OsControll = new OrdemServicoController();
+
+        for (OrdemDeServico os : OsControll.read()) {
+
             model.addRow(new Object[]{
                 os.getNumeroOS(),
-                os.getFuncionarioOs().getMatricula(),
-                os.getClienteOs().getCpf(),
+                os.getFuncionarioOs().getNome(),
+                os.getClienteOs().getNome(),
                 os.getProblemaOs().getCodigo(),
                 os.getDescricaoProblemaOS(),
                 os.getDataCadastroOS(),
                 os.getStatus()
             });
         }
-
-        /*
-        //LIMPA OS CAMPOS DE TEXTO↓
-        jText_numeroOS.setText("");
-        jText_matricula_funcionarioOS.setText("");
-        jText_cpf_clienteOs.setText("");
-        jText_cod_problemaOS.setText("");
-        jTextArea_descricao_problemaOS.setText("");
-        jDateChooser_data_cadastroOS.setDate(null);
-         */
     }
-//---------------------------------------------------------------------------------------------------------------------------------
 
+    public void readJTableOpen() throws Exception {
+        DefaultTableModel model = (DefaultTableModel) jTable_OS_alterando.getModel();
+
+        model.setNumRows(0);
+        OrdemServicoController OsControll = new OrdemServicoController();
+
+        ArrayList<OrdemDeServico> abertas = new ArrayList<>();
+
+        for (OrdemDeServico os : OsControll.read()) {
+
+            if (os.getStatus().equals("Aberta")) {
+                model.addRow(new Object[]{
+                    os.getNumeroOS(),
+                    os.getFuncionarioOs().getNome(),
+                    os.getClienteOs().getNome(),
+                    os.getProblemaOs().getCodigo(),
+                    os.getDescricaoProblemaOS(),
+                    os.getDataCadastroOS(),
+                    os.getStatus()
+                });
+            }
+            abertas.add(os);
+        }
+    }
+
+//---------------------------------------------------------------------------------------------------------------------------------
     public void readComboBox_Cliente() {
         try {
             DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -130,7 +152,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
             jComboBoxFuncionarioOS.setModel(model);
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 
@@ -141,7 +163,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
             jText_matricula_funcionarioOS.setText(Integer.toString(funcionario.getMatricula()));
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 //---------------------------------------------------------------------------------------------------------------------------------     
@@ -160,7 +182,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
             jComboBoxProblemaOS.setModel(model);
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 
@@ -200,39 +222,31 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
         jTextArea_descricao_problemaOS = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_OS_cadastro = new javax.swing.JTable();
-        jComboBoxFuncionarioOS = new javax.swing.JComboBox<>();
-        jComboBoxClienteOS = new javax.swing.JComboBox<>();
-        jComboBoxProblemaOS = new javax.swing.JComboBox<>();
+        jComboBoxFuncionarioOS = new javax.swing.JComboBox<Object>();
+        jComboBoxClienteOS = new javax.swing.JComboBox<Object>();
+        jComboBoxProblemaOS = new javax.swing.JComboBox<Object>();
         jDateChooser_data_cadastroOS = new com.toedter.calendar.JDateChooser();
         jPanel_cancelarOs = new javax.swing.JPanel();
-        jButton_confirmar_cancelamento = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jFormattedText_data_cancelamento = new javax.swing.JFormattedTextField();
-        jText_numeroOS_cancelamento = new javax.swing.JTextField();
-        jText_busca_os_cancelamento = new javax.swing.JTextField();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea_movito_cancelamento = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable_OS_cancelamento = new javax.swing.JTable();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea_descricao_servicoOS = new javax.swing.JTextArea();
-        jLabel12 = new javax.swing.JLabel();
-        jRadioButton_status_solucionado = new javax.swing.JRadioButton();
+        jTable_OS_alterando = new javax.swing.JTable();
+        jText_numeroOS_alteracao = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel_data = new javax.swing.JLabel();
+        jRadioButton_Solucionar = new javax.swing.JRadioButton();
+        jRadioButton_Cancelar = new javax.swing.JRadioButton();
+        jLabel_descricao = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextArea_descricao_alteracao = new javax.swing.JTextArea();
+        jButton_confirmar_alteracao = new javax.swing.JButton();
+        jText_busca_os_alteracao = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jDateChooser_alteracao = new com.toedter.calendar.JDateChooser();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jTabbedPane.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPaneMouseClicked(evt);
-            }
-        });
 
         jPanel_cadastrarOs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -347,138 +361,140 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Ordens de Serviços", jPanel_cadastrarOs);
 
-        jButton_confirmar_cancelamento.setText("Confirmar");
-
-        jLabel8.setText("Data:");
-
-        jLabel9.setText("Motivo do cancelamento ↓");
-
-        jLabel10.setText("Numero OS:");
-
-        jLabel11.setText("Buscar OS ↓");
-
-        jFormattedText_data_cancelamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-
-        jText_numeroOS_cancelamento.setEditable(false);
-
-        jTextArea_movito_cancelamento.setColumns(20);
-        jTextArea_movito_cancelamento.setRows(5);
-        jScrollPane5.setViewportView(jTextArea_movito_cancelamento);
-
-        jTable_OS_cancelamento.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_OS_alterando.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero Os", "Matricula Func", "Cpf Cliente", "Cod Problema", "Desc Problema", "Cadastrado", "Status OS", "Serviço"
+                "Numero Os", "Matricula Func", "Cpf Cliente", "Cod Problema", "Desc Problema", "Cadastrado", "Status OS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable_OS_cancelamento.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_OS_alterando.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_OS_cancelamentoMouseClicked(evt);
+                jTable_OS_alterandoMouseClicked(evt);
             }
         });
-        jTable_OS_cancelamento.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTable_OS_alterando.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable_OS_cancelamentoKeyReleased(evt);
+                jTable_OS_alterandoKeyReleased(evt);
             }
         });
-        jScrollPane4.setViewportView(jTable_OS_cancelamento);
+        jScrollPane4.setViewportView(jTable_OS_alterando);
 
-        jTextArea_descricao_servicoOS.setColumns(20);
-        jTextArea_descricao_servicoOS.setRows(5);
-        jScrollPane6.setViewportView(jTextArea_descricao_servicoOS);
+        jText_numeroOS_alteracao.setEditable(false);
 
-        jLabel12.setText("Descrição do Serviço ↓");
+        jLabel10.setText("Numero OS:");
 
-        jRadioButton_status_solucionado.setText("Solucionada");
+        jLabel_data.setText("Data:");
+
+        jRadioButton_Solucionar.setText("Solucionar");
+        jRadioButton_Solucionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_SolucionarActionPerformed(evt);
+            }
+        });
+
+        jRadioButton_Cancelar.setText("Cancelar");
+        jRadioButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_CancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel_descricao.setText("Descrição ↓");
+
+        jTextArea_descricao_alteracao.setColumns(20);
+        jTextArea_descricao_alteracao.setRows(5);
+        jScrollPane5.setViewportView(jTextArea_descricao_alteracao);
+
+        jButton_confirmar_alteracao.setText("Confirmar");
+        jButton_confirmar_alteracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_confirmar_alteracaoActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Buscar OS ↓");
 
         javax.swing.GroupLayout jPanel_cancelarOsLayout = new javax.swing.GroupLayout(jPanel_cancelarOs);
         jPanel_cancelarOs.setLayout(jPanel_cancelarOsLayout);
         jPanel_cancelarOsLayout.setHorizontalGroup(
             jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
                 .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel11)))
-                        .addGap(39, 39, 39))
-                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_confirmar_cancelamento)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4))
                     .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
                         .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel9)
-                                .addGap(245, 245, 245)
-                                .addComponent(jLabel12))
-                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                                .addGap(35, 35, 35)
+                                .addGap(40, 40, 40)
                                 .addComponent(jLabel10)
+                                .addGap(12, 12, 12)
+                                .addComponent(jText_numeroOS_alteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jRadioButton_Solucionar)
+                                .addGap(5, 5, 5)
+                                .addComponent(jRadioButton_Cancelar))
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel_data)
                                 .addGap(18, 18, 18)
-                                .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jFormattedText_data_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jDateChooser_alteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addGap(310, 310, 310)
+                                .addComponent(jLabel_descricao))
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton_confirmar_alteracao)
+                                .addGap(60, 60, 60)
+                                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jLabel11))
+                                    .addComponent(jText_busca_os_alteracao, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 949, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cancelarOsLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jRadioButton_status_solucionado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
         );
         jPanel_cancelarOsLayout.setVerticalGroup(
             jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jText_numeroOS_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jFormattedText_data_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addComponent(jRadioButton_status_solucionado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jText_busca_os_cancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))
-                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
-                        .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_cancelarOsLayout.createSequentialGroup()
                         .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                .addComponent(jScrollPane5))
-                            .addComponent(jButton_confirmar_cancelamento))
-                        .addGap(12, 12, 12)))
+                            .addComponent(jRadioButton_Solucionar)
+                            .addComponent(jRadioButton_Cancelar)
+                            .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jText_numeroOS_alteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel_data))
+                    .addComponent(jDateChooser_alteracao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(jLabel_descricao)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel_cancelarOsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton_confirmar_alteracao))
+                    .addGroup(jPanel_cancelarOsLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel11)
+                        .addGap(7, 7, 7)
+                        .addComponent(jText_busca_os_alteracao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -511,9 +527,8 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
             new OrdemServicoController().create(os);
 
-            readJTableOS(jTable_OS_cadastro);
+            readALL();
 
-            
             //LIMPA OS CAMPOS DE TEXTO↓
             jText_numeroOS.setText("");
             jText_matricula_funcionarioOS.setText("");
@@ -521,7 +536,6 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
             jText_cod_problemaOS.setText("");
             jTextArea_descricao_problemaOS.setText("");
             jDateChooser_data_cadastroOS.setDate(null);
-            
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -548,21 +562,13 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
         readLineTableOs();
     }//GEN-LAST:event_jTable_OS_cadastroMouseClicked
 
-    private void jTabbedPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPaneMouseClicked
-        try {
-            readJTableOS(jTable_OS_cancelamento);
-        } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-    }//GEN-LAST:event_jTabbedPaneMouseClicked
-
-    private void jTable_OS_cancelamentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OS_cancelamentoKeyReleased
+    private void jTable_OS_alterandoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OS_alterandoKeyReleased
         readLineTableOs();
-    }//GEN-LAST:event_jTable_OS_cancelamentoKeyReleased
+    }//GEN-LAST:event_jTable_OS_alterandoKeyReleased
 
-    private void jTable_OS_cancelamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_OS_cancelamentoMouseClicked
+    private void jTable_OS_alterandoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_OS_alterandoMouseClicked
         readLineTableOs();
-    }//GEN-LAST:event_jTable_OS_cancelamentoMouseClicked
+    }//GEN-LAST:event_jTable_OS_alterandoMouseClicked
 
     private void jButton_atualizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_osActionPerformed
         try {
@@ -577,9 +583,8 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
             new OrdemServicoController().update(os);
 
-            readJTableOS(jTable_OS_cadastro);
+            readALL();
 
-            
             //LIMPA OS CAMPOS DE TEXTO↓
             jText_numeroOS.setText("");
             jText_matricula_funcionarioOS.setText("");
@@ -587,12 +592,55 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
             jText_cod_problemaOS.setText("");
             jTextArea_descricao_problemaOS.setText("");
             jDateChooser_data_cadastroOS.setDate(null);
-            
 
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton_atualizar_osActionPerformed
+
+    private void jRadioButton_SolucionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_SolucionarActionPerformed
+        jTextArea_descricao_alteracao.setVisible(true);
+        jButton_confirmar_alteracao.setEnabled(true);
+        jDateChooser_alteracao.setEnabled(true);
+
+        jLabel_data.setText("Data Solucionada:");
+        jLabel_descricao.setText("Descrição do Serviço↓");
+    }//GEN-LAST:event_jRadioButton_SolucionarActionPerformed
+
+    private void jRadioButton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_CancelarActionPerformed
+        jTextArea_descricao_alteracao.setVisible(true);
+        jButton_confirmar_alteracao.setEnabled(true);
+        jDateChooser_alteracao.setEnabled(true);
+
+        jLabel_data.setText("Data Cancelamento: ");
+        jLabel_descricao.setText("Motivo do Cancelamento ↓");
+    }//GEN-LAST:event_jRadioButton_CancelarActionPerformed
+
+    private void jButton_confirmar_alteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_confirmar_alteracaoActionPerformed
+
+        try {
+            OrdemDeServico os = new OrdemDeServico();
+            OrdemServicoController controll = new OrdemServicoController();
+
+            if (jRadioButton_Solucionar.isSelected()) {
+                os.setNumeroOS(Integer.parseInt(jText_numeroOS_alteracao.getText()));
+                os.setDataSolucaoOS(new java.sql.Date(jDateChooser_alteracao.getDate().getTime()));
+                os.setDescricaoServicoOS(jTextArea_descricao_alteracao.getText());
+                controll.solucionar(os);
+            }
+            if (jRadioButton_Cancelar.isSelected()) {
+                os.setNumeroOS(Integer.parseInt(jText_numeroOS_alteracao.getText()));
+                os.setDataCancelamentoOS(new java.sql.Date(jDateChooser_alteracao.getDate().getTime()));
+                os.setMotivoCancelamentoOS(jTextArea_descricao_alteracao.getText());
+                controll.cancelar(os);
+            }
+
+           readALL();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+    }//GEN-LAST:event_jButton_confirmar_alteracaoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -640,45 +688,43 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_atualizar_os;
     private javax.swing.JButton jButton_cadastrar_os;
-    private javax.swing.JButton jButton_confirmar_cancelamento;
+    private javax.swing.JButton jButton_confirmar_alteracao;
     private javax.swing.JComboBox<Object> jComboBoxClienteOS;
     private javax.swing.JComboBox<Object> jComboBoxFuncionarioOS;
     private javax.swing.JComboBox<Object> jComboBoxProblemaOS;
+    private com.toedter.calendar.JDateChooser jDateChooser_alteracao;
     private com.toedter.calendar.JDateChooser jDateChooser_data_cadastroOS;
-    private javax.swing.JFormattedTextField jFormattedText_data_cancelamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_data;
+    private javax.swing.JLabel jLabel_descricao;
     private javax.swing.JPanel jPanel_cadastrarOs;
     private javax.swing.JPanel jPanel_cancelarOs;
-    private javax.swing.JRadioButton jRadioButton_status_solucionado;
+    private javax.swing.JRadioButton jRadioButton_Cancelar;
+    private javax.swing.JRadioButton jRadioButton_Solucionar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane;
+    private javax.swing.JTable jTable_OS_alterando;
     private javax.swing.JTable jTable_OS_cadastro;
-    private javax.swing.JTable jTable_OS_cancelamento;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea_descricao_alteracao;
     private javax.swing.JTextArea jTextArea_descricao_problemaOS;
-    private javax.swing.JTextArea jTextArea_descricao_servicoOS;
-    private javax.swing.JTextArea jTextArea_movito_cancelamento;
-    private javax.swing.JTextField jText_busca_os_cancelamento;
+    private javax.swing.JTextField jText_busca_os_alteracao;
     private javax.swing.JTextField jText_cod_problemaOS;
     private javax.swing.JTextField jText_cpf_clienteOs;
     private javax.swing.JTextField jText_matricula_funcionarioOS;
     private javax.swing.JTextField jText_numeroOS;
-    private javax.swing.JTextField jText_numeroOS_cancelamento;
+    private javax.swing.JTextField jText_numeroOS_alteracao;
     // End of variables declaration//GEN-END:variables
 
     //-----------------------------------------------------------//-----------------------------------------------------------\\
