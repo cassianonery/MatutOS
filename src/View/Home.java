@@ -9,8 +9,6 @@ import Model.Cliente;
 import Model.Funcionario;
 import Model.Problema;
 
-import View.Gerenciador_ordens;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -814,7 +812,7 @@ public class Home extends javax.swing.JFrame {
             //Atualizar a tabela de CLIENTES e Limpa os CAMPOS↓
             Controller.readJTableCliente();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, "erro na tentatica de cadasto do cliente    " + ex.getMessage());
         }
 
 

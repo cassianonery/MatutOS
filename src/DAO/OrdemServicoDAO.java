@@ -5,10 +5,9 @@ import Model.OrdemDeServico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
 
 public class OrdemServicoDAO implements InterfaceOrdemDeServico {
 
@@ -16,7 +15,7 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
     public void create(OrdemDeServico os) throws Exception {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
-        try {
+        
             stmt = con.prepareStatement(" INSERT INTO ordemservico (matricula_funcionario, cpf_cliente, codigo_problema, datacadastro, descricaoproblema) "
                     + " VALUES (?,?,?,?,?) ");
 
@@ -27,22 +26,15 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
             stmt.setString(5, os.getDescricaoProblemaOS());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no Banco: !" + ex);
-        } finally {
+            
             ConexaoBanco.closeConnetion(con, stmt);
-        }
     }
 
     @Override
     public void update(OrdemDeServico os) throws Exception {
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
-        try {
+        
             stmt = con.prepareStatement(" UPDATE ordemservico SET matricula_funcionario = ?, cpf_cliente = ?, codigo_problema = ?, "
                     + " datacadastro = ?, descricaoproblema = ? WHERE numero = ? ");
 
@@ -54,15 +46,9 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
             stmt.setInt(6, os.getNumeroOS());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Erro ao salvar no Banco: !" + ex);
-        } finally {
+  
             ConexaoBanco.closeConnetion(con, stmt);
-        }
+
     }
 
     @Override
@@ -73,7 +59,6 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
 
         List<OrdemDeServico> ordensDeSerivcos = new ArrayList<>();
 
-        try {
             stmt = con.prepareStatement(" Select Os.numero as numeroOrdem, \n"
                     + "Os.motivocancelamento as motivoCancelamentoOrdem, \n"
                     + "Os.datacadastro as dataCadastroOrdem,\n"
@@ -132,11 +117,9 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
                 ordensDeSerivcos.add(os);
             }
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO na leitura do banco " + ex);
-        } finally {
+       
             ConexaoBanco.closeConnetion(con, stmt, rs);
-        }
+        
 
         return (ArrayList<OrdemDeServico>) ordensDeSerivcos;
     }
@@ -148,7 +131,6 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
 
         List<OrdemDeServico> ordensDeSerivcos = new ArrayList<>();
 
-        try {
             stmt = con.prepareStatement(" SELECT * From ordemservico WHERE numero LIKE ? ");
             stmt.setString(1, "%" + numero + "%");
             rs = stmt.executeQuery();
@@ -169,13 +151,8 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
 
                 ordensDeSerivcos.add(os);
             }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERRO na leitura do banco " + ex);
-        } finally {
+   
             ConexaoBanco.closeConnetion(con, stmt, rs);
-        }
-
         return (ArrayList<OrdemDeServico>) ordensDeSerivcos;
     }
 
@@ -192,9 +169,6 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
             stmt.setInt(3, os.getNumeroOS());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
             ConexaoBanco.closeConnetion(con, stmt);
         
     }
@@ -212,9 +186,6 @@ public class OrdemServicoDAO implements InterfaceOrdemDeServico {
             stmt.setInt(3, os.getNumeroOS());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
             ConexaoBanco.closeConnetion(con, stmt);
         
         

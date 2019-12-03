@@ -1,9 +1,9 @@
-package Extra;
+/*package Extra;
 
 import Controller.OrdemServicoController;
 import DAO.*;
 import Model.*;
-import Extra.GerenciarOS_MVC;
+
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -194,3 +194,4 @@ public class GController {
     
 
 }
+*/

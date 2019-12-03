@@ -70,7 +70,7 @@ public class FuncionarioController implements InterfaceFuncionario {
         //Caso confirmação seja SIM↓
         if (confirmacao == JOptionPane.YES_OPTION) {
 
-          
+          Validations.matricula(funcionario.getMatricula());
             //jogar para os DADOS↓
             new FuncionarioDAO().delete(funcionario);
         }
