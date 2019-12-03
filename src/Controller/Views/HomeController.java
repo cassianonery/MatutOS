@@ -1,15 +1,21 @@
 package Controller.Views;
 
+//Importações dos pacotes de Controladores↓
 import Controller.ClienteController;
 import Controller.FuncionarioController;
 import Controller.OrdemServicoController;
 import Controller.ProblemaController;
-import DAO.OrdemServicoDAO;
+
+//Importações dos pacotes Model↓
 import Model.Cliente;
 import Model.Funcionario;
 import Model.OrdemDeServico;
 import Model.Problema;
+
+//importação da View do Controller↓
 import View.Home;
+
+//importações java↓
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
@@ -22,8 +28,8 @@ public class HomeController {
         this.home = home;
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDOS RESPONSABEIS POR ME MOSTRAR AS LINHAS DA TABELA CLIENTES↓
-    public void readLineTableCliente() throws Exception {
+    //COMANDOS RESPONSAVEIS POR SETAR AS LINHAS DA TABELA CLIENTES↓
+    public void setLineTable_Cliente() throws Exception {
         if (home.getTableClientes().getSelectedRow() != -1) {
 
             home.getNome_campo_cli().setText(home.getTableClientes().getValueAt(home.getTableClientes().getSelectedRow(), 0).toString());
@@ -32,8 +38,8 @@ public class HomeController {
         }
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDOS RESPONSABEIS POR ME MOSTRAR AS LINHAS DA TABELA FUNCIONARIOS↓
-    public void readLineTableFuncionario() throws Exception {
+    //COMANDOS RESPONSAVEIS POR SETAR AS LINHAS DA TABELA FUNCIONARIOS↓
+    public void setLineTable_Funcionario() throws Exception {
         if (home.getTableFuncionario().getSelectedRow() != -1) {
             home.getMatricula_campo_func().setText(home.getTableFuncionario().getValueAt(home.getTableFuncionario().getSelectedRow(), 0).toString());
             home.getNome_campo_func().setText(home.getTableFuncionario().getValueAt(home.getTableFuncionario().getSelectedRow(), 1).toString());
@@ -43,19 +49,18 @@ public class HomeController {
         }
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDOS RESPONSABEIS POR ME MOSTRAR AS LINHAS DA TABELA PROBLEMAS↓
-    public void readLineTableProblema() throws Exception {
+    //COMANDOS RESPONSAVEIS POR SETAR AS LINHAS DA TABELA PROBLEMAS↓
+    public void setLineTable_Problema() throws Exception {
         if (home.getTableProblema().getSelectedRow() != -1) {
             home.getCodigo_campo_prob().setText(home.getTableProblema().getValueAt(home.getTableProblema().getSelectedRow(), 0).toString());
             home.getNome_campo_prob().setText(home.getTableProblema().getValueAt(home.getTableProblema().getSelectedRow(), 1).toString());
             home.getDescricao_campo_prob().setText(home.getTableProblema().getValueAt(home.getTableProblema().getSelectedRow(), 2).toString());
 
         }
-    }
-    
+    } 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //ATUALIZA A TABELA DE CLIENTES↓
-    public void readJTableCliente() throws Exception {
+    //LER A TABELA DE CLIENTES↓
+    public void readJTable_Cliente() throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableClientes().getModel();
         model.setNumRows(0);
         ClienteController cliController = new ClienteController();
@@ -75,8 +80,9 @@ public class HomeController {
         home.getCpf_campo_cli().setText("");
           
     }
-     //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE CLIENTES PELO CPF↓
-    public void readJTableCliente(String cpf) throws Exception {
+    
+     //LER A TABELA DE CLIENTES USANDO O CPF↓
+    public void readJTable_Cliente(String cpf) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableClientes().getModel();
         model.setNumRows(0);
         ClienteController cliController = new ClienteController();
@@ -95,12 +101,10 @@ public class HomeController {
         home.getRg_campo_cli().setText("");
         home.getCpf_campo_cli().setText("");
           
-    }
-  
-    
+    }   
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE FUNCIONARIO↓
-    public void readJTableFuncionario() throws Exception {
+     //LER A TABELA DE FUNCIONARIO↓
+    public void readJTable_Funcionario() throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableFuncionario().getModel();
         model.setNumRows(0);
         FuncionarioController funcController = new FuncionarioController();
@@ -123,8 +127,9 @@ public class HomeController {
         home.getCpf_campo_func().setText("");
         home.getSalario_campo_func().setText("");
     }
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE FUNCIONARIO PELA MATRICULA↓
-    public void readJTableFuncionario(String matricula) throws Exception {
+    
+    //LER A TABELA DE FUNCIONARIO USANDO A MATRICULA↓
+    public void readJTable_Funcionario(String matricula) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableFuncionario().getModel();
         model.setNumRows(0);
         FuncionarioController funcController = new FuncionarioController();
@@ -150,8 +155,8 @@ public class HomeController {
    
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE PROBLEMAS↓
-    public void readJTableProblema() throws Exception {
+    //LER A TABELA DE PROBLEMAS↓ 
+    public void readJTable_Problema() throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableProblema().getModel();
         model.setNumRows(0);
         ProblemaController probController = new ProblemaController();
@@ -169,8 +174,9 @@ public class HomeController {
         home.getNome_campo_prob().setText("");
         home.getDescricao_campo_prob().setText("");
     }
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE PROBLEMAS PELO CODIGO↓
-    public void readJTableProblema(String codigo) throws Exception {
+    
+    //LER A TABELA DE PROBLEMAS USANDO O CODIGO↓
+    public void readJTable_Problema(String codigo) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getTableProblema().getModel();
         model.setNumRows(0);
         ProblemaController probController = new ProblemaController();
@@ -191,8 +197,8 @@ public class HomeController {
    
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //COMANDO RESPONSAVEL POR ATUALIZAR MINHA TABELA DE ORDEM DE SERVIÇO↓
-    public void readJTableOrdemdeServico() throws Exception {
+    //LER A TABELA DE ORDEM DE SERVIÇO↓
+    public void readJTable_OS() throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getjTable_OsMain().getModel();
         model.setNumRows(0);
         OrdemServicoController OsControll = new OrdemServicoController();
@@ -213,7 +219,8 @@ public class HomeController {
         }
     }
     
-    public void readJTableOrdemdeServico(String numero) throws Exception {
+    //LER A TABELA DE ORDEM DE SERVIÇO USANDO O NUMERO↓
+    public void readJTable_OS(String numero) throws Exception {
         DefaultTableModel model = (DefaultTableModel) home.getjTable_OsMain().getModel();
         model.setNumRows(0);
         OrdemServicoController OsControll = new OrdemServicoController();
@@ -237,14 +244,13 @@ public class HomeController {
     
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------------  
-    //METODOS RESPONSAVEIS POR ALTERAR AS CORES DOS BOTOES (CLIENTE,FUNCIONARIO,PROBLEMA,ORDEM DE SERIVOÇO)↓
+    //ALTERA AS CORES DOS BOTOES (CLIENTE,FUNCIONARIO,PROBLEMA,ORDEM DE SERIVOÇO)↓
     public void setLblColor(JLabel lbl) {
         lbl.setBackground(new Color(187, 187, 187));
     }
-
+    //RESETA AS CORES DOS BOTOES (CLIENTE,FUNCIONARIO,PROBLEMA,ORDEM DE SERIVOÇO)↓
     public void resetLblColor(JLabel lbl) {
         lbl.setBackground(new Color(255, 255, 255));
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
-
 }

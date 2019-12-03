@@ -1,7 +1,6 @@
 package View;
 
 import Controller.OrdemServicoController;
-import Controller.Views.HomeController;
 import Model.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Gerenciador_ordens extends javax.swing.JFrame {
@@ -28,14 +26,17 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
         startRead();
         readALL();
-        
+
+        jTextArea_descricao_problemaOS.setLineWrap(true);
+        jTextArea_descricao_alteracao.setLineWrap(true);
     }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-    void readALL() throws Exception{
+    void readALL() throws Exception {
         readJTableAll();
         readJTableOpen();
     }
+
     void startRead() {
 
         try {
@@ -59,11 +60,12 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
             jDateChooser_data_cadastroOS.setDate((Date) jTable_OS_cadastro.getValueAt(jTable_OS_cadastro.getSelectedRow(), 5));
         }
     }
+
     public void setLineTalbe_alterando() {
         if (jTable_OS_alterando.getSelectedRow() != -1) {
 
             jText_numeroOS_alteracao.setText(jTable_OS_alterando.getValueAt(jTable_OS_alterando.getSelectedRow(), 0).toString());
-            
+
         }
     }
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -516,30 +518,38 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
     private void jButton_cadastrar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_cadastrar_osActionPerformed
 
-        try {
-            OrdemDeServico os = new OrdemDeServico();
+        //Confirmação de CADASTRO do OS↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer cadastrar essa Ordem?", "Confirmação", JOptionPane.YES_OPTION);
 
-            os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
-            os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
-            os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
-            os.setDataCadastroOS(new java.sql.Date(jDateChooser_data_cadastroOS.getDate().getTime()));
-            os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-            new OrdemServicoController().create(os);
+            try {
+                OrdemDeServico os = new OrdemDeServico();
 
-            readALL();
+                os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
+                os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
+                os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
+                os.setDataCadastroOS(new java.sql.Date(jDateChooser_data_cadastroOS.getDate().getTime()));
+                os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
 
-            //LIMPA OS CAMPOS DE TEXTO↓
-            jText_numeroOS.setText("");
-            jText_matricula_funcionarioOS.setText("");
-            jText_cpf_clienteOs.setText("");
-            jText_cod_problemaOS.setText("");
-            jTextArea_descricao_problemaOS.setText("");
-            jDateChooser_data_cadastroOS.setDate(null);
+                new OrdemServicoController().create(os);
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+                readALL();
+
+                //LIMPA OS CAMPOS DE TEXTO↓
+                jText_numeroOS.setText("");
+                jText_matricula_funcionarioOS.setText("");
+                jText_cpf_clienteOs.setText("");
+                jText_cod_problemaOS.setText("");
+                jTextArea_descricao_problemaOS.setText("");
+                jDateChooser_data_cadastroOS.setDate(null);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButton_cadastrar_osActionPerformed
 
     private void jComboBoxFuncionarioOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFuncionarioOSActionPerformed
@@ -563,31 +573,39 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_OS_alterandoMouseClicked
 
     private void jButton_atualizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_osActionPerformed
-        try {
-            OrdemDeServico os = new OrdemDeServico();
+        //Confirmação de ATUALIZAÇÃO do OS↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar essa Ordem? ", "Confirmação", JOptionPane.YES_OPTION);
 
-            os.setNumeroOS(Integer.parseInt(jText_numeroOS.getText()));
-            os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
-            os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
-            os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
-            os.setDataCadastroOS(new java.sql.Date(jDateChooser_data_cadastroOS.getDate().getTime()));
-            os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-            new OrdemServicoController().update(os);
+            try {
+                OrdemDeServico os = new OrdemDeServico();
 
-            readALL();
+                os.setNumeroOS(Integer.parseInt(jText_numeroOS.getText()));
+                os.getFuncionarioOs().setMatricula(Integer.parseInt(jText_matricula_funcionarioOS.getText()));
+                os.getClienteOs().setCpf(jText_cpf_clienteOs.getText());
+                os.getProblemaOs().setCodigo(Integer.parseInt(jText_cod_problemaOS.getText()));
+                os.setDataCadastroOS(new java.sql.Date(jDateChooser_data_cadastroOS.getDate().getTime()));
+                os.setDescricaoProblemaOS(jTextArea_descricao_problemaOS.getText());
 
-            //LIMPA OS CAMPOS DE TEXTO↓
-            jText_numeroOS.setText("");
-            jText_matricula_funcionarioOS.setText("");
-            jText_cpf_clienteOs.setText("");
-            jText_cod_problemaOS.setText("");
-            jTextArea_descricao_problemaOS.setText("");
-            jDateChooser_data_cadastroOS.setDate(null);
+                new OrdemServicoController().update(os);
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+                readALL();
+
+                //LIMPA OS CAMPOS DE TEXTO↓
+                jText_numeroOS.setText("");
+                jText_matricula_funcionarioOS.setText("");
+                jText_cpf_clienteOs.setText("");
+                jText_cod_problemaOS.setText("");
+                jTextArea_descricao_problemaOS.setText("");
+                jDateChooser_data_cadastroOS.setDate(null);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButton_atualizar_osActionPerformed
 
     private void jRadioButton_SolucionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_SolucionarActionPerformed
@@ -627,7 +645,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
                 controll.cancelar(os);
             }
 
-           readALL();
+            readALL();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
