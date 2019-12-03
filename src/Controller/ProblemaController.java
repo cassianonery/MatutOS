@@ -12,12 +12,6 @@ public class ProblemaController implements InterfaceProblema {
     @Override
     public void create(Problema problema) throws Exception {
 
-        //Confirmação de CADASTRO do Problema↓
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer cadastrar esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
-
-        //Caso confirmação seja SIM↓
-        if (confirmacao == JOptionPane.YES_OPTION) {
-
             //Object Treatment↓------------------------------------------------------------------
             if (problema == null) {
                 throw new Exception("Objeto Problema não pode ser Nulo: Favor insira os dados corretamente");
@@ -28,21 +22,11 @@ public class ProblemaController implements InterfaceProblema {
 
             //jogar para os DADOS↓
             new ProblemaDAO().create(problema);
-        }
-        //Caso confirmação seja NÃO ele simplesmente ignora ↑
-
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void update(Problema problema) throws Exception {
-
-        //Confirmação de ATUALIZAÇÃO do Problema↓
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
-
-        //Caso confirmação seja SIM↓
-        if (confirmacao == JOptionPane.YES_OPTION) {
-
             //Object Treatment↓------------------------------------------------------------------
             if (problema == null) {
                 throw new Exception("Objeto Problema não pode ser Nulo: Favor insira os dados corretamente");
@@ -54,30 +38,19 @@ public class ProblemaController implements InterfaceProblema {
 
             //jogar para os DADOS↓
             new ProblemaDAO().update(problema);
-        }
-        //Caso confirmação seja NÃO ele simplesmente ignora ↑
-
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void delete(Problema problema) throws Exception {
-
-        //Confirmação de EXCLUSÃO do Problema↓
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
-
-        //Caso confirmação seja SIM↓
-        if (confirmacao == JOptionPane.YES_OPTION) {
-
             //Object Treatment↓------------------------------------------------------------------
             if (problema == null) {
                 throw new Exception("Objeto Problema não pode ser Nulo: Favor insira os dados corretamente");
             }
+             Validations.codigoProb(problema.getCodigo());//←CODE Treatment
 
             //jogar para os DADOS↓
             new ProblemaDAO().delete(problema);
-        }
-        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -93,8 +66,6 @@ public class ProblemaController implements InterfaceProblema {
         //LER dos DADOS↓
          return new ProblemaDAO().read(codigo);
     }
-
-   
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
 //------------------------------------------------------------------------------END---------------------------------------------------------------------------------------------------------
 

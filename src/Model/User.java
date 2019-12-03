@@ -1,11 +1,9 @@
 
-package Extra;
+package Model;
 
 public class User {
     
-    
     private String login,senha;
-
 
     public String getLogin() {
         return login;
@@ -22,8 +20,5 @@ public class User {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
-    
-            
-    
+
 }

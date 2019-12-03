@@ -4,20 +4,13 @@ import DAO.OrdemServicoDAO;
 import Interface.InterfaceOrdemDeServico;
 import Model.OrdemDeServico;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class OrdemServicoController implements InterfaceOrdemDeServico {
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public void create(OrdemDeServico ordemServico) throws Exception {
-
-        //Confirmação de CADASTRO do OS↓
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer cadastrar essa Ordem?", "Confirmação", JOptionPane.YES_OPTION);
-
-        //Caso confirmação seja SIM↓
-        if (confirmacao == JOptionPane.YES_OPTION) {
-
+        
             //Object Treatment↓------------------------------------------------------------------
             if (ordemServico == null) {
                 throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
@@ -31,19 +24,12 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
 
             //jogar para os DADOS↓
             new OrdemServicoDAO().create(ordemServico);
-        }
-        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
     public void update(OrdemDeServico ordemServico) throws Exception {
-        //Confirmação de ATUALIZAÇÃO do OS↓
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar essa Ordem? ", "Confirmação", JOptionPane.YES_OPTION);
-
-        //Caso confirmação seja SIM↓
-        if (confirmacao == JOptionPane.YES_OPTION) {
-
+        
             //Object Treatment↓------------------------------------------------------------------
             if (ordemServico == null) {
                 throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
@@ -58,8 +44,6 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
 
             //jogar para os DADOS↓
             new OrdemServicoDAO().update(ordemServico);
-        }
-        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
@@ -87,7 +71,6 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
 
         //jogar para os DADOS↓
         new OrdemServicoDAO().solucionar(os);
-
     }
 
     @Override
@@ -103,6 +86,5 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
         
         //jogar para os DADOS↓
         new OrdemServicoDAO().cancelar(os);
-
     }
 }

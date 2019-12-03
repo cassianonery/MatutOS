@@ -2,7 +2,7 @@
 package Controller.Views;
 
 import Controller.Validations;
-import Extra.UserDAO;
+import DAO.UserDAO;
 import Interface.UserInterface;
 
 public class LoginController implements UserInterface {
