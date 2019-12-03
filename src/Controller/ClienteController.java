@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class ClienteController implements InterfaceCliente {
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //Validations Vl = new Validations();
+    
     @Override
     public void create(Cliente cliente) throws Exception {
 

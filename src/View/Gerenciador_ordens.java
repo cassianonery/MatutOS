@@ -48,7 +48,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
     }
 //---------------------------------------------------------------------------------------------------------------------------------
 
-    public void readLineTableOs() {
+    public void setLineTable_cadastrando() {
         if (jTable_OS_cadastro.getSelectedRow() != -1) {
 
             jText_numeroOS.setText(jTable_OS_cadastro.getValueAt(jTable_OS_cadastro.getSelectedRow(), 0).toString());
@@ -57,6 +57,13 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
             jText_cod_problemaOS.setText(jTable_OS_cadastro.getValueAt(jTable_OS_cadastro.getSelectedRow(), 3).toString());
             jTextArea_descricao_problemaOS.setText(jTable_OS_cadastro.getValueAt(jTable_OS_cadastro.getSelectedRow(), 4).toString());
             jDateChooser_data_cadastroOS.setDate((Date) jTable_OS_cadastro.getValueAt(jTable_OS_cadastro.getSelectedRow(), 5));
+        }
+    }
+    public void setLineTalbe_alterando() {
+        if (jTable_OS_alterando.getSelectedRow() != -1) {
+
+            jText_numeroOS_alteracao.setText(jTable_OS_alterando.getValueAt(jTable_OS_alterando.getSelectedRow(), 0).toString());
+            
         }
     }
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -204,6 +211,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane = new javax.swing.JTabbedPane();
         jPanel_cadastrarOs = new javax.swing.JPanel();
         jButton_atualizar_os = new javax.swing.JButton();
@@ -222,9 +230,9 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
         jTextArea_descricao_problemaOS = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_OS_cadastro = new javax.swing.JTable();
-        jComboBoxFuncionarioOS = new javax.swing.JComboBox<Object>();
-        jComboBoxClienteOS = new javax.swing.JComboBox<Object>();
-        jComboBoxProblemaOS = new javax.swing.JComboBox<Object>();
+        jComboBoxFuncionarioOS = new javax.swing.JComboBox<>();
+        jComboBoxClienteOS = new javax.swing.JComboBox<>();
+        jComboBoxProblemaOS = new javax.swing.JComboBox<>();
         jDateChooser_data_cadastroOS = new com.toedter.calendar.JDateChooser();
         jPanel_cancelarOs = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -328,11 +336,6 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
                 jTable_OS_cadastroMouseClicked(evt);
             }
         });
-        jTable_OS_cadastro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable_OS_cadastroKeyReleased(evt);
-            }
-        });
         jScrollPane3.setViewportView(jTable_OS_cadastro);
 
         jPanel_cadastrarOs.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 262, 963, 324));
@@ -382,11 +385,6 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
                 jTable_OS_alterandoMouseClicked(evt);
             }
         });
-        jTable_OS_alterando.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable_OS_alterandoKeyReleased(evt);
-            }
-        });
         jScrollPane4.setViewportView(jTable_OS_alterando);
 
         jText_numeroOS_alteracao.setEditable(false);
@@ -395,6 +393,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
 
         jLabel_data.setText("Data:");
 
+        buttonGroup1.add(jRadioButton_Solucionar);
         jRadioButton_Solucionar.setText("Solucionar");
         jRadioButton_Solucionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -402,6 +401,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jRadioButton_Cancelar);
         jRadioButton_Cancelar.setText("Cancelar");
         jRadioButton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -554,20 +554,12 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
         setNameJText_Problema();
     }//GEN-LAST:event_jComboBoxProblemaOSActionPerformed
 
-    private void jTable_OS_cadastroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OS_cadastroKeyReleased
-        readLineTableOs();
-    }//GEN-LAST:event_jTable_OS_cadastroKeyReleased
-
     private void jTable_OS_cadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_OS_cadastroMouseClicked
-        readLineTableOs();
+        setLineTable_cadastrando();
     }//GEN-LAST:event_jTable_OS_cadastroMouseClicked
 
-    private void jTable_OS_alterandoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OS_alterandoKeyReleased
-        readLineTableOs();
-    }//GEN-LAST:event_jTable_OS_alterandoKeyReleased
-
     private void jTable_OS_alterandoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_OS_alterandoMouseClicked
-        readLineTableOs();
+        setLineTalbe_alterando();
     }//GEN-LAST:event_jTable_OS_alterandoMouseClicked
 
     private void jButton_atualizar_osActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_osActionPerformed
@@ -686,6 +678,7 @@ public class Gerenciador_ordens extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton_atualizar_os;
     private javax.swing.JButton jButton_cadastrar_os;
     private javax.swing.JButton jButton_confirmar_alteracao;

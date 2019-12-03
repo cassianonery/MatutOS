@@ -86,7 +86,7 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
         Validations.descrição(os.getDescricaoServicoOS());
 
         //jogar para os DADOS↓
-        new OrdemServicoDAO().update(os);
+        new OrdemServicoDAO().solucionar(os);
 
     }
 
@@ -98,10 +98,11 @@ public class OrdemServicoController implements InterfaceOrdemDeServico {
         }
 
         Validations.numeroOs(os.getNumeroOS());
-        Validations.data(os.getDataSolucaoOS());
-        Validations.descrição(os.getDescricaoServicoOS());
+        Validations.data(os.getDataCancelamentoOS());
+        Validations.descrição(os.getMotivoCancelamentoOS());
+        
         //jogar para os DADOS↓
-        new OrdemServicoDAO().update(os);
+        new OrdemServicoDAO().cancelar(os);
 
     }
 }

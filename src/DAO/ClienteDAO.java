@@ -13,7 +13,7 @@ import java.util.List;
 
 //-------------------------------
 //-------------------------------
-import javax.swing.JOptionPane;
+
 
 public class ClienteDAO implements InterfaceCliente {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -31,8 +31,6 @@ public class ClienteDAO implements InterfaceCliente {
         stmt.setString(3, cliente.getCpf());
 
         stmt.executeUpdate();
-
-        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         ConexaoBanco.closeConnetion(con, stmt);
 
@@ -53,8 +51,6 @@ public class ClienteDAO implements InterfaceCliente {
 
         stmt.executeUpdate();
 
-        JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-
         ConexaoBanco.closeConnetion(con, stmt);
 
     }
@@ -71,8 +67,6 @@ public class ClienteDAO implements InterfaceCliente {
         stmt.setString(1, cliente.getCpf());
 
         stmt.executeUpdate();
-
-        JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
 
         ConexaoBanco.closeConnetion(con, stmt);
 
