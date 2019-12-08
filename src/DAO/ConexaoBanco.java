@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ConexaoBanco {
 
@@ -17,13 +15,12 @@ public class ConexaoBanco {
     private static final String SENHA = "";
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    public static Connection getConnection() throws SQLException {
+  
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
-        try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConexaoBanco.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-        }
+        Class.forName(DRIVER);
+
         return DriverManager.getConnection(URL, USUARIO, SENHA);
 
     }

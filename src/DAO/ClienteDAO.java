@@ -13,13 +13,11 @@ import java.util.List;
 
 //-------------------------------
 //-------------------------------
-
-
 public class ClienteDAO implements InterfaceCliente {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
-    public void create(Cliente cliente) throws SQLException {
+    public void create(Cliente cliente) throws SQLException, ClassNotFoundException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
@@ -38,7 +36,7 @@ public class ClienteDAO implements InterfaceCliente {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
 
     @Override
-    public void update(Cliente clienteNovo, Cliente clienteVelho) throws SQLException {
+    public void update(Cliente clienteNovo, Cliente clienteVelho) throws SQLException, ClassNotFoundException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
@@ -57,7 +55,7 @@ public class ClienteDAO implements InterfaceCliente {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
-    public void delete(Cliente cliente) throws SQLException {
+    public void delete(Cliente cliente) throws SQLException, ClassNotFoundException {
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;

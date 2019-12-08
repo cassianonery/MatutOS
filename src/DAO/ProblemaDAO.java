@@ -13,7 +13,7 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------    
     @Override
-    public void create(Problema problema) throws SQLException{
+    public void create(Problema problema) throws SQLException, ClassNotFoundException{
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
@@ -29,7 +29,7 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
-    public void update(Problema problema) throws SQLException{
+    public void update(Problema problema) throws SQLException, ClassNotFoundException{
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
@@ -46,7 +46,7 @@ public class ProblemaDAO implements Interface.InterfaceProblema {
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
     @Override
-    public void delete(Problema problema) throws SQLException{
+    public void delete(Problema problema) throws SQLException, ClassNotFoundException{
 
         Connection con = ConexaoBanco.getConnection();
         PreparedStatement stmt = null;
