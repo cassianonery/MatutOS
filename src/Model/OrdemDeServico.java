@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class OrdemDeServico {
    
-    private Cliente cpf_cliente_os;
-    private Funcionario matri_funcionario_os;
-    private Problema cod_problema_os;
+    private Cliente clienteOs;
+    private Funcionario funcionarioOs;
+    private Problema problemaOs;
     
     private ArrayList<Cliente> clientes;
     private ArrayList<Funcionario> funcionarios;
@@ -17,74 +17,61 @@ public class OrdemDeServico {
     private String descricaoProblemaOS,
                    descricaoServicoOS,
                    motivoCancelamentoOS;
-     
+
     private Date dataCadastroOS, 
                  dataCancelamentoOS,
                  dataSolucaoOS;
 
     
     public OrdemDeServico() {
+        funcionarioOs = new Funcionario();
+        clienteOs = new Cliente();
+        problemaOs = new Problema();
+    }
+    
+    //comentar↓
+     public String getStatus(){
+        String retorno =  "Aberta";
+        
+        if (dataCancelamentoOS != null) {
+            retorno = "Cancelada";
+        }
+        if (dataSolucaoOS != null) {
+            retorno = "Solucionada";
+        }
+        
+        return retorno;
     }
 
-    /*
-    //Construtor de Ordem de Servico para CANCELAMENTO↓
-    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema codProblema, String descricaoProblemaOS, Date dataCadastroOS, Date dataCancelamentoOS, String motivoCancelamentoOS, Funcionario matri_funcionario_os, Cliente cpf_cliente_os) {
-        this.cpf_cliente_os = cpf_cliente_os;
-        this.matri_funcionario_os = matri_funcionario_os;
-        this.cod_problema = codProblema;
-        this.numeroOS = numeroOS;
-        this.descricaoProblemaOS = descricaoProblemaOS;
-        this.descricaoServicoOS = descricaoServicoOS;
-        this.motivoCancelamentoOS = motivoCancelamentoOS;
-        this.dataCadastroOS = dataCadastroOS;
-        this.dataCancelamentoOS = dataCancelamentoOS;
-        
-        this.clientes = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
-        this.classProblemas = new ArrayList<>();
-    }
-
-    //Construtor de Ordem de Servico para SOLUCIONADO↓
-    public OrdemDeServico(int numeroOS, String descricaoServicoOS, Problema cod_problema, String descricaoProblemaOS, Date dataCadastroOS, Date dataSolucaoOS, Funcionario matri_funcionario_os, Cliente cpf_cliente_os) {
-        this.cpf_cliente_os = cpf_cliente_os;
-        this.matri_funcionario_os = matri_funcionario_os;
-        this.cod_problema = cod_problema;
-        this.numeroOS = numeroOS;
-        this.descricaoProblemaOS = descricaoProblemaOS;
-        this.descricaoServicoOS = descricaoServicoOS;
-        this.dataCadastroOS = dataCadastroOS;
-        this.dataSolucaoOS = dataSolucaoOS;
-        
-        this.clientes = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
-        this.classProblemas = new ArrayList<>();
-    }*/
+    
 
     
     //Todos os Getter↓
 
-    public Cliente getCpf_cliente_os() {
-        return cpf_cliente_os;
+    public Cliente getClienteOs() {
+        return clienteOs;
     }
 
-    public void setCpf_cliente_os(Cliente cpf_cliente_os) {
-        this.cpf_cliente_os = cpf_cliente_os;
+    public void setClienteOs(Cliente clienteOs) {
+        this.clienteOs = clienteOs;
     }
 
-    public Funcionario getMatri_funcionario_os() {
-        return matri_funcionario_os;
+    public Funcionario getFuncionarioOs() {
+        return funcionarioOs;
     }
 
-    public void setMatri_funcionario_os(Funcionario matri_funcionario_os) {
-        this.matri_funcionario_os = matri_funcionario_os;
+    public void setFuncionarioOs(Funcionario funcionarioOs) {
+        this.funcionarioOs = funcionarioOs;
     }
 
-    public Problema getCod_problema_os() {
-        return cod_problema_os;
+ 
+
+    public Problema getProblemaOs() {
+        return problemaOs;
     }
 
-    public void setCod_problema_os(Problema cod_problema_os) {
-        this.cod_problema_os = cod_problema_os;
+    public void setProblemaOs(Problema problemaOs) {
+        this.problemaOs = problemaOs;
     }
 
     public ArrayList<Cliente> getClientes() {
@@ -168,6 +155,8 @@ public class OrdemDeServico {
     public void setDataSolucaoOS(Date dataSolucaoOS) {
         this.dataSolucaoOS = dataSolucaoOS;
     }
+
+  
   
     
     

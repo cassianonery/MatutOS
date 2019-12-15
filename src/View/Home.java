@@ -1,12 +1,17 @@
 package View;
 
+//Importações dos pacotes de Controladores↓
 import Controller.ClienteController;
 import Controller.FuncionarioController;
-import Controller.HomeController;
+import Controller.Views.HomeController;
 import Controller.ProblemaController;
+
+//Importações dos pacotes Model↓
 import Model.Cliente;
 import Model.Funcionario;
 import Model.Problema;
+
+//importações java↓
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -15,8 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 public class Home extends javax.swing.JFrame {
 
@@ -25,13 +28,10 @@ public class Home extends javax.swing.JFrame {
     public Home() throws Exception {
         initComponents();
 
-        //Modelo Tabela Cliente↓↓
-        DefaultTableModel modelo = (DefaultTableModel) tableClientes.getModel();
-        tableClientes.setRowSorter(new TableRowSorter(modelo));
+        Controller = new HomeController(this);
 
         //Iniciar lendo a tableCliente↓
-        Controller = new HomeController(this);
-        Controller.readJTableCliente();
+        Controller.readJTable_Cliente();
 
         //Iniciar setando a cor do botão cliente↓
         Controller.setLblColor(btn_cliente);
@@ -101,7 +101,7 @@ public class Home extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanelOrdemDeServicos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tableOrdemdeServico = new javax.swing.JTable();
+        jTable_OsMain = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jText_pesquisaOs = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -325,6 +325,11 @@ public class Home extends javax.swing.JFrame {
         });
         jPanelClientes.add(jButtonExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 79, -1));
 
+        campo_busca_cli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_cliActionPerformed(evt);
+            }
+        });
         campo_busca_cli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_cliKeyTyped(evt);
@@ -472,6 +477,11 @@ public class Home extends javax.swing.JFrame {
         jLabelBusca1.setText("Busca ↓");
         jPanelFuncionarios.add(jLabelBusca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 260, -1, -1));
 
+        campo_busca_func.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_funcActionPerformed(evt);
+            }
+        });
         campo_busca_func.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_funcKeyTyped(evt);
@@ -526,16 +536,9 @@ public class Home extends javax.swing.JFrame {
                 "Codigo", "Nome", "Descrição"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -584,6 +587,11 @@ public class Home extends javax.swing.JFrame {
         });
         jPanelProblemas.add(jButton_excluir_prob, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
 
+        campo_busca_prob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_busca_probActionPerformed(evt);
+            }
+        });
         campo_busca_prob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campo_busca_probKeyTyped(evt);
@@ -604,14 +612,14 @@ public class Home extends javax.swing.JFrame {
 
         jPanelOrdemDeServicos.setBackground(new java.awt.Color(59, 63, 66));
 
-        tableOrdemdeServico.setBackground(new java.awt.Color(59, 63, 66));
-        tableOrdemdeServico.setForeground(new java.awt.Color(255, 255, 255));
-        tableOrdemdeServico.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_OsMain.setBackground(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.setForeground(new java.awt.Color(255, 255, 255));
+        jTable_OsMain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Numero OS", "Serviço", "Cod Problema", "Dresc Problema", "Cadastro", "Cancelamento", "Motivo Cancelamento", "Matricula Func", "Cpf Cliente", "Status OS"
+                "Numero OS", "Matricula Func", "Cpf Cliente", "Cod Problema", "Dresc Problema", "Cadastro", "Serviço", "Cancelamento", "Motivo Cancelamento", "Status OS"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -622,14 +630,30 @@ public class Home extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableOrdemdeServico.setGridColor(new java.awt.Color(59, 63, 66));
-        tableOrdemdeServico.setSelectionBackground(new java.awt.Color(59, 63, 66));
-        jScrollPane3.setViewportView(tableOrdemdeServico);
+        jTable_OsMain.setGridColor(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.setSelectionBackground(new java.awt.Color(59, 63, 66));
+        jTable_OsMain.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable_OsMainKeyReleased(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable_OsMain);
 
         jButton2.setText("Gerenciar Ordens de Serviços");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jText_pesquisaOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_pesquisaOsActionPerformed(evt);
+            }
+        });
+        jText_pesquisaOs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jText_pesquisaOsKeyTyped(evt);
             }
         });
 
@@ -685,8 +709,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clienteMouseClicked
-
-        //Tornar a camada CLIENTE visivel↓
+        //Seta a jPANEL CLIENTE visivel↓
         jPanelClientes.setVisible(true);
         jPanelFuncionarios.setVisible(false);
         jPanelProblemas.setVisible(false);
@@ -697,13 +720,11 @@ public class Home extends javax.swing.JFrame {
         Controller.resetLblColor(btn_funcionario);
         Controller.resetLblColor(btn_problema);
         Controller.resetLblColor(btn_ordemServico);
-
-
     }//GEN-LAST:event_btn_clienteMouseClicked
 
     private void btn_funcionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_funcionarioMouseClicked
         try {
-            //Tornar a camada FUNCIONARIO visivel↓
+            //Seta a jPANEL FUNCIONARIO visivel↓
             jPanelClientes.setVisible(false);
             jPanelFuncionarios.setVisible(true);
             jPanelProblemas.setVisible(false);
@@ -715,21 +736,20 @@ public class Home extends javax.swing.JFrame {
             Controller.resetLblColor(btn_problema);
             Controller.resetLblColor(btn_ordemServico);
 
-            //Atualiza a tabela FUNCIONARIO↓
-            Controller.readJTableFuncionario();
+            //Ler a tabela FUNCIONARIO↓
+            Controller.readJTable_Funcionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btn_funcionarioMouseClicked
 
     private void btn_problemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_problemaMouseClicked
         try {
-
             //Quebra a linha da TextArea↓
             descricao_campo_prob.setLineWrap(true);
 
-            //Tornar a camada PROBLEMA visivel↓
+            //Seta a jPANEL PROBLEMA visivel↓
             jPanelClientes.setVisible(false);
             jPanelFuncionarios.setVisible(false);
             jPanelProblemas.setVisible(true);
@@ -741,135 +761,108 @@ public class Home extends javax.swing.JFrame {
             Controller.resetLblColor(btn_funcionario);
             Controller.resetLblColor(btn_ordemServico);
 
-            //Atualiza a tabela PROBLEMA↓
-            Controller.readJTableProblema();
+            //Ler a tabela PROBLEMA↓
+            Controller.readJTable_Problema();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_btn_problemaMouseClicked
 
     private void btn_ordemServicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ordemServicoMouseClicked
+        try {
+            //Seta a jPANEL ORDEM DE SERVIÇO  visivel↓
+            jPanelClientes.setVisible(false);
+            jPanelFuncionarios.setVisible(false);
+            jPanelProblemas.setVisible(false);
+            jPanelOrdemDeServicos.setVisible(true);
 
-        //Tornar a camada ORDEM DE SERVIÇO visivel↓
-        jPanelClientes.setVisible(false);
-        jPanelFuncionarios.setVisible(false);
-        jPanelProblemas.setVisible(false);
-        jPanelOrdemDeServicos.setVisible(true);
+            //Seta a cor nos BOTÕES↓
+            Controller.setLblColor(btn_ordemServico);
+            Controller.resetLblColor(btn_cliente);
+            Controller.resetLblColor(btn_funcionario);
+            Controller.resetLblColor(btn_problema);
 
-        //Seta a cor nos BOTÕES↓
-        Controller.setLblColor(btn_ordemServico);
-        Controller.resetLblColor(btn_cliente);
-        Controller.resetLblColor(btn_funcionario);
-        Controller.resetLblColor(btn_problema);
-
-
+            //Ler a tabela PROBLEMA↓
+            Controller.readJTable_OS();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }//GEN-LAST:event_btn_ordemServicoMouseClicked
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        //BOTÃO DE CONFIRMAR CADASTRO DO CLIENTE↓↓
-//----------------------------------------------------------------------------------\\
+        //BOTÃO DE CONFIRMAR CADASTRO DO CLIENTE↑↑
 
-        try {
-            //Passa os dados do CLIENTE para o CONTROLLADOR↓
-            Cliente cliente = new Cliente();
-            ClienteController cliController = new ClienteController();
+        //Confirmação de CADASTRO do Cliente↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer cadastrar esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
 
-            cliente.setNome(nome_campo_cli.getText());
-            cliente.setRg(rg_campo_cli.getText());
-            cliente.setCpf(cpf_campo_cli.getText());
-            cliController.create(cliente);
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            //Caso confirmação seja SIM↓
+            try {
+                //Passa os dados do CLIENTE para o CONTROLLADOR↓
+                Cliente cliente = new Cliente();
+                ClienteController cliController = new ClienteController();
 
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_cli.setText("");
-            nome_campo_cli.setText("");
-            rg_campo_cli.setText("");
-            cpf_campo_cli.setText("");
+                cliente.setNome(nome_campo_cli.getText());
+                cliente.setRg(rg_campo_cli.getText());
+                cliente.setCpf(cpf_campo_cli.getText());
+                cliController.create(cliente);
 
-            //Atualizar a tabela CLIENTE↓
-            Controller.readJTableCliente();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do CONFIRMAR Cliente... " + ex.getMessage());
+                //Ler a tabela de CLIENTES e Limpa os CAMPOS↓
+                Controller.readJTable_Cliente();
+            } catch (Exception ex) {
+                //busca as mensagens de ERRO↓
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
-
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        //BOTÃO DE ATUALIZAR O CLIENTE CADASTRADO↓
-//----------------------------------------------------------------------------------\\
+        //BOTÃO DE ATUALIZAR O CLIENTE↑↑
 
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableClientes.getSelectedRow() != -1) {
-            try {
+        //Confirmação de ATUALIZAÇÃO do Cliente↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualziar esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
 
-                //Passa os dados ATUALIZADOS do CLIENTE para o CONTROLLADOR↓
-                Cliente clienteNovo = new Cliente();
-                Cliente clienteVelho = new Cliente();
-                ClienteController cliController = new ClienteController();
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-                clienteNovo.setNome(nome_campo_cli.getText());
-                clienteNovo.setRg(rg_campo_cli.getText());
-                clienteNovo.setCpf(cpf_campo_cli.getText());
-                clienteVelho.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
-                cliController.update(clienteNovo, clienteVelho);
+            //IF usado para verificar se estou clicando na linha da tabela↓
+            if (tableClientes.getSelectedRow() != -1) {
+                try {
 
-                //LIMPA OS CAMPOS APOS O UPDATE↓
-                campo_busca_cli.setText("");
-                nome_campo_cli.setText("");
-                rg_campo_cli.setText("");
-                cpf_campo_cli.setText("");
+                    //Passa os dados ATUALIZADOS do CLIENTE para o CONTROLLADOR↓
+                    Cliente clienteNovo = new Cliente();
+                    Cliente clienteVelho = new Cliente();
+                    ClienteController cliController = new ClienteController();
 
-                //Atualizar a tabela CLIENTE↓
-                Controller.readJTableCliente();
+                    clienteNovo.setNome(nome_campo_cli.getText());
+                    clienteNovo.setRg(rg_campo_cli.getText());
+                    clienteNovo.setCpf(cpf_campo_cli.getText());
+                    clienteVelho.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
+                    cliController.update(clienteNovo, clienteVelho);
 
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do ATUALIZAR Cliente... " + ex);
+                    //Ler a tabela de CLIENTES e Limpa os CAMPOS↓
+                    Controller.readJTable_Cliente();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Clique num CLIENTE para alterar");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um CLIENTE para alterar");
         }
-
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButton_confirmar_cadastro_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_confirmar_cadastro_funcActionPerformed
+        //BOTÃO DE CONFIRMAR CADASTRO DO FUNCIONARIO↑↑
 
-        //BOTÃO DE CONFIRMAR CADASTRO DO FUNCIONARIO↓↓
-//----------------------------------------------------------------------------------\\        
-        try {
-            //Passa os dados do FUNCIONARIO para o CONTROLLADOR↓
-            Funcionario funcionario = new Funcionario();
-            FuncionarioController funController = new FuncionarioController();
+        //Confirmação de CADASTRO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Cadastrar esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
 
-            funcionario.setNome(nome_campo_func.getText());
-            funcionario.setRg(rg_campo_func.getText());
-            funcionario.setCpf(cpf_campo_func.getText());
-            funcionario.setSalario(Float.parseFloat(salario_campo_func.getText()));
-            funController.create(funcionario);
-
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_func.setText("");
-            matricula_campo_func.setText("");
-            nome_campo_func.setText("");
-            rg_campo_func.setText("");
-            cpf_campo_func.setText("");
-            salario_campo_func.setText("");
-
-            //Atualizar a tabela FUNCIONARIO↓
-            Controller.readJTableFuncionario();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo no Catch do Cadastrar Funcionario... " + ex.getMessage());
-        }
-
-    }//GEN-LAST:event_jButton_confirmar_cadastro_funcActionPerformed
-
-    private void jButton_atualizar_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_funcActionPerformed
-        //BOTÃO DE ATUALIZAR O FUNCIONARIO CADASTRADO↓↓
-//----------------------------------------------------------------------------------\\
-JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario?","ATENÇÃO", JOptionPane.YES_OPTION);
-
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableFuncionario.getSelectedRow() != -1) {
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
             try {
                 //Passa os dados do FUNCIONARIO para o CONTROLLADOR↓
                 Funcionario funcionario = new Funcionario();
@@ -879,95 +872,123 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
                 funcionario.setRg(rg_campo_func.getText());
                 funcionario.setCpf(cpf_campo_func.getText());
                 funcionario.setSalario(Float.parseFloat(salario_campo_func.getText()));
-                funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
-                funController.update(funcionario);
-
-                //LIMPA OS CAMPOS APOS O UPDATE↓
-                campo_busca_func.setText("");
-                matricula_campo_func.setText("");
-                nome_campo_func.setText("");
-                rg_campo_func.setText("");
-                cpf_campo_func.setText("");
-                salario_campo_func.setText("");
+                funController.create(funcionario);
 
                 //Atualizar a tabela FUNCIONARIO↓
-                Controller.readJTableFuncionario();
-
+                Controller.readJTable_Funcionario();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Funcionario... " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario para Atualizar");
         }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
+
+    }//GEN-LAST:event_jButton_confirmar_cadastro_funcActionPerformed
+
+    private void jButton_atualizar_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_funcActionPerformed
+        //BOTÃO DE ATUALIZAR O FUNCIONARIO CADASTRADO↓↓
+
+        //Confirmação de ATUALIZAÇÃO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
+
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
+
+            //IF usado para verificar que linha da tabela estou clicando↓
+            if (tableFuncionario.getSelectedRow() != -1) {
+                try {
+                    //Passa os dados do FUNCIONARIO para o CONTROLLADOR↓
+                    Funcionario funcionario = new Funcionario();
+                    FuncionarioController funController = new FuncionarioController();
+
+                    funcionario.setNome(nome_campo_func.getText());
+                    funcionario.setRg(rg_campo_func.getText());
+                    funcionario.setCpf(cpf_campo_func.getText());
+                    funcionario.setSalario(Float.parseFloat(salario_campo_func.getText()));
+                    funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
+                    funController.update(funcionario);
+
+                    //Atualizar a tabela FUNCIONARIO↓
+                    Controller.readJTable_Funcionario();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Funcionario para Atualizar");
+            }
+        }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButton_atualizar_funcActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //Abre o JFrame de CADASTRO OS↓
-        GerenciarOS gerenciarOs = new GerenciarOS();
-        gerenciarOs.setVisible(true);
+        try {
+            //Abre o JFrame de CADASTRO OS↓
+            new Gerenciador_ordens().setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableClientesKeyReleased
         try {
             //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando as SETAS DO TECLADO
-            Controller.readLineTableCliente();
+            Controller.setLineTable_Cliente();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableClientesKeyReleased
 
     private void tableClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseClicked
         try {
             //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando o CLICK DO MOUSE
-            Controller.readLineTableCliente();
+            Controller.setLineTable_Cliente();
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
     }//GEN-LAST:event_tableClientesMouseClicked
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        //BOTÃO DE EXCLUIR OS DADOS DO CLIENTE↓↓
-//----------------------------------------------------------------------------------\\
-        //IF usado para verificar que linha da tabela estou clicando↓
-        JOptionPane.showConfirmDialog(null, "Certeza que quer excluir esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
+        //BOTÃO DE EXCLUIR OS DADOS DO CLIENTE↑↑
 
-        if (tableClientes.getSelectedRow() != -1) {
+        //Confirmação de EXCLUSÃO do Cliente↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer EXCLUIR esse Cliente?", "Confirmação", JOptionPane.YES_OPTION);
+
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
+
             try {
-                //Remove os dados do CLIENTE↓
-                Cliente cliente = new Cliente();
-                ClienteController cliController = new ClienteController();
+                if (tableClientes.getSelectedRow() != -1) {
+                    //Remove os dados do CLIENTE↓
+                    Cliente cliente = new Cliente();
+                    ClienteController cliController = new ClienteController();
 
-                cliente.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
-                cliController.delete(cliente);
+                    cliente.setCpf(tableClientes.getValueAt(tableClientes.getSelectedRow(), 2).toString());
 
-                //LIMPA OS CAMPOS APOS O CADASTRO↓
-                campo_busca_cli.setText("");
-                nome_campo_cli.setText("");
-                rg_campo_cli.setText("");
-                cpf_campo_cli.setText("");
+                    cliController.delete(cliente);
 
-                //Atualizar a tabela CLIENTE↓
-                Controller.readJTableCliente();
+                    //Atualizar a tabela CLIENTE↓
+                    Controller.readJTable_Cliente();
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Cliente... " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Cliente para excluir");
         }
-
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void tableFuncionarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableFuncionarioKeyReleased
         //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando as SETAS DO TECLADO 
         try {
 
-            Controller.readLineTableFuncionario();
+            Controller.setLineTable_Funcionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_tableFuncionarioKeyReleased
@@ -976,101 +997,90 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
         //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando o CLICK DO MOUSE
         try {
 
-            Controller.readLineTableFuncionario();
+            Controller.setLineTable_Funcionario();
 
         } catch (Exception ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_tableFuncionarioMouseClicked
 
     private void jButton_excluir_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_excluir_funcActionPerformed
         //BOTÃO DE EXCLUIR OS DADOS DO FUNCIONARIO↓↓
-//----------------------------------------------------------------------------------\\
 
-        JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Funcionario?", "ATENÇÃO", JOptionPane.YES_NO_OPTION);
+        //Confirmação de EXCLUSÃO do FUNCIONARIO↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Funcionario?", "Confirmação", JOptionPane.YES_OPTION);
 
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableFuncionario.getSelectedRow() != -1) {
-
-            //Remove os dados do Funcionario↓
-            Funcionario funcionario = new Funcionario();
-            FuncionarioController funController = new FuncionarioController();
-
-            funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
-
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            //IF usado para verificar que linha da tabela estou clicando↓
             try {
-                funController.delete(funcionario);
+                if (tableFuncionario.getSelectedRow() != -1) {
 
+                    //Remove os dados do Funcionario↓
+                    Funcionario funcionario = new Funcionario();
+                    FuncionarioController funController = new FuncionarioController();
+
+                    funcionario.setMatricula((int) tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0));
+
+                    funController.delete(funcionario);
+
+                    //Atualizar a tabela FUNCIONARIO↓
+                    Controller.readJTable_Funcionario();
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um Funcionario para excluir");
+                }
             } catch (Exception ex) {
-                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_func.setText("");
-            matricula_campo_func.setText("");
-            nome_campo_func.setText("");
-            rg_campo_func.setText("");
-            cpf_campo_func.setText("");
-            salario_campo_func.setText("");
-
-            try {
-                //Atualizar a tabela FUNCIONARIO↓
-                Controller.readJTableFuncionario();
-
-            } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Funcionario... "+ex.getMessage());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Funcionario para excluir");
         }
-
 
     }//GEN-LAST:event_jButton_excluir_funcActionPerformed
 
     private void tableProblemaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProblemaMouseClicked
         //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando o CLICK DO MOUSE
         try {
-            Controller.readLineTableProblema();
+            Controller.setLineTable_Problema();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO NO USO DO CONTROLLER" + ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableProblemaMouseClicked
 
     private void tableProblemaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableProblemaKeyReleased
         //↑↑Faz com que eu consiga jogar os dados da TABELA para os campos usando as SETAS DO TECLADO     
         try {
-            Controller.readLineTableProblema();
+            Controller.setLineTable_Problema();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO NO USO DO CONTROLLER" + ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_tableProblemaKeyReleased
 
     private void jButton_confirmar_cadastro_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_confirmar_cadastro_probActionPerformed
         //BOTÃO DE CONFIRMAR CADASTRO DO PROBLEMA↓↓
-//----------------------------------------------------------------------------------\\
-        try {
-            //Passa os dados do PROBLEMA para o CONTROLLADOR↓
-            Problema problema = new Problema();
-            ProblemaController probController = new ProblemaController();
 
-            problema.setNome(nome_campo_prob.getText());
-            problema.setDescricao(descricao_campo_prob.getText());
-            probController.create(problema);
+        //Confirmação de CADASTRO do Problema↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer cadastrar esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
 
-            //LIMPA OS CAMPOS APOS O CADASTRO↓
-            campo_busca_prob.setText("");
-            codigo_campo_prob.setText("");
-            nome_campo_prob.setText("");
-            descricao_campo_prob.setText("");
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            try {
+                //Passa os dados do PROBLEMA para o CONTROLLADOR↓
+                Problema problema = new Problema();
+                ProblemaController probController = new ProblemaController();
 
-            //Atualizar a tabela PROBLEMA↓
-            Controller.readJTableProblema();
+                problema.setNome(nome_campo_prob.getText());
+                problema.setDescricao(descricao_campo_prob.getText());
+                probController.create(problema);
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Caindo No Catch do Confirmar Problema... " + ex.getMessage());
+                //Atualizar a tabela PROBLEMA↓
+                Controller.readJTable_Problema();
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
         }
-
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
 
     }//GEN-LAST:event_jButton_confirmar_cadastro_probActionPerformed
 
@@ -1139,69 +1149,67 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
 
     private void jButton_atualizar_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_atualizar_probActionPerformed
         //BOTÃO DE ATUALIZAR O PROBLEMA CADASTRADO↓
-//----------------------------------------------------------------------------------\\
-        JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Problema?", "ATENÇÃO", JOptionPane.YES_OPTION);
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableProblema.getSelectedRow() != -1) {
+//Confirmação de ATUALIZAÇÃO do Problema↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
+
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
             try {
-                //Passa os dados ATUALIZADOS do PROBLEMA para o CONTROLLADOR↓
-                Problema problema = new Problema();
-                ProblemaController probController = new ProblemaController();
+                //IF usado para verificar que linha da tabela estou clicando↓
+                if (tableProblema.getSelectedRow() != -1) {
 
-                problema.setNome(nome_campo_prob.getText());
-                problema.setDescricao(descricao_campo_prob.getText());
-                problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
-                probController.update(problema);
+                    //Passa os dados ATUALIZADOS do PROBLEMA para o CONTROLLADOR↓
+                    Problema problema = new Problema();
+                    ProblemaController probController = new ProblemaController();
 
-                //LIMPA OS CAMPOS↓
-                campo_busca_prob.setText("");
-                codigo_campo_prob.setText("");
-                nome_campo_prob.setText("");
-                descricao_campo_prob.setText("");
+                    problema.setNome(nome_campo_prob.getText());
+                    problema.setDescricao(descricao_campo_prob.getText());
+                    problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
+                    probController.update(problema);
 
-                //Atualizar a tabela PROBLEMA↓
-                Controller.readJTableProblema();
+                    //Atualizar a tabela PROBLEMA↓
+                    Controller.readJTable_Problema();
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um Problema para Atualizar");
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Atualizar Problema... " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Problema para Atualizar");
         }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButton_atualizar_probActionPerformed
 
     private void jButton_excluir_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_excluir_probActionPerformed
         //BOTÃO DE EXCLUIR OS DADOS DO PROBLEMA↓↓
-//----------------------------------------------------------------------------------\\
+        //Confirmação de EXCLUSÃO do Problema↓
+        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer Excluir esse Problema?", "Confirmação", JOptionPane.YES_OPTION);
 
-        JOptionPane.showConfirmDialog(null, "Certeza que quer excluir esse Problema?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //Caso confirmação seja SIM↓
+        if (confirmacao == JOptionPane.YES_OPTION) {
 
-        //IF usado para verificar que linha da tabela estou clicando↓
-        if (tableProblema.getSelectedRow() != -1) {
+            //IF usado para verificar que linha da tabela estou clicando↓
             try {
-                //REMOVE OS DADDOS DO PROBLEMA↓↓
-                Problema problema = new Problema();
-                ProblemaController probController = new ProblemaController();
+                if (tableProblema.getSelectedRow() != -1) {
+                    //REMOVE OS DADDOS DO PROBLEMA↓↓
+                    Problema problema = new Problema();
+                    ProblemaController probController = new ProblemaController();
 
-                problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
-                probController.delete(problema);
+                    problema.setCodigo((int) tableProblema.getValueAt(tableProblema.getSelectedRow(), 0));
+                    probController.delete(problema);
 
-                //LIMPA OS CAMPOS↓
-                campo_busca_prob.setText("");
-                codigo_campo_prob.setText("");
-                nome_campo_prob.setText("");
-                descricao_campo_prob.setText("");
+                    //Atualizar a tabela PROBLEMA↓
+                    Controller.readJTable_Problema();
 
-                //Atualizar a tabela PROBLEMA↓
-                Controller.readJTableProblema();
-
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um Problema para excluir");
+                }
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Caindo no Catch do Excluir Problema... "+ex.getMessage());
+                JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um Problema para excluir");
         }
+        //Caso confirmação seja NÃO ele simplesmente ignora ↑
     }//GEN-LAST:event_jButton_excluir_probActionPerformed
 
     private void nome_campo_probKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nome_campo_probKeyTyped
@@ -1219,12 +1227,13 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void campo_busca_cliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_cliKeyTyped
-        //Não permite o uso de NUMEROS e SIMBOLOS ↓↓
-        String caracteres = "/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.";
+        //Não permite o uso de LETRAS e SIMBOLOS ↓↓
+        String caracteres = "0123456789";
 
-        if (caracteres.contains(evt.getKeyChar() + "")) {
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
+
     }//GEN-LAST:event_campo_busca_cliKeyTyped
 
     private void campo_busca_funcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_busca_funcKeyTyped
@@ -1248,6 +1257,58 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private void matricula_campo_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matricula_campo_funcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matricula_campo_funcActionPerformed
+
+    private void campo_busca_cliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_cliActionPerformed
+
+        try {
+            Controller.readJTable_Cliente(campo_busca_cli.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+    }//GEN-LAST:event_campo_busca_cliActionPerformed
+
+    private void campo_busca_probActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_probActionPerformed
+        try {
+            Controller.readJTable_Problema(campo_busca_prob.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_campo_busca_probActionPerformed
+
+    private void campo_busca_funcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_busca_funcActionPerformed
+        try {
+            Controller.readJTable_Funcionario(campo_busca_func.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_campo_busca_funcActionPerformed
+
+    private void jTable_OsMainKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_OsMainKeyReleased
+
+        try {
+            Controller.readJTable_OS();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jTable_OsMainKeyReleased
+
+    private void jText_pesquisaOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_pesquisaOsActionPerformed
+        try {
+            Controller.readJTable_OS(jText_pesquisaOs.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }//GEN-LAST:event_jText_pesquisaOsActionPerformed
+
+    private void jText_pesquisaOsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jText_pesquisaOsKeyTyped
+        //Não permite o uso de LETRAS e SIMBOLOS ↓↓
+        String caracteres = "0123456789";
+
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jText_pesquisaOsKeyTyped
 //------------------------------------------------------------
 
 //------------------------------------------------------------
@@ -1341,6 +1402,7 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable_OsMain;
     private javax.swing.JTextField jText_pesquisaOs;
     private javax.swing.JTextField matricula_campo_func;
     private javax.swing.JTextField nome_campo_cli;
@@ -1351,7 +1413,6 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
     private javax.swing.JTextField salario_campo_func;
     private javax.swing.JTable tableClientes;
     private javax.swing.JTable tableFuncionario;
-    private javax.swing.JTable tableOrdemdeServico;
     private javax.swing.JTable tableProblema;
     // End of variables declaration//GEN-END:variables
 
@@ -1415,12 +1476,12 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
         this.tableProblema = tableProblema;
     }
 
-    public JTable getTableOrdemdeServico() {
-        return tableOrdemdeServico;
+    public JTable getjTable_OsMain() {
+        return jTable_OsMain;
     }
 
-    public void setTableOrdemdeServico(JTable tableOrdemdeServico) {
-        this.tableOrdemdeServico = tableOrdemdeServico;
+    public void setjTable_OsMain(JTable jTable_OsMain) {
+        this.jTable_OsMain = jTable_OsMain;
     }
 
     // ---------------------------------------------------------------------------
@@ -1545,6 +1606,38 @@ JOptionPane.showConfirmDialog(null, "Certeza que quer Atualizar esse Funcionario
 
     public void setSalario_campo_func(JTextField salario_campo_func) {
         this.salario_campo_func = salario_campo_func;
+    }
+
+    public JTextField getCampo_busca_cli() {
+        return campo_busca_cli;
+    }
+
+    public void setCampo_busca_cli(JTextField campo_busca_cli) {
+        this.campo_busca_cli = campo_busca_cli;
+    }
+
+    public JTextField getCampo_busca_func() {
+        return campo_busca_func;
+    }
+
+    public void setCampo_busca_func(JTextField campo_busca_func) {
+        this.campo_busca_func = campo_busca_func;
+    }
+
+    public JTextField getCampo_busca_prob() {
+        return campo_busca_prob;
+    }
+
+    public void setCampo_busca_prob(JTextField campo_busca_prob) {
+        this.campo_busca_prob = campo_busca_prob;
+    }
+
+    public JTextField getjText_pesquisaOs() {
+        return jText_pesquisaOs;
+    }
+
+    public void setjText_pesquisaOs(JTextField jText_pesquisaOs) {
+        this.jText_pesquisaOs = jText_pesquisaOs;
     }
 
 }

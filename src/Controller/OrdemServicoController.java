@@ -1,77 +1,90 @@
-
 package Controller;
 
 import DAO.OrdemServicoDAO;
 import Interface.InterfaceOrdemDeServico;
 import Model.OrdemDeServico;
 import java.util.List;
-import javax.swing.JOptionPane;
 
-public class OrdemServicoController implements InterfaceOrdemDeServico  {
+public class OrdemServicoController implements InterfaceOrdemDeServico {
 
-        @Override
-    public void create(OrdemDeServico ordemServiço) throws Exception {
-   String caracteres = "0123456789/*-+,!@#$%¨&)(}{][^~´`;:><ºª§=¨¬£³²¹|_.\\";
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    @Override
+    public void create(OrdemDeServico ordemServico) throws Exception {
         
-        //Confirmando certeza da Ação↓------------------------------------------------------------------
-        int confirmacao = JOptionPane.showConfirmDialog(null, "Certeza que quer criar essa OS ?", "Confirmação", JOptionPane.YES_NO_OPTION);
-        
-        //IF OptionPane == SIM, prossiga↓------------------------------------------------------------------
-        if (confirmacao == JOptionPane.YES_OPTION) {
-            
-            //Objeto OrdemServiço não pode ser NULO↓------------------------------------------------------------------
-           if (ordemServiço == null) {
-                 throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
-            } 
-            //Descrição do Serviço↓------------------------------------------------------------------
-            else if (ordemServiço.getDescricaoServicoOS().trim().equals("") || ordemServiço.getDescricaoServicoOS() == null) {
-                throw new Exception("O campo Descrição de Serviço não pode estar em branco, favor inserir corretamente..");
-            } 
-            else if(ordemServiço.getDescricaoServicoOS().length() > 255){
-                throw new Exception("Caracteres exedidos (Limite de 255)");
-            } 
-            else if (ordemServiço.getDescricaoServicoOS().contains(caracteres)) {
-                throw new Exception("NÃO ADIANTA USAR CTRL+C e CTRL+V AQUI É BLINDADOO KRAIII <3");
+            //Object Treatment↓------------------------------------------------------------------
+            if (ordemServico == null) {
+                throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
             }
-            //Descrição do Problema↓------------------------------------------------------------------
-            else if (ordemServiço.getDescricaoProblemaOS().trim().equals("") || ordemServiço.getDescricaoProblemaOS()== null) {
-                throw new Exception("O campo Descrição do Problema não pode estar em branco, favor inserir corretamente..");
-            } 
-            else if(ordemServiço.getDescricaoProblemaOS().length() > 255){
-                throw new Exception("Caracteres exedidos (Limite de 255)");
-            } 
-            else if (ordemServiço.getDescricaoProblemaOS().contains(caracteres)) {
-                throw new Exception("JÁ DISSE QUE NÃO ADIANTA KRAIII <3");
-            }
-            else{
-                OrdemServicoDAO dao = new OrdemServicoDAO();
-                dao.create(ordemServiço);
-            }
-          
- 
-            
-        }
-        //IF NO OptionPane == NÃO, pare↓------------------------------------------------------------------
-        else if(confirmacao == JOptionPane.NO_OPTION){
-            
-            
-        }
+
+            Validations.matricula(ordemServico.getFuncionarioOs().getMatricula());  //←REGISTRATION Treatment
+            Validations.cpf(ordemServico.getClienteOs().getCpf());                  //←CPF Treatment
+            Validations.codigoProb(ordemServico.getProblemaOs().getCodigo());       //←CODE Prob Treatment
+            Validations.data(ordemServico.getDataCadastroOS());                     //←DATE Treatment
+            Validations.descrição(ordemServico.getDescricaoProblemaOS());           //←DESCRIPTION Treatment
+
+            //jogar para os DADOS↓
+            new OrdemServicoDAO().create(ordemServico);
     }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void update(OrdemDeServico ordemServico) throws Exception {
+        
+            //Object Treatment↓------------------------------------------------------------------
+            if (ordemServico == null) {
+                throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
+            }
+
+            Validations.numeroOs(ordemServico.getNumeroOS());                       //←NumberOS Treatment
+            Validations.matricula(ordemServico.getFuncionarioOs().getMatricula());  //←REGISTRATION Treatment
+            Validations.cpf(ordemServico.getClienteOs().getCpf());                  //←CPF Treatment
+            Validations.codigoProb(ordemServico.getProblemaOs().getCodigo());       //←CODE Prob Treatment
+            Validations.data(ordemServico.getDataCadastroOS());                     //←DATE Treatment
+            Validations.descrição(ordemServico.getDescricaoProblemaOS());           //←DESCRIPTION Treatment
+
+            //jogar para os DADOS↓
+            new OrdemServicoDAO().update(ordemServico);
+    }
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
     @Override
     public List<OrdemDeServico> read() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new OrdemServicoDAO().read();
+    }
+
+    public List<OrdemDeServico> read(String numero) throws Exception {
+        return new OrdemServicoDAO().read(numero);
+    }
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------END---------------------------------------------------------------------------------------------------------   
+    @Override
+    public void solucionar(OrdemDeServico os) throws Exception {
+        //Object Treatment↓------------------------------------------------------------------
+        if (os == null) {
+            throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
+        }
+
+        Validations.numeroOs(os.getNumeroOS());
+        Validations.data(os.getDataSolucaoOS());
+        Validations.descrição(os.getDescricaoServicoOS());
+
+        //jogar para os DADOS↓
+        new OrdemServicoDAO().solucionar(os);
     }
 
     @Override
-    public void update(OrdemDeServico OrdemDeServico) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void cancelar(OrdemDeServico os) throws Exception {
+        //Object Treatment↓------------------------------------------------------------------
+        if (os == null) {
+            throw new Exception("Objeto Ordem de Serviço não pode ser Nulo: Favor insira os dados corretamente");
+        }
+
+        Validations.numeroOs(os.getNumeroOS());
+        Validations.data(os.getDataCancelamentoOS());
+        Validations.descrição(os.getMotivoCancelamentoOS());
+        
+        //jogar para os DADOS↓
+        new OrdemServicoDAO().cancelar(os);
     }
-    
-    
-    
-    
-    
-    
-    
 }
